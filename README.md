@@ -1,8 +1,9 @@
 # histocar_project
 Proyecto de gestión de servicios vehiculares
 
-Recordar crear el virtual enviroment, y luego: 
+Pasos para preparar el proyecto:
 
-pip install -r requirements.txt 
+    1 - Clonar repositorio remoto: git clone https://github.com/bITAMINAS/histocar_project.git
+    2 - Crear el virtual enviroment: python -m venv env
+    3 - Instalar dependencias del proyecto: pip install -r requirements.txt 
 
-para reconstruir el enviroment con todas las dependencias del proyecto.
