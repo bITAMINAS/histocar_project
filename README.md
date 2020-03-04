@@ -11,5 +11,5 @@ Otros:
 - Para actualizar el archivo de dependencias Requirements.txt:
     pip freeze > requirements.txt
 
-- Para poner a correr el servidor de Django :
+- Para poner a correr el servidor de Django:
     python manage.py runserver
