@@ -1,4 +1,4 @@
-#!C:\bitaminas\env\Scripts\python.exe
+#!c:\bitaminas\env\scripts\python.exe
 from django.core import management
 
 if __name__ == "__main__":
