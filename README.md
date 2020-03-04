@@ -13,3 +13,5 @@ Otros:
 
 - Para poner a correr el servidor de Django:
     python manage.py runserver
+- Actualizar BD, migraciones:
+    python manage.py migrate
