@@ -8,3 +8,5 @@ def home(request):
 
 def test(request):
     return HttpResponse("Esta es una prueba de la pagina test")
+
+    

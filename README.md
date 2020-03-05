@@ -16,4 +16,5 @@ Otros:
 - Actualizar BD, migraciones:
     python manage.py migrate
 
-    Rocio
+- Actualizar base de datos de la aplicación conectada (webapps):
+    python manage.py makemigrations webapp
