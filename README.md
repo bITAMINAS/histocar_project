@@ -15,3 +15,5 @@ Otros:
     python manage.py runserver
 - Actualizar BD, migraciones:
     python manage.py migrate
+
+    Rocio
