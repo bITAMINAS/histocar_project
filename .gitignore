@@ -7,7 +7,11 @@ ENV/
 env.bak/
 venv.bak/
 .vscode
-back_office/__pycache__/__init__.cpython-38.pyc
-histocar/__pycache__/urls.cpython-38.pyc
-back_office/__pycache__/views.cpython-38.pyc
-back_office/__pycache__/urls.cpython-38.pyc
+#Aca va una lista de https://djangowaves.com/tips-tricks/gitignore-for-a-django-project/ para ignorar 
+#Archivos en entrono de django
+*.log
+*.pot
+*.pyc
+__pycache__
+*.py[cod] 
+*$py.class 
