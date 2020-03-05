@@ -1,6 +1,0 @@
-{
-    "python.pythonPath": "env\\Scripts\\python.exe",
-    "python.linting.enabled": true,
-    "python.linting.lintOnSave": true,
-    "python.linting.pylintArgs": ["--load-plugins", "pylint_django"] //Para sacar el error durante los import de los paquetes Django: https://stackoverflow.com/questions/53730062/vscode-doesnt-recognized-my-django-module-app-warning-from-vscode
-}
