@@ -12,6 +12,6 @@ venv.bak/
 *.log
 *.pot
 *.pyc
-__pycache__
+__pycache__/
 *.py[cod] 
 *$py.class 
