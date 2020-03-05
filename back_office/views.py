@@ -4,5 +4,5 @@ from django.http import HttpResponse
 # Create your views here.
 
 def home(request):
-    return HttpResponse("Hello, Djangoooooooooo!")
+    return HttpResponse("Hello, Djangoooooooooo! prueba de commit y si funcuina servidor")
 
