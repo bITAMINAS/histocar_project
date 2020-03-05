@@ -8,4 +8,6 @@ env.bak/
 venv.bak/
 .vscode
 back_office/__pycache__/__init__.cpython-38.pyc
-back_office/__pycache__/__init__.cpython-38.pyc
+histocar/__pycache__/urls.cpython-38.pyc
+back_office/__pycache__/views.cpython-38.pyc
+back_office/__pycache__/urls.cpython-38.pyc
