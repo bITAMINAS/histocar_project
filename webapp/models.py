@@ -21,9 +21,9 @@ class Servicio(models.Model):
     kilometros = models.IntegerField 
     puntuacion = models.IntegerField 
     costo = models.IntegerField 
-    vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE)
-    tareas = models.ManyToManyField(Tarea)
-    estados = models.ManyToManyField(Estados, through='Estado_Servicio')
+    vehiculo = models.ForeignKey('Vehiculo', on_delete=models.CASCADE)
+    tareas = models.ManyToManyField('Tarea')
+    estados = models.ManyToManyField('Estados', through='Estado_Servicio')
 
 
 class Tarea(models.Model):
@@ -43,10 +43,9 @@ class Estado_Servicio(models.Model):
 
 
 class Vehiculo(models.Model):
-    Colors = models.TextChoices('Blanco', 'Rojo', 'Negro', 'Azul', 'Bordó', 'Marrón', 
-                                'Gris Plata', 'Gris Ceniza', 'Amarillo', 'Verde', 'Otro')
-    TiposCombustibles = models.TextChoices('Nafta', 'Gasoil', 'Híbrido', 'Eléctrico',
-                                            'Hidrógeno', 'GLP')
+    Colors = models.TextChoices('Blanco', 'Rojo', 'Negro')
+    #, 'Azul', 'Bordó', 'Marrón', 'Gris Plata', 'Gris Ceniza', 'Amarillo', 'Verde', 'Otro')
+    TiposCombustibles = models.TextChoices('Nafta', 'Gasoil', 'Híbrido', 'Eléctrico', 'Hidrógeno', 'GLP')
 
     modelo = models.ForeignKey(Modelo) # Con el atributo modelo ya es suficiente, ya que a partir de él se puede inferir la Marca
     color = models.CharField(blank=True, choices=Colors.choices, max_length=15)
@@ -54,7 +53,7 @@ class Vehiculo(models.Model):
     matricula = models.CharField(max_length=50)
     anio = models.IntegerField 
     tipoCombustible = models.CharField(blank=True, choices=TiposCombustibles.choices, max_length=15)
-    duenio = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    duenio = models.ForeignKey('Usuario', on_delete=models.CASCADE)
 
 
 class Marca(models.Model):
@@ -63,7 +62,7 @@ class Marca(models.Model):
 
 class Modelo(models.Model):
     nombre = models.CharField(max_length=20)
-    marca = models.ForeignKey(Marca, on_delete=models.CASCADE) #Modelo pertenece a una Marca
+    marca = models.ForeignKey('Marca', on_delete=models.CASCADE) #Modelo pertenece a una Marca
 
 
 class TipoCombustible(models.Model):
