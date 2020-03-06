@@ -4,8 +4,8 @@ from django.db import models
 
 class Usuario(models.Model):
     id
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=20)
+    apellido = models.CharField(max_length=20)
     documento = models.CharField(max_length=8)
     email = models.EmailField(unique=True, default="") #unique=True sirve para que no se repita en la bd
     telefono = models.CharField(max_length=20)
