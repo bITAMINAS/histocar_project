@@ -26,6 +26,8 @@ Otros:
 - Para movernos a otra Rama:
     git checkout nombre_de_la_rama
 
+- Para hacer un merge, por ejemplo de la rama "desarrollo" hacia la rama "master", primero hay que cambiarse hacia la rama "master", y luego se ejecuta el comando:
+    git merge desarrollo
 
 Links de interés:
     https://www.campusmvp.es/recursos/post/git-los-conceptos-de-master-origin-y-head.aspx
