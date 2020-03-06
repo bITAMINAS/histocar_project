@@ -18,3 +18,6 @@ Otros:
 
 - Actualizar base de datos de la aplicación conectada (webapps):
     python manage.py makemigrations webapp
+
+Links de interés:
+    https://www.campusmvp.es/recursos/post/git-los-conceptos-de-master-origin-y-head.aspx
