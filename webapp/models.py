@@ -28,15 +28,20 @@ class Estado(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=240)
     servicio = models.ManyToManyField(Servicio)
-    fecha = models.DateTimeField()
+
 
 class Vehiculo(models.Model):
+    Colors = models.TextChoices('Blanco', 'Rojo', 'Negro', 'Azul', 'Bordó', 'Marrón', 
+                                'Gris Plata', 'Gris Ceniza', 'Amarillo', 'Verde', 'Otro')
+    TiposCombustibles = models.TextChoices('Nafta', 'Gasoil', 'Híbrido', 'Eléctrico',
+                                            'Hidrógeno', 'GLP')
+
     modelo = models.ForeignKey(Modelo)
-    color = models.CharField(max_length=10)
+    color = models.CharField(blank=True, choices=Colors.choices, max_length=15)
     nroChasis = models.CharField(max_length=50)
     matricula = models.CharField(max_length=50)
     anio = models.IntegerField 
-    tipoCombustible =
+    tipoCombustible = models.CharField(blank=True, choices=TiposCombustibles.choices, max_length=15)
 
 class Marca(models.Model):
     nombre = models.CharField(max_length=20)
