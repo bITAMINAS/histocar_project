@@ -3,9 +3,12 @@ Proyecto de gestión de servicios vehiculares
 
 Pasos para preparar el proyecto:
 
-    1 - Clonar repositorio remoto: git clone https://github.com/bITAMINAS/histocar_project.git
-    2 - Crear el virtual enviroment: python -m venv env
-    3 - Instalar dependencias del proyecto: pip install -r requirements.txt 
+    1 - Clonar repositorio remoto:
+            git clone https://github.com/bITAMINAS/histocar_project.git
+    2 - Crear el virtual enviroment: 
+            python -m venv env
+    3 - Instalar dependencias del proyecto:
+            pip install -r requirements.txt 
 
 Otros:
 - Para actualizar el archivo de dependencias Requirements.txt:
@@ -18,6 +21,10 @@ Otros:
 
 - Actualizar base de datos de la aplicación conectada (webapps):
     python manage.py makemigrations webapp
+
+- Para movernos a otra Rama:
+    git checkout nombre_de_la_rama
+
 
 Links de interés:
     https://www.campusmvp.es/recursos/post/git-los-conceptos-de-master-origin-y-head.aspx
