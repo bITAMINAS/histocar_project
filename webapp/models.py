@@ -63,3 +63,6 @@ class Marca(models.Model):
 class Modelo(models.Model):
     nombre = models.CharField(max_length=20, default="")
     marca = models.ForeignKey('Marca', on_delete=models.CASCADE) #Modelo pertenece a una Marca
+
+    def __str__(self):
+        return self.nombre
