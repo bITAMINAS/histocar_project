@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 class Usuario(models.Model):
     nombre = models.CharField(max_length=20, default="")
@@ -26,8 +27,14 @@ class Servicio(models.Model):
     tareas = models.ManyToManyField('Tarea')
     estados = models.ManyToManyField('Estado', through='Estado_Servicio')
 
+    def __str__(self):
+        return datetime.strftime(self.fecha, '%d/%m/%Y') + ', ' + self.vehiculo.modelo.marca.nombre + ' ' + self.vehiculo.modelo.nombre
+
 class Tarea(models.Model):
     nombre = models.CharField(max_length=240, default="")
+
+    def __str__(self):
+        return self.nombre
 
 class Estado(models.Model):
     nombre = models.CharField(max_length=50, default="")
