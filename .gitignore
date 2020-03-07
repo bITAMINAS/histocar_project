@@ -71,3 +71,4 @@ static_collected
 .vscode/settings.json
 .vscode/launch.json
 webapp/migrations/0003_auto_20200306_2221.py
+webapp/migrations/0004_auto_20200306_2233.py

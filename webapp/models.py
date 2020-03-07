@@ -16,9 +16,9 @@ class Servicio(models.Model):
     fecha = models.DateTimeField()
     textoOtros = models.CharField(max_length=240, default="")
     comentario = models.CharField(max_length=240, default="")
-    kilometros = models.IntegerField 
-    puntuacion = models.IntegerField 
-    costo = models.IntegerField 
+    kilometros = models.IntegerField(default=0)
+    puntuacion = models.IntegerField(default=0)
+    costo = models.IntegerField(default=0)
     vehiculo = models.ForeignKey('Vehiculo', on_delete=models.CASCADE, default='1')
     tareas = models.ManyToManyField('Tarea')
     estados = models.ManyToManyField('Estado', through='Estado_Servicio')
@@ -50,7 +50,7 @@ class Vehiculo(models.Model):
     color = models.CharField(blank=True, choices=Colores.choices, max_length=15)
     nroChasis = models.CharField(max_length=50, default="")
     matricula = models.CharField(max_length=50, default="")
-    anio = models.IntegerField 
+    anio = models.IntegerField(default=0)
     tipoCombustible = models.CharField(blank=True, choices=TiposCombustibles.choices, max_length=15)
     duenio = models.ForeignKey('Usuario', on_delete=models.CASCADE)
 
