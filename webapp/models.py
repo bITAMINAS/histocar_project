@@ -46,6 +46,8 @@ class Vehiculo(models.Model):
     #Colores.choices
     # Deberia devovler: [('Blanco', 'Blanco'), ('Rojo', 'Rojo'), ('Negro', 'Negro'), ('Azul', 'Azul'), ('Bordó', 'Bordó'), ('Marrón', 'Marrón'), ('Gris_Plata', 'Gris Plata')]
     #saludos
+    #fuente: https://docs.djangoproject.com/en/3.0/ref/models/fields/
+    
     modelo = models.ForeignKey('Modelo', on_delete=models.CASCADE) # Con el atributo modelo ya es suficiente, ya que a partir de él se puede inferir la Marca
     color = models.CharField(blank=True, choices=Colores.choices, max_length=15)
     nroChasis = models.CharField(max_length=50, default="")
