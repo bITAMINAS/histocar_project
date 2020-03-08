@@ -28,7 +28,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    
+    {%include "sidebar.html"%}
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -38,7 +38,7 @@
       <div id="content">
 
         <!-- Topbar -->
-
+        {%include "topbar.html"%}
         <!-- End of Topbar -->
 
 
@@ -48,12 +48,12 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Panel de control</h1>
+            <h1 class="h3 mb-0 text-gray-800">{{seccion}}</h1>
             <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
           </div>
 
           <!-- Content Row -->
-
+          {% block content %}{% endblock %}
 		      <!-- End of Content Row -->
 
         </div>
@@ -63,9 +63,8 @@
       <!-- End of Main Content -->
 
 
-
       <!-- Footer -->
-
+      {%include "footer.html"%}
       <!-- End of Footer -->
 
     </div>
