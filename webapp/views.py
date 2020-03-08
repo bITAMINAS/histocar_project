@@ -14,6 +14,16 @@ def test(request):
     return HttpResponse("Esta es una prueba de la pagina test")
 
 def index(request):
-    servicios = Servicio.objects.filter().order_by('id')
+    servicios = Servicio.objects.all().order_by('id')
     seccion = 'Inicio'
     return render(request, 'webapp/index.html', {'servicios': servicios, 'seccion': seccion})
+
+def verServicios(request):
+    servicios = Servicio.objects.all().order_by('id')
+    seccion = 'Ver Servicios'
+    return render(request, 'webapp/ver_servicios.html', {'servicios': servicios, 'seccion': seccion})
+
+def crearServicio(request):
+    servicios = Servicio.objects.all().order_by('id')
+    seccion = 'Ver Servicios'
+    return render(request, 'webapp/crear_servicio.html', {'servicios': servicios, 'seccion': seccion})
