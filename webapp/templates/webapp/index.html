@@ -56,7 +56,7 @@
         Interface
       </div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
+      <!-- Nav Item - Components Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
@@ -216,57 +216,45 @@
 
 
 
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
 
-
-
-
-
-
-<!-- Begin Page Content -->
-<div class="container-fluid">
-
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Panel de control</h1>
-      <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
-    </div>
-
-    <!-- Content Row -->
-    <div class="row">
-{% for servicio in servicios %}
-      <div class="col-xl-3 col-md-6 mb-4">
-    
-
-        <div class="card shadow mb-3">
-          <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Servicio N{{ servicio.id }} </h6>
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Panel de control</h1>
+            <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
           </div>
-          <div class="card-body">
-            <p>Comentario: {{ servicio.textoOtros }}</p>
-            <p class="mb-0">costo de {{ servicio.costo }}</p>
-            <p>Con {{ servicio.kilometros|linebreaksbr }} kilometros</p>
+
+          <!-- Content Row -->
+          <div class="row">
+            {% for servicio in servicios %}
+            <div class="col-xl-3 col-md-6 mb-4">
+          
+
+              <div class="card shadow mb-3">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Servicio N{{ servicio.id }} </h6>
+                </div>
+                <div class="card-body">
+                  <p>Comentario: {{ servicio.textoOtros }}</p>
+                  <p class="mb-0">costo de {{ servicio.costo }}</p>
+                  <p>Con {{ servicio.kilometros|linebreaksbr }} kilometros</p>
+                </div>
+              </div>
+
+            </div>
+            {% endfor %}
           </div>
+
         </div>
+        <!-- /.container-fluid -->
 
       </div>
-      {% endfor %}
-    </div>
-
-  </div>
-  <!-- /.container-fluid -->
-
-</div>
-<!-- End of Main Content -->
+      <!-- End of Main Content -->
 
 
 
-
-
-
-
-
-
-        <!-- Footer -->
+      <!-- Footer -->
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
@@ -281,6 +269,8 @@
 
   </div>
   <!-- End of Page Wrapper -->
+
+
 
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
@@ -305,6 +295,9 @@
       </div>
     </div>
   </div>
+
+
+
 
   <!-- Bootstrap core JavaScript-->
   <script src="{% static 'webapp/vendor/jquery/jquery.min.js' %}"></script>
