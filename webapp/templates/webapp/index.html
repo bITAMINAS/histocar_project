@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %} 
+ <!-- Content Row -->
+ <div class="row">
+  {% for servicio in servicios %}
+  <div class="col-xl-3 col-md-6 mb-4">
+
+
+    <div class="card shadow mb-3">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Servicio N {{ servicio.id }} </h6>
+      </div>
+      <div class="card-body">
+        <p>Fecha del servicio {{servicio.fecha}}</p>
+        <p class="mb-0">Comentario: {{ servicio.textoOtros }}</p>
+        <p>Info del vehiculo:</p>
+        <li>Marca: {{ servicio.vehiculo.modelo.marca }}</li>
+        <li>Modelo: {{ servicio.vehiculo.modelo }}</li>
+        <li>Color: {{ servicio.vehiculo.color }}</li>
+        <li>Dueño: {{ servicio.vehiculo.duenio }}</li>
+        <p class="mb-0">costo de {{ servicio.costo }}</p>
+        <p class="mb-0">Con {{ servicio.kilometros }} kilometros  </p>
+      </div>
+    </div>
+
+  </div>
+  {% endfor %}
+</div>
+<!-- End of Content Row -->
+{% endblock %}

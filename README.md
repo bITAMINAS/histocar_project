@@ -18,10 +18,6 @@ Otros:
     
     python manage.py runserver
 
-- Actualizar BD, migraciones:
-    
-    python manage.py migrate
-
 - Actualizar base de datos de la aplicación conectada (webapps):
     
     python manage.py makemigrations webapp
