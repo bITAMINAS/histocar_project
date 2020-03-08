@@ -15,4 +15,5 @@ def test(request):
 
 def index(request):
     servicios = Servicio.objects.filter().order_by('id')
-    return render(request, 'webapp/index.html', {'servicios': servicios})
+    seccion = 'Inicio'
+    return render(request, 'webapp/index.html', {'servicios': servicios, 'seccion': seccion})
