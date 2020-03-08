@@ -11,9 +11,15 @@
         <h6 class="m-0 font-weight-bold text-primary">Servicio N {{ servicio.id }} </h6>
       </div>
       <div class="card-body">
-        <p>Comentario: {{ servicio.textoOtros }}</p>
+        <p>Fecha del servicio {{servicio.fecha}}</p>
+        <p class="mb-0">Comentario: {{ servicio.textoOtros }}</p>
+        <p>Info del vehiculo:</p>
+        <li>Marca: {{ servicio.vehiculo.modelo.marca }}</li>
+        <li>Modelo: {{ servicio.vehiculo.modelo }}</li>
+        <li>Color: {{ servicio.vehiculo.color }}</li>
+        <li>Dueño: {{ servicio.vehiculo.duenio }}</li>
         <p class="mb-0">costo de {{ servicio.costo }}</p>
-        <p>Con {{ servicio.kilometros|linebreaksbr }} kilometros</p>
+        <p class="mb-0">Con {{ servicio.kilometros }} kilometros  </p>
       </div>
     </div>
 
