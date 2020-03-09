@@ -35,4 +35,4 @@ def crearServicio(request):
             return redirect('index')
     else:
         form= ServicioForm()
-    return render(request, 'webapp/crear_servicio.html', {'form': form})
+    return render(request, 'webapp/crear_servicio.html', {'form': form, 'seccion': seccion})
