@@ -31,51 +31,158 @@
     https://github.com/jazzband/django-widget-tweaks 
     https://getbootstrap.com/docs/4.4/components/forms/
 -->
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">{{form.fecha.label}}</label>
-                    {%if form.fecha.errors %}
-                    {% render_field form.fecha class="form-control is-invalid" %}
-                    <script>
-                      $('').ready(function() {
-                        toastr.error('Error en fecha.','Error')
-                      });
-                      </script>
-                    {% else %}
-                    {% render_field form.fecha class="form-control" %}
-                    {% endif %}
-                    </div>
+
+{% for error in form.fecha.errors %}
+<script>
+  $('').ready(function() {
+    toastr.error('{{ error }}','Error')
+  });
+  </script>
+{% endfor %}
+
+<div class="form-group">
+  <label for="exampleFormControlInput1">{{form.fecha.label}}</label>
+      {%if form.fecha.errors %}
+        {% render_field form.fecha class="form-control is-invalid" %}
+          {% for error in form.fecha.errors %}
+        <script>
+          $('').ready(function() {
+            toastr.error('{{ error }}','Error')
+          });
+        </script>
+      {% endfor %}
+     {% else %}
+       {% render_field form.fecha class="form-control" %}
+     {% endif %}
+</div>
                     
-                    <div class="form-group">
-                    <label for="exampleFormControlInput1">{{form.textoOtros.label}}</label>
-                    {% render_field form.textoOtros class="form-control" %}
-                    </div>
-                    <div class="form-group">
-                    <label for="exampleFormControlInput1">{{form.comentario.label}}</label>
-                    {% render_field form.comentario class="form-control" %}
-                    </div>
-                    <div class="form-group">
-                    <label for="exampleFormControlInput1">{{form.kilometros.label}}</label>
-                    {% render_field form.kilometros class="form-control" %}
-                    </div>
-                    <div class="form-group">
-                    <label for="exampleFormControlInput1">{{form.puntuacion.label}}</label>
-                    {% render_field form.puntuacion class="form-control" %}
-                    </div>
-                    <div class="form-group">
-                    <label for="exampleFormControlInput1">{{form.costo.label}}</label>
-                    {% render_field form.costo class="form-control" %}
-                    </div>
-                    <div class="form-group">
-                    <label for="exampleFormControlInput1">{{form.vehiculo.label}}</label>
-                    {% render_field form.vehiculo class="form-control" %}
-                    </div>
-                    <div class="form-group">
-                    <label for="exampleFormControlInput1">{{form.tareas.label}}</label>
-                    {% render_field form.tareas class="form-control" %}
-                    </div>
-                    <div class="form-group">
-                    <label for="exampleFormControlInput1">{{form.estados.label}}</label>
-                    {% render_field form.estados class="form-control" %}</div>
+<div class="form-group">
+  <label for="exampleFormControlInput1">{{form.textoOtros.label}}</label>
+      {%if form.textoOtros.errors %}
+        {% render_field form.textoOtros class="form-control is-invalid" %}
+          {% for error in form.textoOtros.errors %}
+        <script>
+          $('').ready(function() {
+            toastr.error('{{ error }}','Error')
+          });
+        </script>
+      {% endfor %}
+     {% else %}
+       {% render_field form.textoOtros class="form-control" %}
+     {% endif %}
+</div>                    
+                 
+<div class="form-group">
+  <label for="exampleFormControlInput1">{{form.comentario.label}}</label>
+      {%if form.comentario.errors %}
+        {% render_field form.comentario class="form-control is-invalid" %}
+          {% for error in form.comentario.errors %}
+        <script>
+          $('').ready(function() {
+            toastr.error('{{ error }}','Error')
+          });
+        </script>
+      {% endfor %}
+     {% else %}
+       {% render_field form.comentario class="form-control" %}
+     {% endif %}
+</div>
+                   
+<div class="form-group">
+  <label for="exampleFormControlInput1">{{form.kilometros.label}}</label>
+      {%if form.kilometros.errors %}
+        {% render_field form.kilometros class="form-control is-invalid" %}
+          {% for error in form.kilometros.errors %}
+        <script>
+          $('').ready(function() {
+            toastr.error('{{ error }}','Error')
+          });
+        </script>
+      {% endfor %}
+     {% else %}
+       {% render_field form.kilometros class="form-control" %}
+     {% endif %}
+</div>
+                   
+<div class="form-group">
+  <label for="exampleFormControlInput1">{{form.puntuacion.label}}</label>
+      {%if form.puntuacion.errors %}
+        {% render_field form.puntuacion class="form-control is-invalid" %}
+          {% for error in form.puntuacion.errors %}
+        <script>
+          $('').ready(function() {
+            toastr.error('{{ error }}','Error')
+          });
+        </script>
+      {% endfor %}
+     {% else %}
+       {% render_field form.puntuacion class="form-control" %}
+     {% endif %}
+</div>
+
+<div class="form-group">
+    <label for="exampleFormControlInput1">{{form.costo.label}}</label>
+        {%if form.costo.errors %}
+        	{% render_field form.costo class="form-control is-invalid" %}
+        		{% for error in form.costo.errors %}
+					<script>
+					  $('').ready(function() {
+					    toastr.error('{{ error }}','Error')
+					  });
+					</script>
+				{% endfor %}
+   		{% else %}
+   			{% render_field form.costo class="form-control" %}
+   		{% endif %}
+</div>
+                    
+<div class="form-group">
+  <label for="exampleFormControlInput1">{{form.vehiculo.label}}</label>
+      {%if form.vehiculo.errors %}
+        {% render_field form.vehiculo class="form-control is-invalid" %}
+          {% for error in form.vehiculo.errors %}
+        <script>
+          $('').ready(function() {
+            toastr.error('{{ error }}','Error')
+          });
+        </script>
+      {% endfor %}
+     {% else %}
+       {% render_field form.vehiculo class="form-control" %}
+     {% endif %}
+</div>
+                  
+<div class="form-group">
+  <label for="exampleFormControlInput1">{{form.tareas.label}}</label>
+      {%if form.tareas.errors %}
+        {% render_field form.tareas class="form-control is-invalid" %}
+          {% for error in form.tareas.errors %}
+        <script>
+          $('').ready(function() {
+            toastr.error('{{ error }}','Error')
+          });
+        </script>
+      {% endfor %}
+     {% else %}
+       {% render_field form.tareas class="form-control" %}
+     {% endif %}
+</div>
+
+<div class="form-group">
+  <label for="exampleFormControlInput1">{{form.estados.label}}</label>
+      {%if form.estados.errors %}
+        {% render_field form.estados class="form-control is-invalid" %}
+          {% for error in form.estados.errors %}
+        <script>
+          $('').ready(function() {
+            toastr.error('{{ error }}','Error')
+          });
+        </script>
+      {% endfor %}
+     {% else %}
+       {% render_field form.estados class="form-control" %}
+     {% endif %}
+</div>
 
             <button type='submit' class="btn btn-primary mb-2">Agregar servicio</button>
             </div>
@@ -107,7 +214,7 @@
 <!-- End of Content Row -->
 <!-- InputMask -->
 
-<!-- REQUIRED SCRIPTS -->
+<!-- REQUIRED SCRIPTS 
 
 
 
@@ -124,5 +231,5 @@
     
   })
 </script>
-
+-->
 {% endblock %}
