@@ -14,20 +14,20 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="../../index3.html" class="brand-link">
-        <img src="../../dist/img/AdminLTELogo.png"
+      <a href="{% url "index" %}" class="brand-link">
+        <!--<img src="../../dist/img/AdminLTELogo.png"
              alt="AdminLTE Logo"
              class="brand-image img-circle elevation-3"
-             style="opacity: .8">
-        <span class="brand-text font-weight-light">HistoCar</span>
+             style="opacity: .8">-->
+        <span class="brand-text font-weight-light" style="opacity: .8">HistoCar</span>
       </a>
   
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <i class="fas fa-user"></i>
+          <div class="image" style="color: snow;">
+            <i class="fas fa-user fa-2x"></i>
             <!-- <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> -->
           </div>
           <div class="info">
@@ -50,13 +50,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="/ver-servicios" class="nav-link">
+                  <a href="{% url "VerServicios" %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Ver servicios</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/crear-servicio" class="nav-link">
+                  <a href="{% url "CrearServicio" %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Agregar servicios</p>
                   </a>
