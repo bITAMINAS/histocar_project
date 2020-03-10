@@ -33,3 +33,5 @@ Otros:
 
 Links de interés:
     https://www.campusmvp.es/recursos/post/git-los-conceptos-de-master-origin-y-head.aspx
+
+Aca Estoy escribiendo sin saber que leandro esta trabajando en el mismo archivo
