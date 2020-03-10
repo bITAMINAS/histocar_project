@@ -1,26 +1,59 @@
 {% extends "base.html" %}
 {% block content %} 
-    <!-- Content Row -->
-    <div class="row">
-    {% for servicio in servicios %}
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card shadow mb-3">
-          <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Servicio N{{ servicio.id }} </h6>
-          </div>
-          <div class="card-body">
-            <p>Fecha del servicio {{servicio.fecha}}</p>
-            <p class="mb-0">Comentario: {{ servicio.textoOtros }}</p>
-            <p>Info del vehiculo:</p>
-            <li>Marca: {{ servicio.vehiculo.modelo.marca }}</li>
-            <li>Modelo: {{ servicio.vehiculo.modelo }}</li>
-            <li>Color: {{ servicio.vehiculo.color }}</li>
-            <li>Dueño: {{ servicio.vehiculo.duenio }}</li>
-            <p class="mb-0">costo de {{ servicio.costo }}</p>
-            <p class="mb-0">Con {{ servicio.kilometros }} kilometros  </p>
+      <!-- Default box -->
+      <div class="card card-solid">
+        <div class="card-body pb-0">
+          <div class="row d-flex align-items-stretch">
+
+{% for servicio in servicios %}  
+
+            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+              <div class="card bg-light">
+                <div class="card-header text-muted border-bottom-0">
+                  Servicio {{servicio.id}}
+                </div>
+                <div class="card-body pt-0">
+                  <div class="row">
+                    <div class="col-7">
+                      <h2 class="lead"><b>{{ servicio.vehiculo.duenio }}</b></h2>
+                      <p class="text-muted text-sm"><b>Vehiculo: </b>
+                        {{ servicio.vehiculo.modelo.marca }} 
+                        {{ servicio.vehiculo.modelo }} 
+                        {{ servicio.vehiculo.matricula }}
+                        {{ servicio.vehiculo.color }}
+                      </p>
+                      <ul class="ml-4 mb-0 fa-ul text-muted">
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Direccion:
+                          {{ servicio.vehiculo.duenio.dirCalle }} {{ servicio.vehiculo.duenio.dirNumero }}, {{ servicio.vehiculo.duenio.dirCiudad }}, {{ servicio.vehiculo.duenio.dirDepartamento }}</li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telefono #: {{ servicio.vehiculo.duenio.telefono }}</li>
+                      </ul>
+                      <p>Fecha del servicio {{servicio.fecha}}, 
+                      Comentario: {{ servicio.comentario }}, {{ servicio.textoOtros }}
+                      costo de {{ servicio.costo }}, Con {{ servicio.kilometros }} kilometros</p>
+                    </div>
+                    <div class="col-5 text-center">
+                      <i class="fas fa-car fa-5x"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="text-right">
+                    <a href="#" class="btn btn-sm bg-teal">
+                      <i class="fas fa-comments"></i> Editar servicio
+                    </a>
+                    <a href="#" class="btn btn-sm btn-primary">
+                      <i class="fas fa-eye"></i> Ver status
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div> 
+{% endfor %}
+
           </div>
         </div>
+        <!-- /.card-body -->
+        <!-- /.card-footer -->
       </div>
-      {% endfor %}
-    </div>
-{% endblock %}
+      <!-- /.card -->
+{%endblock%}
