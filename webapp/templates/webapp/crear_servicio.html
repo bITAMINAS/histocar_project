@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block content %} 
+{% load widget_tweaks %}
+ <!-- Content Row -->
+ <!-- Toastr -->
+ {% load static %}
+ <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
+<script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
+<script src="{% static 'webapp/plugins/moment/moment.min.js' %}"></script>
+<script src="{% static 'webapp/plugins/daterangepicker/daterangepicker.js' %}"></script>
+<link rel="stylesheet" href="{% static 'webapp/plugins/daterangepicker/daterangepicker.css' %}">
+
+ <div class="row">
+
+  <div class="col-xl-12 col-md-12 mb-12">
+    <div class="card shadow mb-3">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Agregar nuevo servicio</h6>
+      </div>
+      <div class="card-body">
+        
+        
+        
+        
+        <form method="POST" class="ServicioForm">{% csrf_token %}
+            <div class="form-group">
+            
+<!--
+    Links de interes
+    https://github.com/jazzband/django-widget-tweaks 
+    https://getbootstrap.com/docs/4.4/components/forms/
+-->
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">{{form.fecha.label}}</label>
+                    {%if form.fecha.errors %}
+                    {% render_field form.fecha class="form-control is-invalid" %}
+                    {% else %}
+                    {% render_field form.fecha class="form-control" %}
+                    {% endif %}
+                    </div>
+                    <script>
+                    $('.toastrDefaultSuccess').ready(function() {
+                      toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+                    });
+                    </script>
+                    <div class="form-group">
+                    <label for="exampleFormControlInput1">{{form.textoOtros.label}}</label>
+                    {% render_field form.textoOtros class="form-control" %}
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleFormControlInput1">{{form.comentario.label}}</label>
+                    {% render_field form.comentario class="form-control" %}
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleFormControlInput1">{{form.kilometros.label}}</label>
+                    {% render_field form.kilometros class="form-control" %}
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleFormControlInput1">{{form.puntuacion.label}}</label>
+                    {% render_field form.puntuacion class="form-control" %}
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleFormControlInput1">{{form.costo.label}}</label>
+                    {% render_field form.costo class="form-control" %}
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleFormControlInput1">{{form.vehiculo.label}}</label>
+                    {% render_field form.vehiculo class="form-control" %}
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleFormControlInput1">{{form.tareas.label}}</label>
+                    {% render_field form.tareas class="form-control" %}
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleFormControlInput1">{{form.estados.label}}</label>
+                    {% render_field form.estados class="form-control" %}</div>
+
+            <button type='submit' class="btn btn-primary mb-2">Agregar servicio</button>
+            </div>
+        </form>
+        <script>
+          toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": true,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "9000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}  
+        </script>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- End of Content Row -->
+<!-- InputMask -->
+
+<!-- REQUIRED SCRIPTS -->
+
+
+
+
+  <script>
+  $(function () {
+    //Date range picker
+    $('#id_fecha').daterangepicker({
+      singleDatePicker: true,
+      timePicker: true,
+      locale: {
+        format: 'YYYY-MM-DD hh:mm'
+      }
+    })
+    
+  })
+</script>
+
+{% endblock %}
