@@ -32,14 +32,6 @@
     https://getbootstrap.com/docs/4.4/components/forms/
 -->
 
-{% for error in form.fecha.errors %}
-<script>
-  $('').ready(function() {
-    toastr.error('{{ error }}','Error')
-  });
-  </script>
-{% endfor %}
-
 <div class="form-group">
   <label for="exampleFormControlInput1">{{form.fecha.label}}</label>
       {%if form.fecha.errors %}
