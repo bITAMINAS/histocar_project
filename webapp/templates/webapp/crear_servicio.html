@@ -2,6 +2,14 @@
 {% block content %} 
 {% load widget_tweaks %}
  <!-- Content Row -->
+ <!-- Toastr -->
+ {% load static %}
+ <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
+<script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
+<script src="{% static 'webapp/plugins/moment/moment.min.js' %}"></script>
+<script src="{% static 'webapp/plugins/daterangepicker/daterangepicker.js' %}"></script>
+<link rel="stylesheet" href="{% static 'webapp/plugins/daterangepicker/daterangepicker.css' %}">
+
  <div class="row">
 
   <div class="col-xl-12 col-md-12 mb-12">
@@ -24,8 +32,17 @@
 -->
                 <div class="form-group">
                     <label for="exampleFormControlInput1">{{form.fecha.label}}</label>
+                    {%if form.fecha.errors %}
+                    {% render_field form.fecha class="form-control is-invalid" %}
+                    {% else %}
                     {% render_field form.fecha class="form-control" %}
+                    {% endif %}
                     </div>
+                    <script>
+                    $('.toastrDefaultSuccess').ready(function() {
+                      toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+                    });
+                    </script>
                     <div class="form-group">
                     <label for="exampleFormControlInput1">{{form.textoOtros.label}}</label>
                     {% render_field form.textoOtros class="form-control" %}
@@ -61,14 +78,50 @@
             <button type='submit' class="btn btn-primary mb-2">Agregar servicio</button>
             </div>
         </form>
-        
-        
-        
-        
+        <script>
+          toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": true,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "9000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}  
+        </script>
       </div>
     </div>
 
   </div>
 </div>
 <!-- End of Content Row -->
+<!-- InputMask -->
+
+<!-- REQUIRED SCRIPTS -->
+
+
+
+
+  <script>
+  $(function () {
+    //Date range picker
+    $('#id_fecha').daterangepicker({
+      singleDatePicker: true,
+      timePicker: true,
+      locale: {
+        format: 'YYYY-MM-DD hh:mm'
+      }
+    })
+    
+  })
+</script>
+
 {% endblock %}
