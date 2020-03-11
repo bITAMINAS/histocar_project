@@ -11,7 +11,7 @@ Pasos para preparar el proyecto:
             pip install -r requirements.txt 
 
 Otros:
-- Para actualizar el archivo de dependencias Requirements.txt:
+- Para actualizar el archivo de dependencias Requirements.txt (NO ES PARA INSTALAR LOS NUEVOS PAQUETES)
     pip freeze > requirements.txt
 
 - Para poner a correr el servidor de Django:
