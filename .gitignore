@@ -44,7 +44,7 @@ pip-delete-this-directory.txt
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
+#db.sqlite3
 
 # PyBuilder
 target/
@@ -70,3 +70,4 @@ static_collected
 # Exclude machine-specific vs code settings
 .vscode/settings.json
 .vscode/launch.json
+
