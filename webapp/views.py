@@ -30,8 +30,7 @@ def crearServicio(request):
     if request.method == "POST":
         form = ServicioForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
+            form.save()
             return redirect('index')
     else:
         form= ServicioForm()

@@ -17,7 +17,7 @@ class Usuario(models.Model):
         return self.nombre + ' ' + self.apellido
     
 class Servicio(models.Model):
-    fecha = models.DateTimeField()
+    fecha = models.DateTimeField(null=True)
     textoOtros = models.CharField(max_length=240, default="")
     comentario = models.CharField(max_length=240, default="")
     kilometros = models.IntegerField(default=0)
@@ -47,7 +47,9 @@ class Estado(models.Model):
 class Estado_Servicio(models.Model):
     servicio = models.ForeignKey('Servicio', on_delete=models.CASCADE)
     estado = models.ForeignKey('Estado', on_delete=models.CASCADE)
-    fecha = models.DateField()
+    fecha = models.DateField(null=True)
+    # fecha queda como campo null = true porque es el fix del bug 7
+    # https://exceptionshub.com/not-null-constraint-failed-after-adding-to-models-py.html
 
 
 class Vehiculo(models.Model):
