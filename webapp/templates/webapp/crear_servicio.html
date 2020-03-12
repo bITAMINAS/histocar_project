@@ -6,11 +6,6 @@
  {% load static %}
 <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
 <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
-<script src="{% static 'webapp/plugins/moment/moment.min.js' %}"></script>
-<script src="{% static 'webapp/plugins/daterangepicker/daterangepicker.js' %}"></script>
-<link rel="stylesheet" href="{% static 'webapp/plugins/daterangepicker/daterangepicker.css' %}">
-
- <div class="row">
 
   <div class="col-xl-12 col-md-12 mb-12">
     <div class="card shadow mb-3">
@@ -49,7 +44,7 @@
 </div>
                     
 <div class="form-group">
-  <label for="exampleFormControlInput1">{{form.textoOtros.label}}</label>
+  <label for="Otras tareas">{{form.textoOtros.label}}</label>
       {%if form.textoOtros.errors %}
         {% render_field form.textoOtros class="form-control is-invalid" %}
           {% for error in form.textoOtros.errors %}
@@ -63,25 +58,10 @@
        {% render_field form.textoOtros class="form-control" %}
      {% endif %}
 </div>                    
-                 
+ 
+#
 <div class="form-group">
-  <label for="exampleFormControlInput1">{{form.comentario.label}}</label>
-      {%if form.comentario.errors %}
-        {% render_field form.comentario class="form-control is-invalid" %}
-          {% for error in form.comentario.errors %}
-        <script>
-          $('').ready(function() {
-            toastr.error('{{ error }}','Comentario')
-          });
-        </script>
-      {% endfor %}
-     {% else %}
-       {% render_field form.comentario class="form-control" %}
-     {% endif %}
-</div>
-                   
-<div class="form-group">
-  <label for="exampleFormControlInput1">{{form.kilometros.label}}</label>
+  <label for="kilometros"> {{form.kilometros.label}}</label>
       {%if form.kilometros.errors %}
         {% render_field form.kilometros class="form-control is-invalid" %}
           {% for error in form.kilometros.errors %}
@@ -97,23 +77,7 @@
 </div>
                    
 <div class="form-group">
-  <label for="exampleFormControlInput1">{{form.puntuacion.label}}</label>
-      {%if form.puntuacion.errors %}
-        {% render_field form.puntuacion class="form-control is-invalid" %}
-          {% for error in form.puntuacion.errors %}
-        <script>
-          $('').ready(function() {
-            toastr.error('{{ error }}','Puntuacion')
-          });
-        </script>
-      {% endfor %}
-     {% else %}
-       {% render_field form.puntuacion class="form-control" %}
-     {% endif %}
-</div>
-
-<div class="form-group">
-    <label for="exampleFormControlInput1">{{form.costo.label}}</label>
+    <label for="costo">{{form.costo.label}}</label>
         {%if form.costo.errors %}
         	{% render_field form.costo class="form-control is-invalid" %}
         		{% for error in form.costo.errors %}
@@ -129,7 +93,7 @@
 </div>
                     
 <div class="form-group">
-  <label for="exampleFormControlInput1">{{form.vehiculo.label}}</label>
+  <label for="vehiculo">{{form.vehiculo.label}}</label>
       {%if form.vehiculo.errors %}
         {% render_field form.vehiculo class="form-control is-invalid" %}
           {% for error in form.vehiculo.errors %}
@@ -145,7 +109,7 @@
 </div>
                   
 <div class="form-group">
-  <label for="exampleFormControlInput1">{{form.tareas.label}}</label>
+  <label for="tareas">{{form.tareas.label}}</label>
       {%if form.tareas.errors %}
         {% render_field form.tareas class="form-control is-invalid" %}
           {% for error in form.tareas.errors %}
@@ -161,7 +125,7 @@
 </div>
 
 <div class="form-group">
-  <label for="exampleFormControlInput1">{{form.estados.label}}</label>
+  <label for="estados">{{form.estados.label}}</label>
       {%if form.estados.errors %}
         {% render_field form.estados class="form-control is-invalid" %}
           {% for error in form.estados.errors %}
@@ -202,11 +166,10 @@
     </div>
 
   </div>
-</div>
 <!-- End of Content Row -->
 <!-- InputMask -->
 
-<!-- REQUIRED SCRIPTS 
+<!-- REQUIRED SCRIPTS -->
 
 
 
@@ -223,5 +186,5 @@
     
   })
 </script>
--->
+
 {% endblock %}
