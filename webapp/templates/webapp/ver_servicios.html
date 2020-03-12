@@ -30,6 +30,15 @@
                       <p>Fecha del servicio {{servicio.fecha}}, 
                       Comentario: {{ servicio.comentario }}, {{ servicio.textoOtros }}
                       costo de {{ servicio.costo }}, Con {{ servicio.kilometros }} kilometros</p>
+                      Tareas:    
+                      {% for tarea in servicio.tareas.all %}
+                      {{tarea.nombre}}
+                      {% endfor %}
+
+                      Estados:
+                      {% for estado in servicio.estadoservicio_set.all %}
+                      {{estado.fecha}}
+                      {% endfor %}
                     </div>
                     <div class="col-5 text-center">
                       <i class="fas fa-car fa-5x"></i>
