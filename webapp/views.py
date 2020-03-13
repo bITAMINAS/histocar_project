@@ -16,7 +16,7 @@ def index(request):
 def verServicios(request):
     servicios = Servicio.objects.all().order_by('id')
     seccion = 'Ver Servicios'
-    return render(request, 'webapp/ver_servicios.html', {'servicios': servicios, 'seccion': seccion})
+    return render(request, 'webapp/servicios-lista.html', {'servicios': servicios, 'seccion': seccion})
 
 def crearServicio(request):
     seccion = 'Crear Servicio'
@@ -28,4 +28,9 @@ def crearServicio(request):
             return redirect('index')
     else:
         form= ServicioForm()
-    return render(request, 'webapp/crear_servicio.html', {'form': form, 'seccion': seccion})
+    return render(request, 'webapp/servicios-crear.html', {'form': form, 'seccion': seccion})
+
+def detallesServicio(request, servicio_id):
+    servicio = Servicio.objects.get(pk=servicio_id)
+    seccion = 'Detalles de Servicio'
+    return render(request, 'webapp/servicios-detalle.html', {'servicio': servicio, 'seccion': seccion})
