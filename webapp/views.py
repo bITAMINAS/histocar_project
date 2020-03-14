@@ -8,7 +8,7 @@ from .models import Servicio, Usuario
 from .forms import ServicioForm, registroUsuario, Login
 
 # Create your views here.
-
+@login_required(login_url='login')
 def index(request):
     servicios = Servicio.objects.all().order_by('id')
     seccion = 'Inicio'
@@ -18,7 +18,8 @@ def verServicios(request):
     servicios = Servicio.objects.all().order_by('id')
     seccion = 'Ver Servicios'
     return render(request, 'webapp/servicios-lista.html', {'servicios': servicios, 'seccion': seccion})
-
+    
+@login_required(login_url='login')
 def crearServicio(request):
     seccion = 'Crear Servicio'
 
