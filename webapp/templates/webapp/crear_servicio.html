@@ -1,16 +1,12 @@
 {% extends "base.html" %}
-{% block content %} 
+{% block content %}
 {% load widget_tweaks %}
  <!-- Content Row -->
  <!-- Toastr -->
  {% load static %}
 <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
 <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
-<script src="{% static 'webapp/plugins/moment/moment.min.js' %}"></script>
-<script src="{% static 'webapp/plugins/daterangepicker/daterangepicker.js' %}"></script>
-<link rel="stylesheet" href="{% static 'webapp/plugins/daterangepicker/daterangepicker.css' %}">
 
- <div class="row">
 
   <div class="col-xl-12 col-md-12 mb-12">
     <div class="card shadow mb-3">
@@ -18,17 +14,17 @@
         <h6 class="m-0 font-weight-bold text-primary">Agregar nuevo servicio</h6>
       </div>
       <div class="card-body">
-        
-        
-        
-        
+
+
+
+
         <form method="POST" class="ServicioForm">{% csrf_token %}
             <div class="form-group">
-            
+
 <!--
     Links de interes
-    
-    https://github.com/jazzband/django-widget-tweaks 
+
+    https://github.com/jazzband/django-widget-tweaks
     https://getbootstrap.com/docs/4.4/components/forms/
 -->
 
@@ -47,7 +43,7 @@
        {% render_field form.fecha class="form-control" %}
      {% endif %}
 </div>
-                    
+
 <div class="form-group">
   <label for="exampleFormControlInput1">{{form.textoOtros.label}}</label>
       {%if form.textoOtros.errors %}
@@ -62,8 +58,8 @@
      {% else %}
        {% render_field form.textoOtros class="form-control" %}
      {% endif %}
-</div>                    
-                 
+</div>
+
 <div class="form-group">
   <label for="exampleFormControlInput1">{{form.comentario.label}}</label>
       {%if form.comentario.errors %}
@@ -79,7 +75,7 @@
        {% render_field form.comentario class="form-control" %}
      {% endif %}
 </div>
-                   
+
 <div class="form-group">
   <label for="exampleFormControlInput1">{{form.kilometros.label}}</label>
       {%if form.kilometros.errors %}
@@ -95,7 +91,7 @@
        {% render_field form.kilometros class="form-control" %}
      {% endif %}
 </div>
-                   
+
 <div class="form-group">
   <label for="exampleFormControlInput1">{{form.puntuacion.label}}</label>
       {%if form.puntuacion.errors %}
@@ -127,7 +123,7 @@
    			{% render_field form.costo class="form-control" %}
    		{% endif %}
 </div>
-                    
+
 <div class="form-group">
   <label for="exampleFormControlInput1">{{form.vehiculo.label}}</label>
       {%if form.vehiculo.errors %}
@@ -143,7 +139,7 @@
        {% render_field form.vehiculo class="form-control" %}
      {% endif %}
 </div>
-                  
+
 <div class="form-group">
   <label for="exampleFormControlInput1">{{form.tareas.label}}</label>
       {%if form.tareas.errors %}
@@ -196,17 +192,16 @@
   "hideEasing": "linear",
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
-}  
+}
         </script>
       </div>
     </div>
 
   </div>
-</div>
 <!-- End of Content Row -->
 <!-- InputMask -->
 
-<!-- REQUIRED SCRIPTS -->
+<!-- REQUIRED SCRIPTS-->
 
 
 
@@ -220,7 +215,7 @@
         format: 'YYYY-MM-DD hh:mm'
       }
     })
-    
+
   })
 </script>
 
