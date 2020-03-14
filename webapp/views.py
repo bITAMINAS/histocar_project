@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 
 #Cargamos vistas de los modelos
 from .models import Servicio, Usuario
-from .forms import ServicioForm, registroUsuario
+from .forms import ServicioForm, registroUsuario, Login
 
 # Create your views here.
 

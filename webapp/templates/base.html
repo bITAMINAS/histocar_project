@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="{% static 'webapp/plugins/daterangepicker/daterangepicker.css' %}">
   <!-- summernote -->
   <link rel="stylesheet" href="{% static 'webapp/plugins/summernote/summernote-bs4.css' %}">
+  <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Grand+Hotel&display=swap" rel="stylesheet">
@@ -57,32 +58,14 @@
     </div>
     <!-- /.content-header -->
 
-    <!-- Main content -->
-    <section class="content">
-      {% block content %}{% endblock %}
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  
 
-
-  <!-- Main Footer -->
-  {%include "footer.html"%}
-  <!-- /.footer -->
-
-</div>
-<!-- ./wrapper -->
-
-
-<!-- jQuery -->
+    <!-- jQuery -->
 <script src="{% static 'webapp/plugins/jquery/jquery.min.js' %}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{% static 'webapp/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
+
+<script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
 <!-- Bootstrap 4 -->
 <script src="{% static 'webapp/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <!-- ChartJS -->
@@ -105,10 +88,26 @@
 <script src="{% static 'webapp/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
 <!-- AdminLTE App -->
 <script src="{% static 'webapp/js/adminlte.js' %}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{% static 'webapp/js/pages/dashboard.js' %}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{% static 'webapp/js/demo.js' %}"></script>
+
+
+    <!-- Main content -->
+    <section class="content">
+      {% block content %}{% endblock %}
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+
+
+  <!-- Main Footer -->
+  {%include "footer.html"%}
+  <!-- /.footer -->
+
+</div>
+<!-- ./wrapper -->
+
+
 
 </body>
 </html>

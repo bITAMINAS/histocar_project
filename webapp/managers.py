@@ -8,7 +8,7 @@ class UsuarioMejorado(BaseUserManager):
         """
         if not documento:
             raise ValueError('The given email must be set')
-        documento = (documento)
+        documento = get_by_natural_key(documento)
         user = self.model(documento=documento, **extra_fields)
         user.set_password(password)
         user.save()
