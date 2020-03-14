@@ -29,7 +29,7 @@
 }
 
 .bg-image {
-  background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200');
+  background-image: url('https://images.pexels.com/photos/733737/pexels-photo-733737.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
   background-size: cover;
   background-position: center;
 }
@@ -145,8 +145,24 @@
           <div class="row">
             <div class="col-md-9 col-lg-8 mx-auto">
               <h3 class="login-heading mb-4">Bienvenido</h3>
+              <p>{% if form.errors %}
+                <!-- Error messaging -->
+                <div id="errors">
+                  <div class="inner">
+                    <p>There were some errors in the information you entered. Please correct the following:</p>
+                    {{ form.non_field_errors }}
+                    <ul>
+                      {% for field in form %}
+                        {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                <!-- /Error messaging -->
+              {% endif %}</p>
               <form method="POST">{% csrf_token %}
                 <div class="form-label-group">
+                 
                     {%if form.documento.errors %}
                     {% render_field form.documento class="form-control is-invalid" %}
                       {% for error in form.documento.errors %} {{ error }} {% endfor %}
