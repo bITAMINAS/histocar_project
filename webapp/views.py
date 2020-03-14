@@ -31,7 +31,7 @@ def crearServicio(request):
         form= ServicioForm()
     return render(request, 'webapp/crear_servicio.html', {'form': form, 'seccion': seccion})
 
-def altaUsuario(request):
+def crearUsuario(request):
     seccion = 'Alta de nuevo Usuario'
     if request.method == 'POST':
         form = registroUsuario(request.POST)
@@ -40,7 +40,7 @@ def altaUsuario(request):
             return redirect('index')
     else:
         form = registroUsuario()
-    return render(request, 'webapp/registro.html', {'form': form, 'seccion':seccion})
+    return render(request, 'webapp/crear_usuario.html', {'form': form, 'seccion':seccion})
 
 def login(request):
     seccion= 'Ingreso de usuario'
@@ -53,7 +53,7 @@ def login(request):
             if user is not None:
                 if user.is_active:
                     django_login(request,user)
-                    return redirect('/registro') #user is redirected to dashboard
+                    return redirect('/') 
     else:
         form = Login()
 
