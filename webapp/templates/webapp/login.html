@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %} 
+{% load widget_tweaks %}
+ <!-- Content Row -->
+ <!-- Toastr -->
+ {% load static %}
+
+
+
+  <div class="col-xl-12 col-md-12 mb-12">
+    <div class="card shadow mb-3">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Registro de nuevo user</h6>
+      </div>
+      <div class="card-body">
+        
+        
+        
+        
+        <form method="POST" class="RegistroUsuario">{% csrf_token %}
+            <div class="form-group">
+
+                {{ form.as_p }}
+
+
+<button type='submit' class="btn btn-primary btn-md mt-2 mb-2">Ingresar</button>
+</div>
+</form>
+
+</div>
+</div>
+
+</div>
+<!-- End of Content Row -->
+<!-- InputMask -->
+<!-- REQUIRED SCRIPTS -->
+<script>
+toastr.options = {
+"closeButton": true,
+"debug": false,
+"newestOnTop": false,
+"progressBar": true,
+"positionClass": "toast-top-right",
+"preventDuplicates": false,
+"onclick": null,
+"showDuration": "300",
+"hideDuration": "1000",
+"timeOut": "9000",
+"extendedTimeOut": "1000",
+"showEasing": "swing",
+"hideEasing": "linear",
+"showMethod": "fadeIn",
+"hideMethod": "fadeOut"
+}  
+</script>
+{% endblock %}

@@ -55,3 +55,15 @@ class registroUsuario(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+class Login(forms.Form): # Note: forms.Form NOT forms.ModelForm
+    documento = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control','type':'text','name': 'documento','placeholder':'Documento'}), 
+        label='Documento de identidad')
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class':'form-control','type':'password', 'name': 'password','placeholder':'Password'}),
+        label='Password')
+
+    class Meta:
+        fields = ['email', 'password']
