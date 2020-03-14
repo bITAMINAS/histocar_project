@@ -26,7 +26,7 @@ class registroUsuario(UserCreationForm):
 
     class Meta:
         model = Usuario
-        fields = ('documento', 'email', 'telefono')
+        fields = ('documento', 'email', 'telefono', 'nombre', 'apellido')
         labels = {
             'documento': _('Cedula de identidad'),
         }

@@ -13,10 +13,11 @@
         <h6 class="m-0 font-weight-bold text-primary">Registro de nuevo user</h6>
       </div>
       <div class="card-body">
+        
         <form method="POST" class="RegistroUsuario">{% csrf_token %}
-            <div class="form-group">
+            <div class="col-sm-6">
 
-
+              
               <div class="form-group">
                 <label for="exampleFormControlInput1">{{form.documento.label}}</label>
                     {%if form.documento.errors %}
@@ -64,7 +65,44 @@
                      {% render_field form.telefono class="form-control" %}
                    {% endif %}
               </div>
-
+              <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">{{form.nombre.label}}</label>
+                      {%if form.nombre.errors %}
+                        {% render_field form.nombre class="form-control is-invalid" %}
+                          {% for error in form.nombre.errors %}
+                        <script>
+                          $('').ready(function() {
+                            toastr.error('{{ error }}','{{form.nombre.label}}')
+                          });
+                        </script>
+                      {% endfor %}
+                     {% else %}
+                       {% render_field form.nombre class="form-control" %}
+                     {% endif %}
+                    </div>
+                    </div>
+                    <div class="col-sm-6">
+                     <div class="form-group">
+                  <label for="exampleFormControlInput1">{{form.apellido.label}}</label>
+                      {%if form.apellido.errors %}
+                        {% render_field form.apellido class="form-control is-invalid" %}
+                          {% for error in form.apellido.errors %}
+                        <script>
+                          $('').ready(function() {
+                            toastr.error('{{ error }}','{{form.apellido.label}}')
+                          });
+                        </script>
+                      {% endfor %}
+                     {% else %}
+                       {% render_field form.apellido class="form-control" %}
+                     {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
               <div class="form-group">
                 <label for="exampleFormControlInput1">Contraseña</label>
                     {%if form.password1.errors %}
@@ -80,7 +118,8 @@
                      {% render_field form.password1 class="form-control" %}
                    {% endif %}
               </div>
-              
+              </div>
+              <div class="col-sm-6">
               <div class="form-group">
                 <label for="exampleFormControlInput1">Confirmar contraseña</label>
                     {%if form.password2.errors %}
@@ -96,19 +135,12 @@
                      {% render_field form.password2 class="form-control" %}
                    {% endif %}
               </div>
-
-              {% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
-
-            <button type='submit' class="btn btn-primary btn-md mt-2 mb-2">Agregar Cliente</button>
+              </div>
             </div>
+            <button type='submit' class="btn btn-primary btn-md mt-2 mb-2">Agregar Cliente</button>
+            
         </form>
+        </div>
         
       </div>
     </div>
