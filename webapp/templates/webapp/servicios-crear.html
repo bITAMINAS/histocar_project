@@ -4,9 +4,12 @@
  <!-- Content Row -->
  <!-- Toastr -->
  {% load static %}
+<<<<<<< HEAD:webapp/templates/webapp/servicios-crear.html
 <<<<<<< HEAD:webapp/templates/webapp/crear_servicio.html
 <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
 <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
+=======
+>>>>>>> 0971cbfef8dbe630a87e4a931ab2619f5ad97430:webapp/templates/webapp/servicios-crear.html
 =======
 >>>>>>> 0971cbfef8dbe630a87e4a931ab2619f5ad97430:webapp/templates/webapp/servicios-crear.html
 
@@ -61,6 +64,7 @@
      {% else %}
        {% render_field form.textoOtros class="form-control" %}
      {% endif %}
+<<<<<<< HEAD:webapp/templates/webapp/servicios-crear.html
 <<<<<<< HEAD:webapp/templates/webapp/crear_servicio.html
 </div>
 
@@ -89,6 +93,13 @@
 <div class="form-group">
   <label for="kilometros"> {{form.kilometros.label}}</label>
 >>>>>>> 0971cbfef8dbe630a87e4a931ab2619f5ad97430:webapp/templates/webapp/servicios-crear.html
+=======
+</div>                    
+ 
+#
+<div class="form-group">
+  <label for="kilometros"> {{form.kilometros.label}}</label>
+>>>>>>> 0971cbfef8dbe630a87e4a931ab2619f5ad97430:webapp/templates/webapp/servicios-crear.html
       {%if form.kilometros.errors %}
         {% render_field form.kilometros class="form-control is-invalid" %}
           {% for error in form.kilometros.errors %}
@@ -102,7 +113,11 @@
        {% render_field form.kilometros class="form-control" %}
      {% endif %}
 </div>
+<<<<<<< HEAD:webapp/templates/webapp/servicios-crear.html
 
+=======
+                   
+>>>>>>> 0971cbfef8dbe630a87e4a931ab2619f5ad97430:webapp/templates/webapp/servicios-crear.html
 <div class="form-group">
     <label for="costo">{{form.costo.label}}</label>
         {%if form.costo.errors %}
