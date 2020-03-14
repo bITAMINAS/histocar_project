@@ -29,8 +29,6 @@ class registroUsuario(UserCreationForm):
         fields = ('documento', 'email', 'telefono')
         labels = {
             'documento': _('Cedula de identidad'),
-            'password1': _('Contraseña'),
-            'password2': _('Confirmar Contraseña'),
         }
         help_texts = {
             'documento': _('Sin puntos ni guiones, 8 carcateres'),
