@@ -11,16 +11,12 @@ Pasos para preparar el proyecto:
             pip install -r requirements.txt 
 
 Otros:
-- Para actualizar el archivo de dependencias Requirements.txt:
+- Para actualizar el archivo de dependencias Requirements.txt (NO ES PARA INSTALAR LOS NUEVOS PAQUETES)
     pip freeze > requirements.txt
 
 - Para poner a correr el servidor de Django:
     
     python manage.py runserver
-
-- Actualizar BD, migraciones:
-    
-    python manage.py migrate
 
 - Actualizar base de datos de la aplicación conectada (webapps):
     
@@ -37,3 +33,7 @@ Otros:
 
 Links de interés:
     https://www.campusmvp.es/recursos/post/git-los-conceptos-de-master-origin-y-head.aspx
+
+
+    Plantilla utilizada
+        https://adminlte.io/themes/AdminLTE/
