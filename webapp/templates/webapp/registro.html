@@ -4,8 +4,8 @@
  <!-- Content Row -->
  <!-- Toastr -->
  {% load static %}
-<link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
-<script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
+
+
 
   <div class="col-xl-12 col-md-12 mb-12">
     <div class="card shadow mb-3">
@@ -19,10 +19,89 @@
         
         <form method="POST" class="RegistroUsuario">{% csrf_token %}
             <div class="form-group">
-            
-                {{ form.as_p }}
 
-            <button type='submit' class="btn btn-primary btn-lg mt-2 mb-2">Agregar servicio</button>
+
+              <div class="form-group">
+                <label for="exampleFormControlInput1">{{form.documento.label}}</label>
+                    {%if form.documento.errors %}
+                      {% render_field form.documento class="form-control is-invalid" %}
+                        {% for error in form.documento.errors %}
+                      <script>
+                        $('').ready(function() {
+                          toastr.error('{{ error }}','{{form.documento.label}}')
+                        });
+                      </script>
+                    {% endfor %}
+                   {% else %}
+                     {% render_field form.documento class="form-control" %}
+                   {% endif %}
+              </div>
+
+              <div class="form-group">
+                <label for="exampleFormControlInput1">{{form.email.label}}</label>
+                    {%if form.email.errors %}
+                      {% render_field form.email class="form-control is-invalid" %}
+                        {% for error in form.email.errors %}
+                      <script>
+                        $('').ready(function() {
+                          toastr.error('{{ error }}','{{form.email.label}}')
+                        });
+                      </script>
+                    {% endfor %}
+                   {% else %}
+                     {% render_field form.email class="form-control" %}
+                   {% endif %}
+              </div>
+
+              <div class="form-group">
+                <label for="exampleFormControlInput1">{{form.telefono.label}}</label>
+                    {%if form.telefono.errors %}
+                      {% render_field form.telefono class="form-control is-invalid" %}
+                        {% for error in form.telefono.errors %}
+                      <script>
+                        $('').ready(function() {
+                          toastr.error('{{ error }}','{{form.telefono.label}}')
+                        });
+                      </script>
+                    {% endfor %}
+                   {% else %}
+                     {% render_field form.telefono class="form-control" %}
+                   {% endif %}
+              </div>
+
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Contraseña</label>
+                    {%if form.password1.errors %}
+                      {% render_field form.password1 class="form-control is-invalid" %}
+                        {% for error in form.password1.errors %}
+                      <script>
+                        $('').ready(function() {
+                          toastr.error('{{ error }}','Contraseña')
+                        });
+                      </script>
+                    {% endfor %}
+                   {% else %}
+                     {% render_field form.password1 class="form-control" %}
+                   {% endif %}
+              </div>
+              
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Confirmar contraseña</label>
+                    {%if form.password2.errors %}
+                      {% render_field form.password2 class="form-control is-invalid" %}
+                        {% for error in form.password2.errors %}
+                      <script>
+                        $('').ready(function() {
+                          toastr.error('{{ error }}','Confirmar contraseña')
+                        });
+                      </script>
+                    {% endfor %}
+                   {% else %}
+                     {% render_field form.password2 class="form-control" %}
+                   {% endif %}
+              </div>
+
+            <button type='submit' class="btn btn-primary btn-md mt-2 mb-2">Agregar Cliente</button>
             </div>
         </form>
         
@@ -33,5 +112,23 @@
 <!-- End of Content Row -->
 <!-- InputMask -->
 <!-- REQUIRED SCRIPTS -->
-
+<script>
+  toastr.options = {
+"closeButton": true,
+"debug": false,
+"newestOnTop": false,
+"progressBar": true,
+"positionClass": "toast-top-right",
+"preventDuplicates": false,
+"onclick": null,
+"showDuration": "300",
+"hideDuration": "1000",
+"timeOut": "9000",
+"extendedTimeOut": "1000",
+"showEasing": "swing",
+"hideEasing": "linear",
+"showMethod": "fadeIn",
+"hideMethod": "fadeOut"
+}  
+</script>
 {% endblock %}
