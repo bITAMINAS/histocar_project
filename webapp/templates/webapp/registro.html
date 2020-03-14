@@ -13,10 +13,6 @@
         <h6 class="m-0 font-weight-bold text-primary">Registro de nuevo user</h6>
       </div>
       <div class="card-body">
-        
-        
-        
-        
         <form method="POST" class="RegistroUsuario">{% csrf_token %}
             <div class="form-group">
 
@@ -100,6 +96,15 @@
                      {% render_field form.password2 class="form-control" %}
                    {% endif %}
               </div>
+
+              {% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
 
             <button type='submit' class="btn btn-primary btn-md mt-2 mb-2">Agregar Cliente</button>
             </div>
