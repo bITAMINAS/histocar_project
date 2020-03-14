@@ -59,10 +59,10 @@ class registroUsuario(UserCreationForm):
 
 class Login(forms.Form): # Note: forms.Form NOT forms.ModelForm
     documento = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form-control','type':'text','name': 'documento','placeholder':'Documento'}), 
+        attrs={'class': 'form-control','type':'text','name': 'documento', 'autofoucs':'autofocus'}), 
         label='Documento de identidad')
     password = forms.CharField(widget=forms.PasswordInput(
-        attrs={'class':'form-control','type':'password', 'name': 'password','placeholder':'Password'}),
+        attrs={'class':'form-control','type':'password', 'name': 'password'}),
         label='Password')
 
     class Meta:
