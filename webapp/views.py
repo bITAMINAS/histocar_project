@@ -8,14 +8,14 @@ from .models import Servicio, Usuario
 from .forms import ServicioForm, registroUsuario, Login
 
 # Create your views here.
-@login_required(login_url='login')
+
 def index(request):
     template_name='webapp/index.html'
     servicios = Servicio.objects.all().order_by('id')
     seccion = 'Inicio'
     return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
 
-@login_required(login_url='login')
+
 def verServicios(request):
     template_name='webapp/servicios-lista.html'
     seccion = 'Ver Servicios'
@@ -41,7 +41,7 @@ def detallesServicio(request, servicio_id):
     servicio = Servicio.objects.get(pk=servicio_id)
     return render(request, template_name, {'servicio': servicio, 'seccion': seccion})
 
-def altaUsuario(request):
+def crearUsuario(request):
     template_name='webapp/registro.html'
     seccion = 'Alta de nuevo Usuario'
     
