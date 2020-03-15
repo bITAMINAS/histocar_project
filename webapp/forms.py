@@ -14,9 +14,9 @@ class ServicioForm(forms.ModelForm):
     class Meta:
         model = Servicio
         fields = ('fecha', 'textoOtros', 'kilometros', 'costo', 'vehiculo',  'tareas',  'estados')
-        #widgets = {
-        #    'estados': Select() label='Estado',
-        #}
+        widgets = {
+            'estados': Select(),
+        }
 
 
 # class CrearServicioForm(forms.Form):
