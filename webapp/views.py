@@ -5,8 +5,8 @@ from django.contrib.auth import authenticate, login as django_login, logout as d
 from django.contrib.auth.decorators import login_required
 
 #Cargamos vistas de los modelos
-from .models import Servicio, Usuario
-from .forms import ServicioForm, registroUsuario, Login
+from .models import Servicio, Usuario, Vehiculo
+from .forms import ServicioForm, registroUsuario, Login, crearVehiculos
 
 # Create your views here.
 
@@ -52,6 +52,18 @@ def crearUsuario(request):
             return redirect('index')
     else:
         form = registroUsuario()
+    return render(request, template_name, {'form': form, 'seccion': seccion})
+
+def crearVehiculo(request):
+    template_name='webapp/vehiculo-crear.html'
+    seccion = 'Alta de nuevo vehiculo'
+    if request.method == 'POST':
+        form = crearVehiculos(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = crearVehiculos()
     return render(request, template_name, {'form': form, 'seccion': seccion})
 
 def login(request):

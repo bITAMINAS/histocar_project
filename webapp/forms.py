@@ -4,7 +4,7 @@
 #################################################################
 #################################################################
 from django import forms
-from webapp.models import Servicio, Usuario
+from webapp.models import Servicio, Usuario, Vehiculo
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
 from django.utils.translation import gettext_lazy as _
@@ -34,7 +34,10 @@ class ServicioForm(forms.ModelForm):
 #         widget=forms.Textarea,
 #     )
 
-
+class crearVehiculos(forms.ModelForm):
+    class Meta:
+        model = Vehiculo
+        fields = ('modelo', 'color', 'nroChasis', 'matricula', 'anio', 'tipoCombustible', 'duenio')
 
 class registroUsuario(UserCreationForm):
     error_css_class = 'form-control is-invalid'
