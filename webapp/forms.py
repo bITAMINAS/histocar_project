@@ -38,6 +38,12 @@ class crearVehiculos(forms.ModelForm):
     class Meta:
         model = Vehiculo
         fields = ('modelo', 'color', 'nroChasis', 'matricula', 'anio', 'tipoCombustible', 'duenio')
+        labels = {
+            'duenio': _('Dueño del vehiculo'),
+            'nroChasis': _('Numero de chasis'),
+            'anio': _('Año'),
+            'tipoCombustible': _('Combustible')
+        }
 
 class registroUsuario(UserCreationForm):
     error_css_class = 'form-control is-invalid'
