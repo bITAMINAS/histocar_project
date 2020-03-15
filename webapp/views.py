@@ -10,19 +10,16 @@ from .forms import ServicioForm, registroUsuario, Login
 # Create your views here.
 
 def index(request):
-    template_name='webapp/index.html'
     servicios = Servicio.objects.all().order_by('id')
     seccion = 'Inicio'
-    return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
-
+    return render(request, 'webapp/index.html', {'servicios': servicios, 'seccion': seccion})
 
 def verServicios(request):
-    template_name='webapp/servicios-lista.html'
+    servicios = Servicio.objects.all().order_by('id')
     seccion = 'Ver Servicios'
-    return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
+    return render(request, 'webapp/servicios-lista.html', {'servicios': servicios, 'seccion': seccion})
 
 def crearServicio(request):
-    template_name='webapp/servicios-crear.html'
     seccion = 'Crear Servicio'
 
     if request.method == "POST":
@@ -32,19 +29,15 @@ def crearServicio(request):
             return redirect('index')
     else:
         form= ServicioForm()
-    return render(request, template_name, {'form': form, 'seccion': seccion})
+    return render(request, 'webapp/servicios-crear.html', {'form': form, 'seccion': seccion})
 
 def detallesServicio(request, servicio_id):
-    template_name='webapp/servicios-detalle.html'
-    seccion = 'Detalles de Servicio'
-    
     servicio = Servicio.objects.get(pk=servicio_id)
-    return render(request, template_name, {'servicio': servicio, 'seccion': seccion})
+    seccion = 'Detalles de Servicio'
+    return render(request, 'webapp/servicios-detalle.html', {'servicio': servicio, 'seccion': seccion})
 
 def crearUsuario(request):
-    template_name='webapp/registro.html'
     seccion = 'Alta de nuevo Usuario'
-    
     if request.method == 'POST':
         form = registroUsuario(request.POST)
         if form.is_valid():
@@ -52,11 +45,10 @@ def crearUsuario(request):
             return redirect('index')
     else:
         form = registroUsuario()
-    return render(request, template_name, {'form': form})
+    return render(request, 'webapp/crear_usuario.html', {'form': form, 'seccion':seccion})
 
 def login(request):
     seccion= 'Ingreso de usuario'
-    template_name='webapp/login.html'
     if request.method == 'POST':
         form = Login(data = request.POST)
         if form.is_valid():
@@ -70,7 +62,7 @@ def login(request):
     else:
         form = Login()
 
-    return render(request, template_name, {'form':form, 'seccion': seccion})
+    return render(request,'webapp/login.html',{'form':form, 'seccion': seccion})
 
 def logout(request):
     django_logout(request)
