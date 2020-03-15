@@ -53,3 +53,25 @@ def altaUsuario(request):
     else:
         form = registroUsuario()
     return render(request, template_name, {'form': form})
+
+def login(request):
+    seccion= 'Ingreso de usuario'
+    template_name='webapp/login.html'
+    if request.method == 'POST':
+        form = Login(data = request.POST)
+        if form.is_valid():
+            documento = request.POST['documento']
+            password = request.POST['password']
+            user = authenticate(documento=documento, password=password)
+            if user is not None:
+                if user.is_active:
+                    django_login(request,user)
+                    return redirect('/') 
+    else:
+        form = Login()
+
+    return render(request, template_name, {'form':form, 'seccion': seccion})
+
+def logout(request):
+    django_logout(request)
+    return redirect('/')
