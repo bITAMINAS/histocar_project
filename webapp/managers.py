@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import ugettext_lazy as _
+
 class UsuarioMejorado(BaseUserManager):
     def _create_user(self, documento, password, **extra_fields):
         """
@@ -7,7 +8,7 @@ class UsuarioMejorado(BaseUserManager):
         """
         if not documento:
             raise ValueError('The given email must be set')
-        documento = get_by_natural_key(documento)
+        documento = (documento)
         user = self.model(documento=documento, **extra_fields)
         user.set_password(password)
         user.save()
