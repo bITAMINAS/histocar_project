@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'webapp.apps.WebappConfig',
     'widget_tweaks',
 ]
+AUTH_USER_MODEL = 'webapp.Usuario'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

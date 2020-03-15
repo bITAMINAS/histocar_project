@@ -4,8 +4,7 @@
  <!-- Content Row -->
  <!-- Toastr -->
  {% load static %}
-<link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
-<script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
+
 
   <div class="col-xl-12 col-md-12 mb-12">
     <div class="card shadow mb-3">
@@ -28,7 +27,7 @@
 -->
 
 <div class="form-group">
-  <label for="exampleFormControlInput1">{{form.fecha.label}}</label>
+  <label for="fecha">{{form.fecha.label}}</label>
       {%if form.fecha.errors %}
         {% render_field form.fecha class="form-control is-invalid" %}
           {% for error in form.fecha.errors %}
@@ -39,10 +38,28 @@
         </script>
       {% endfor %}
      {% else %}
-       {% render_field form.fecha class="form-control" %}
+       {% render_field form.fecha type="date" class="form-control" %}
      {% endif %}
 </div>
-                    
+ 
+<div class="form-group">
+  <label for="vehiculo">{{form.vehiculo.label}}</label>
+      {%if form.vehiculo.errors %}
+        {% render_field form.vehiculo class="form-control is-invalid" %}
+          {% for error in form.vehiculo.errors %}
+        <script>
+          $('').ready(function() {
+            toastr.error('{{ error }}','Vehiculo')
+          });
+        </script>
+      {% endfor %}
+     {% else %}
+       {% render_field form.vehiculo class="form-control" %}
+     {% endif %}
+</div>
+
+<!-- <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea> -->
+
 <div class="form-group">
   <label for="Otras tareas">{{form.textoOtros.label}}</label>
       {%if form.textoOtros.errors %}
@@ -55,7 +72,7 @@
         </script>
       {% endfor %}
      {% else %}
-       {% render_field form.textoOtros class="form-control" %}
+       {% render_field form.textoOtros rows="5" cols="20" placeholder='Ingrese otras tareas' class="form-control" %}
      {% endif %}
 </div>                    
  
@@ -92,21 +109,7 @@
    		{% endif %}
 </div>
                     
-<div class="form-group">
-  <label for="vehiculo">{{form.vehiculo.label}}</label>
-      {%if form.vehiculo.errors %}
-        {% render_field form.vehiculo class="form-control is-invalid" %}
-          {% for error in form.vehiculo.errors %}
-        <script>
-          $('').ready(function() {
-            toastr.error('{{ error }}','Vehiculo')
-          });
-        </script>
-      {% endfor %}
-     {% else %}
-       {% render_field form.vehiculo class="form-control" %}
-     {% endif %}
-</div>
+
                   
 <div class="form-group">
   <label for="tareas">{{form.tareas.label}}</label>
