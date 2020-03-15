@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
+from django.contrib.auth.decorators import login_required
 
 #Cargamos vistas de los modelos
 from .models import Servicio, Usuario
@@ -12,13 +13,16 @@ from .forms import ServicioForm, registroUsuario, Login
 def index(request):
     servicios = Servicio.objects.all().order_by('id')
     seccion = 'Inicio'
-    return render(request, 'webapp/index.html', {'servicios': servicios, 'seccion': seccion})
+    return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
 
+@login_required(login_url='login')
 def verServicios(request):
     servicios = Servicio.objects.all().order_by('id')
     seccion = 'Ver Servicios'
-    return render(request, 'webapp/servicios-lista.html', {'servicios': servicios, 'seccion': seccion})
+    servicios = Servicio.objects.all().order_by('id')
+    return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
 
+@login_required(login_url='login')
 def crearServicio(request):
     seccion = 'Crear Servicio'
 
@@ -37,6 +41,7 @@ def detallesServicio(request, servicio_id):
     return render(request, 'webapp/servicios-detalle.html', {'servicio': servicio, 'seccion': seccion})
 
 def crearUsuario(request):
+    template_name='webapp/crear_usuario.html'
     seccion = 'Alta de nuevo Usuario'
     if request.method == 'POST':
         form = registroUsuario(request.POST)
@@ -45,7 +50,7 @@ def crearUsuario(request):
             return redirect('index')
     else:
         form = registroUsuario()
-    return render(request, 'webapp/crear_usuario.html', {'form': form, 'seccion':seccion})
+    return render(request, template_name, {'form': form, 'seccion': seccion})
 
 def login(request):
     seccion= 'Ingreso de usuario'
