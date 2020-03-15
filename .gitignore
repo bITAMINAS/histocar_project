@@ -71,3 +71,4 @@ static_collected
 .vscode/settings.json
 .vscode/launch.json
 
+db.sqlite3
