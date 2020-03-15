@@ -10,17 +10,23 @@
   <meta name="googlebot" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link href="https://fonts.googleapis.com/css?family=Grand+Hotel&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
 
-    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.js"></script>
-      <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-      <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
   <style id="compiled-css" type="text/css">
       :root {
   --input-padding-x: 1.5rem;
   --input-padding-y: 0.75rem;
+}
+
+.titulo-logo{
+  font-family: 'Grand Hotel', cursive;
+  font-size: 48px;
+  text-align: left
 }
 
 .login,
@@ -144,7 +150,10 @@
         <div class="container">
           <div class="row">
             <div class="col-md-9 col-lg-8 mx-auto">
-              <h3 class="login-heading mb-4">Bienvenido</h3>
+              
+              <div class="titulo-logo">HistoCar</div><br/>  
+              <h3 class="login-heading mb-4">Bienvenido</h3><br/>
+              <p></p><br/>
               <p>{% if form.errors %}
                 <!-- Error messaging -->
                 <div id="errors">
