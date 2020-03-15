@@ -11,19 +11,21 @@ from .forms import ServicioForm, registroUsuario, Login
 # Create your views here.
 
 def index(request):
+    template_name='webapp/index.html'
     servicios = Servicio.objects.all().order_by('id')
     seccion = 'Inicio'
     return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
 
 @login_required(login_url='login')
 def verServicios(request):
+    template_name='webapp/servicios-lista.html'
     servicios = Servicio.objects.all().order_by('id')
     seccion = 'Ver Servicios'
-    servicios = Servicio.objects.all().order_by('id')
     return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
 
 @login_required(login_url='login')
 def crearServicio(request):
+
     seccion = 'Crear Servicio'
 
     if request.method == "POST":
