@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 #Cargamos vistas de los modelos
 from .models import Servicio, Usuario, Vehiculo
@@ -32,7 +33,9 @@ def crearServicio(request):
         form = ServicioForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Se creo el servicio correctamente')
             return redirect('index')
+            
     else:
         form= ServicioForm()
     return render(request, 'webapp/servicios-crear.html', {'form': form, 'seccion': seccion})
@@ -49,6 +52,7 @@ def crearUsuario(request):
         form = registroUsuario(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Usuario creado correctamente')
             return redirect('index')
     else:
         form = registroUsuario()
@@ -61,6 +65,7 @@ def crearVehiculo(request):
         form = crearVehiculos(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Vehiculo creado y asignado correctamente')
             return redirect('index')
     else:
         form = crearVehiculos()
