@@ -8,15 +8,16 @@ from webapp.models import Servicio, Usuario
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
 from django.utils.translation import gettext_lazy as _
-from django.forms import ModelForm, Select
-
+from django.forms import ModelForm, Select, MultipleChoiceField
 class ServicioForm(forms.ModelForm):
     class Meta:
         model = Servicio
         fields = ('fecha', 'textoOtros', 'kilometros', 'costo', 'vehiculo',  'tareas',  'estados')
         widgets = {
-            'estados': Select(),
+        #    'estados': forms.Select(),
         }
+        #La manera de guardar este campo es buscar en google acerca de guardar un m2m select. 
+        
 
 
 # class CrearServicioForm(forms.Form):
