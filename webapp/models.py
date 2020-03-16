@@ -1,34 +1,63 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
+from django.utils.translation import gettext_lazy as _
+from .managers import UsuarioMejorado
 from datetime import datetime
+from django.utils import timezone
 
-class Usuario(models.Model):
+
+class Usuario(AbstractBaseUser, PermissionsMixin):
+    #basado en la documentacion de django
+    #https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#extending-the-existing-user-model
+    
+    Departamentos = models.TextChoices('Departamentos', 'Artigas Canelones Cerro_Largo Colonia Durazno Flores Florida Lavalleja Maldonado Montevideo Paysandú Río_Negro Rivera Rocha Salto San_José Soriano Tacuarembó Treinta_y_Tres')
+    
     nombre = models.CharField(max_length=20, default="")
     apellido = models.CharField(max_length=20, default="")
-    documento = models.CharField(max_length=8, default="")
+    documento = models.CharField(unique=True, max_length=8, default="")
     email = models.EmailField(unique=True, default="") #unique=True sirve para que no se repita en la bd
     telefono = models.CharField(max_length=20, default="")
-    tipoUsuario = models.IntegerField(default=0)
-    dirDepartamento = models.CharField('Departamento',max_length=20, default="")
+    tipoUsuario = models.IntegerField(default=1) # 1=CLiente, 2=Empleado, 3=Administrador
+    dirDepartamento = models.CharField('Departamento', choices=Departamentos.choices, max_length=20, default="")
     dirCiudad = models.CharField(max_length=20, default="")
     dirCalle = models.CharField(max_length=50, default="")
     dirNumero = models.CharField(max_length=5, default="")
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(default=timezone.now)
 
+    USERNAME_FIELD = 'documento'
+    REQUIRED_FIELDS = ['email','telefono']
+    objects = UsuarioMejorado()
     def __str__(self):
         return self.nombre + ' ' + self.apellido
     
 class Servicio(models.Model):
-    fecha = models.DateTimeField(default="10/10/2020 22:22:00")
-    textoOtros = models.CharField(max_length=240, default="")
+    fecha = models.DateTimeField()
+    textoOtros = models.TextField('Otras tareas', max_length=240, default="")
     comentario = models.CharField(max_length=240, default="")
     kilometros = models.IntegerField(default=0)
     puntuacion = models.IntegerField(default=0)
     costo = models.IntegerField(default=0)
     vehiculo = models.ForeignKey('Vehiculo', on_delete=models.CASCADE, default="")
     tareas = models.ManyToManyField('Tarea')
-    estados = models.ManyToManyField('Estado', through='EstadoServicio')
+    estados = models.ManyToManyField('Estado', through='EstadoServicio', verbose_name='Estado')
+
+    # @property
+    # def estadoActual(self):
+    #     estado=self.estados.objects.latest('fecha')
+    #     return estado
 
     def __str__(self):
         return datetime.strftime(self.fecha, '%d/%m/%Y') + ', ' + self.vehiculo.modelo.marca.nombre + ' ' + self.vehiculo.modelo.nombre
+
+    def get_absolute_url(self): # new
+        return reverse('university_detail', args=[str(self.id)])
+
+    # https://learndjango.com/tutorials/django-best-practices-models#
 
 class Tarea(models.Model):
     nombre = models.CharField(max_length=240, default="")
@@ -60,12 +89,12 @@ class Vehiculo(models.Model):
     color = models.CharField(blank=True, choices=Colores.choices, max_length=15)
     nroChasis = models.CharField(max_length=50, default="")
     matricula = models.CharField(max_length=50, default="")
-    anio = models.IntegerField(default=0)
+    anio = models.IntegerField(default=2020)
     tipoCombustible = models.CharField(blank=True, choices=TiposCombustibles.choices, max_length=15)
     duenio = models.ForeignKey('Usuario', on_delete=models.CASCADE)
    
     def __str__(self):
-        return self.modelo.marca.nombre + ' ' + self.modelo.nombre + ', ' + self.matricula
+        return self.modelo.marca.nombre + ' ' + self.modelo.nombre + ' - ' + self.matricula + ' - ' + self.duenio.nombre + ' '+ self.duenio.apellido
 
 class Marca(models.Model):
     nombre = models.CharField(max_length=20, default="")

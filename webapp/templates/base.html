@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>HisoCar - {{seccion}}</title>
+  <title>HistoCar - {{seccion}}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -19,106 +19,97 @@
   <!-- JQVMap -->
   <link rel="stylesheet" href="{% static 'webapp/plugins/jqvmap/jqvmap.min.css' %}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{% static 'webapp/css/adminlte.min.css' %}">
+  <link rel="stylesheet" href="{% static 'webapp/css/adminlte.css' %}">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{% static 'webapp/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{% static 'webapp/plugins/daterangepicker/daterangepicker.css' %}">
   <!-- summernote -->
   <link rel="stylesheet" href="{% static 'webapp/plugins/summernote/summernote-bs4.css' %}">
+  <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Grand+Hotel&display=swap" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="{% static 'webapp/plugins/jquery/jquery.min.js' %}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{% static 'webapp/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+  <div class="wrapper">
 
-  <!-- Navbar -->
-  {%include "navbar.html"%}
-  <!-- /.navbar -->
+    <!-- Navbar -->
+    {%include "navbar.html"%}
+    <!-- /.navbar -->
 
+    <!-- Main Sidebar Container -->
+    {%include "sidebar.html"%}
+    <!-- /.main-sidebar-container -->
 
-  <!-- Main Sidebar Container -->
-  {%include "sidebar.html"%}
-  <!-- /.main-sidebar-container -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">{{ seccion }}</h1>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
 
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">{{ seccion }}</h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        
-        <!-- /.row -->
-        <!-- Main row -->
-        <div class="row">
-          
-            {% block content %}{% endblock %}
-       
-        </div>
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  
-
-
-  <!-- Main Footer -->
-  {%include "footer.html"%}
-  <!-- /.footer -->
-
+      <!-- Main content -->
+      <section class="content">
+        {% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h5><i class="icon fas fa-check"></i> Mensaje!</h5>
+  {{ message }}
 </div>
-<!-- ./wrapper -->
+{% endfor %}
+{% endif %}
+        {% block content %}{% endblock %}
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    {%include "footer.html"%}
+    <!-- /.footer -->
+
+  </div>
+  <!-- ./wrapper -->
 
 
-<!-- jQuery -->
-<script src="{% static 'webapp/plugins/jquery/jquery.min.js' %}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="{% static 'webapp/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="{% static 'webapp/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<!-- ChartJS -->
-<script src="{% static 'webapp/plugins/chart.js/Chart.min.js' %}"></script>
-<!-- Sparkline -->
-<script src="{% static 'webapp/plugins/sparklines/sparkline.js' %}"></script>
-<!-- JQVMap -->
-<script src="{% static 'webapp/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
-<script src="{% static 'webapp/plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{% static 'webapp/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
-<!-- daterangepicker -->
-<script src="{% static 'webapp/plugins/moment/moment.min.js' %}"></script>
-<script src="{% static 'webapp/plugins/daterangepicker/daterangepicker.js' %}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{% static 'webapp/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
-<!-- Summernote -->
-<script src="{% static 'webapp/plugins/summernote/summernote-bs4.min.js' %}"></script>
-<!-- overlayScrollbars -->
-<script src="{% static 'webapp/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
-<!-- AdminLTE App -->
-<script src="{% static 'webapp/js/adminlte.js' %}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{% static 'webapp/js/pages/dashboard.js' %}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{% static 'webapp/js/demo.js' %}"></script>
 
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  
+  <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
+  <!-- Bootstrap 4 -->
+  <script src="{% static 'webapp/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <!-- ChartJS -->
+  <script src="{% static 'webapp/plugins/chart.js/Chart.min.js' %}"></script>
+  <!-- Sparkline -->
+  <script src="{% static 'webapp/plugins/sparklines/sparkline.js' %}"></script>
+  <!-- JQVMap -->
+  <script src="{% static 'webapp/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
+  <script src="{% static 'webapp/plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="{% static 'webapp/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
+  <!-- daterangepicker -->
+  <script src="{% static 'webapp/plugins/moment/moment.min.js' %}"></script>
+  <script src="{% static 'webapp/plugins/daterangepicker/daterangepicker.js' %}"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="{% static 'webapp/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+  <!-- Summernote -->
+  <script src="{% static 'webapp/plugins/summernote/summernote-bs4.min.js' %}"></script>
+  <!-- overlayScrollbars -->
+  <script src="{% static 'webapp/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+  <!-- AdminLTE App -->
+  <script src="{% static 'webapp/js/adminlte.js' %}"></script>
 </body>
 </html>

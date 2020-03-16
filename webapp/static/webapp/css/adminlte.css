@@ -11550,11 +11550,13 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 
 .brand-link {
   display: block;
-  font-size: 1.25rem;
+  font-size: 1.50rem;
   line-height: 1.5;
   padding: 0.8125rem 0.5rem;
+  padding-left: 1.0rem;
   transition: width 0.3s ease-in-out;
   white-space: nowrap;
+  font-family: 'Grand Hotel', cursive;
 }
 
 .brand-link:hover {
@@ -11567,8 +11569,8 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 [class*='sidebar-dark'] .brand-link {
-  border-bottom: 1px solid #4b545c;
-  color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid #dee2e6a1;
+  color: rgba(255, 255, 255, 0.945);
 }
 
 [class*='sidebar-light'] .brand-link {
