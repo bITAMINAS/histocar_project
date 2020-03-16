@@ -84,7 +84,7 @@ class Vehiculo(models.Model):
     color = models.CharField(blank=True, choices=Colores.choices, max_length=15)
     nroChasis = models.CharField(max_length=50, default="")
     matricula = models.CharField(max_length=50, default="")
-    anio = models.IntegerField(default=0)
+    anio = models.IntegerField(default=2020)
     tipoCombustible = models.CharField(blank=True, choices=TiposCombustibles.choices, max_length=15)
     duenio = models.ForeignKey('Usuario', on_delete=models.CASCADE)
    
