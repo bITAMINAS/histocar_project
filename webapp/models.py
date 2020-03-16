@@ -46,6 +46,11 @@ class Servicio(models.Model):
     tareas = models.ManyToManyField('Tarea')
     estados = models.ManyToManyField('Estado', through='EstadoServicio', verbose_name='Estado')
 
+    # @property
+    # def estadoActual(self):
+    #     estado=self.estados.objects.latest('fecha')
+    #     return estado
+
     def __str__(self):
         return datetime.strftime(self.fecha, '%d/%m/%Y') + ', ' + self.vehiculo.modelo.marca.nombre + ' ' + self.vehiculo.modelo.nombre
 
