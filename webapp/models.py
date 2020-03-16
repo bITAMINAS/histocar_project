@@ -33,10 +33,10 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['email','telefono']
     objects = UsuarioMejorado()
     def __str__(self):
-        return self.documento
+        return self.nombre + ' ' + self.apellido
     
 class Servicio(models.Model):
-    fecha = models.DateTimeField(default="10/10/2020 22:22:00")
+    fecha = models.DateTimeField()
     textoOtros = models.TextField('Otras tareas', max_length=240, default="")
     comentario = models.CharField(max_length=240, default="")
     kilometros = models.IntegerField(default=0)

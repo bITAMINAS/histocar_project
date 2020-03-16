@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% block content %} 
+{% load widget_tweaks %}
+ <!-- Content Row -->
+ <!-- Toastr -->
+ {% load static %}
+
+
+
+  <div class="col-xl-12 col-md-12 mb-12">
+    <div class="card shadow mb-3">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Registro de nuevo user</h6>
+      </div>
+      <div class="card-body">
+        
+        <form method="POST" class="RegistroUsuario">{% csrf_token %}
+          <div class="col-sm-6">
+            <div class="form-group">
+                <label for="{{form.duenio.label}}">{{form.duenio.label}}</label>
+                    {%if form.duenio.errors %}
+                      {% render_field form.duenio class="form-control is-invalid" %}
+                        {% for error in form.duenio.errors %}
+                      <script>
+                        $('').ready(function() {
+                          toastr.error('{{ error }}','{{form.duenio.label}}')
+                        });
+                      </script>
+                    {% endfor %}
+                   {% else %}
+                     {% render_field form.duenio class="form-control" %}
+                   {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{form.modelo.label}}">{{form.modelo.label}}</label>
+                    {%if form.modelo.errors %}
+                      {% render_field form.modelo class="form-control is-invalid" %}
+                        {% for error in form.modelo.errors %}
+                      <script>
+                        $('').ready(function() {
+                          toastr.error('{{ error }}','{{form.modelo.label}}')
+                        });
+                      </script>
+                    {% endfor %}
+                   {% else %}
+                     {% render_field form.modelo class="form-control" %}
+                   {% endif %}
+              </div>
+
+
+              <div class="form-group">
+                <label for="{{form.color.label}}">{{form.color.label}}</label>
+                    {%if form.color.errors %}
+                      {% render_field form.color class="form-control is-invalid" %}
+                        {% for error in form.color.errors %}
+                      <script>
+                        $('').ready(function() {
+                          toastr.error('{{ error }}','{{form.color.label}}')
+                        });
+                      </script>
+                    {% endfor %}
+                   {% else %}
+                     {% render_field form.color class="form-control" %}
+                   {% endif %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{form.nroChasis.label}}">{{form.nroChasis.label}}</label>
+                    {%if form.nroChasis.errors %}
+                      {% render_field form.nroChasis class="form-control is-invalid" %}
+                        {% for error in form.nroChasis.errors %}
+                      <script>
+                        $('').ready(function() {
+                          toastr.error('{{ error }}','{{form.nroChasis.label}}')
+                        });
+                      </script>
+                    {% endfor %}
+                   {% else %}
+                     {% render_field form.nroChasis class="form-control" %}
+                   {% endif %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{form.matricula.label}}">{{form.matricula.label}}</label>
+                    {%if form.matricula.errors %}
+                      {% render_field form.matricula class="form-control is-invalid" %}
+                        {% for error in form.matricula.errors %}
+                      <script>
+                        $('').ready(function() {
+                          toastr.error('{{ error }}','{{form.matricula.label}}')
+                        });
+                      </script>
+                    {% endfor %}
+                   {% else %}
+                     {% render_field form.matricula class="form-control" %}
+                   {% endif %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{form.anio.label}}">{{form.anio.label}}</label>
+                    {%if form.anio.errors %}
+                      {% render_field form.anio class="form-control is-invalid" %}
+                        {% for error in form.anio.errors %}
+                      <script>
+                        $('').ready(function() {
+                          toastr.error('{{ error }}','{{form.anio.label}}')
+                        });
+                      </script>
+                    {% endfor %}
+                   {% else %}
+                     {% render_field form.anio class="form-control" %}
+                   {% endif %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{form.tipoCombustible.label}}">{{form.tipoCombustible.label}}</label>
+                    {%if form.tipoCombustible.errors %}
+                      {% render_field form.tipoCombustible class="form-control is-invalid" %}
+                        {% for error in form.tipoCombustible.errors %}
+                      <script>
+                        $('').ready(function() {
+                          toastr.error('{{ error }}','{{form.tipoCombustible.label}}')
+                        });
+                      </script>
+                    {% endfor %}
+                   {% else %}
+                     {% render_field form.tipoCombustible class="form-control" %}
+                   {% endif %}
+              </div>
+
+            <button type='submit' class="btn btn-primary btn-md mt-2 mb-2">Agregar vehiculo</button>
+          </div>
+        </form>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+<!-- End of Content Row -->
+<!-- InputMask -->
+<!-- REQUIRED SCRIPTS -->
+<script>
+  toastr.options = {
+"closeButton": true,
+"debug": false,
+"newestOnTop": false,
+"progressBar": true,
+"positionClass": "toast-top-right",
+"preventDuplicates": false,
+"onclick": null,
+"showDuration": "300",
+"hideDuration": "1000",
+"timeOut": "9000",
+"extendedTimeOut": "1000",
+"showEasing": "swing",
+"hideEasing": "linear",
+"showMethod": "fadeIn",
+"hideMethod": "fadeOut"
+}  
+</script>
+{% endblock %}

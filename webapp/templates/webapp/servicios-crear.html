@@ -25,7 +25,19 @@
     https://github.com/jazzband/django-widget-tweaks 
     https://getbootstrap.com/docs/4.4/components/forms/
 -->
-
+<script>
+  $(function () {
+    //Date range picker
+    $('#id_fecha').daterangepicker({
+      singleDatePicker: true,
+      timePicker: true,
+      locale: {
+        format: 'YYYY-MM-DD hh:mm'
+      }
+    })
+    
+  })
+</script>
 <div class="form-group">
   <label for="fecha">{{form.fecha.label}}</label>
       {%if form.fecha.errors %}
@@ -38,7 +50,7 @@
         </script>
       {% endfor %}
      {% else %}
-       {% render_field form.fecha type="date" class="form-control" %}
+       {% render_field form.fecha class="form-control" %}
      {% endif %}
 </div>
  
@@ -164,6 +176,8 @@
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }  
+
+
         </script>
       </div>
     </div>
@@ -176,18 +190,6 @@
 
 
 
-  <script>
-  $(function () {
-    //Date range picker
-    $('#id_fecha').daterangepicker({
-      singleDatePicker: true,
-      timePicker: true,
-      locale: {
-        format: 'YYYY-MM-DD hh:mm'
-      }
-    })
-    
-  })
-</script>
+  
 
 {% endblock %}
