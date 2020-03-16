@@ -25,7 +25,7 @@ SECRET_KEY = '*qmjk)nif7!5$47v(4qk2(3$&uj=h=6qm1czclnzmwl9v3k+$)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['todobanners.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -117,12 +117,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
