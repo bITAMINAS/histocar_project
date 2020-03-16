@@ -10,4 +10,5 @@ urlpatterns = [
     path('crear-vehiculo', views.crearVehiculo, name='CrearVehiculo'),
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
+    path('listar-usuarios', views.verUsuarios, name='ListarUsuarios')
 ]
