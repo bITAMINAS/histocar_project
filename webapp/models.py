@@ -89,7 +89,7 @@ class Vehiculo(models.Model):
     duenio = models.ForeignKey('Usuario', on_delete=models.CASCADE)
    
     def __str__(self):
-        return self.modelo.marca.nombre + ' ' + self.modelo.nombre + ' - ' + self.matricula
+        return self.modelo.marca.nombre + ' ' + self.modelo.nombre + ' - ' + self.matricula + ' - ' + self.duenio.nombre + ' '+ self.duenio.apellido
 
 class Marca(models.Model):
     nombre = models.CharField(max_length=20, default="")
