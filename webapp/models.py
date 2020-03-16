@@ -46,6 +46,11 @@ class Servicio(models.Model):
     tareas = models.ManyToManyField('Tarea')
     estados = models.ManyToManyField('Estado', through='EstadoServicio', verbose_name='Estado')
 
+    # @property
+    # def estadoActual(self):
+    #     estado=self.estados.objects.latest('fecha')
+    #     return estado
+
     def __str__(self):
         return datetime.strftime(self.fecha, '%d/%m/%Y') + ', ' + self.vehiculo.modelo.marca.nombre + ' ' + self.vehiculo.modelo.nombre
 
@@ -84,12 +89,12 @@ class Vehiculo(models.Model):
     color = models.CharField(blank=True, choices=Colores.choices, max_length=15)
     nroChasis = models.CharField(max_length=50, default="")
     matricula = models.CharField(max_length=50, default="")
-    anio = models.IntegerField(default=0)
+    anio = models.IntegerField(default=2020)
     tipoCombustible = models.CharField(blank=True, choices=TiposCombustibles.choices, max_length=15)
     duenio = models.ForeignKey('Usuario', on_delete=models.CASCADE)
    
     def __str__(self):
-        return self.modelo.marca.nombre + ' ' + self.modelo.nombre + ' - ' + self.matricula
+        return self.modelo.marca.nombre + ' ' + self.modelo.nombre + ' - ' + self.matricula + ' - ' + self.duenio.nombre + ' '+ self.duenio.apellido
 
 class Marca(models.Model):
     nombre = models.CharField(max_length=20, default="")
