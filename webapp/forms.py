@@ -39,8 +39,8 @@ class crearVehiculos(forms.ModelForm):
         model = Vehiculo
         fields = ('modelo', 'color', 'nroChasis', 'matricula', 'anio', 'tipoCombustible', 'duenio')
         labels = {
-            'duenio': _('Dueño del vehiculo'),
-            'nroChasis': _('Numero de chasis'),
+            'duenio': _('Propietario'),
+            'nroChasis': _('Número de chasis'),
             'anio': _('Año'),
             'tipoCombustible': _('Combustible')
         }
