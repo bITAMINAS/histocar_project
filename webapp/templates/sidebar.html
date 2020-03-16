@@ -15,7 +15,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-        <li class="nav-header">Menu</li>
+        <li class="nav-header">Menú</li>
         <li class="nav-item">
           <a href="{% url "index" %}" class="nav-link">
             <i class="nav-icon fas fa-home"></i>
@@ -55,19 +55,19 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{% url "ListarUsuarios" %}" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
             <p>
               Ver usuarios
             </p>
           </a>
         </li>
-        <li class="nav-header">Vehiculos</li>
+        <li class="nav-header">Vehículos</li>
         <li class="nav-item">
           <a href="{% url "CrearVehiculo" %}" class="nav-link">
             <i class="nav-icon fas fa-car"></i>
             <p>
-              Asignar vehiculo
+              Crear vehículo
             </p>
           </a>
         </li>

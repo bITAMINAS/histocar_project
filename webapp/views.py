@@ -58,6 +58,13 @@ def crearUsuario(request):
         form = registroUsuario()
     return render(request, template_name, {'form': form, 'seccion': seccion})
 
+@login_required(login_url='login')
+def verUsuarios(request):
+    template_name='webapp/usuarios-lista.html'
+    usuarios = Usuario.objects.all().order_by('id')
+    seccion = 'Ver Usuarios'
+    return render(request, template_name, {'usuarios': usuarios, 'seccion': seccion})
+
 def crearVehiculo(request):
     template_name='webapp/vehiculo-crear.html'
     seccion = 'Alta de nuevo vehiculo'
