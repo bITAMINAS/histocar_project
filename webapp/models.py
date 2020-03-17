@@ -44,7 +44,7 @@ class Servicio(models.Model):
     costo = models.IntegerField(default=0)
     vehiculo = models.ForeignKey('Vehiculo', on_delete=models.CASCADE, default="")
     tareas = models.ManyToManyField('Tarea')
-    estados = models.ForeignKey('Estado', on_delete=models.CASCADE, verbose_name='Estado')
+    estados = models.ManyToManyField('Estado', through='EstadoServicio', verbose_name='Estado')
 
     # @property
     # def estadoActual(self):

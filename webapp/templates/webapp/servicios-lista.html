@@ -55,27 +55,7 @@
                     </small>
                 </td>
                 <td class="project-state">
-
-                        {% if servicio.estados_id == 11 %}
-                        <span class="badge badge-info">Ingresado</span>
-                        {% endif %}
-                        {% if servicio.estados_id == 12 %}
-                        <span class="badge badge-warning ">En progreso</span>
-                        {% endif %}
-                        {% if servicio.estados_id == 13 %}
-                        <span class="badge badge-danger ">Suspendido</span>
-                        {% endif %}
-                        {% if servicio.estados_id == 14 %}
-                        <span class="badge badge-success">Finalizado</span>
-                        {% endif %}
-                        {% if servicio.estados_id == 15 %}
-                        <span class="badge badge-info ">Para retirar</span>
-                        {% endif %}
-                        {% if servicio.estados_id == 16 %}
-                        <span class="badge badge-success">Retirado</span>
-                        {% endif %}
-
-                 <!--   {% for estado in servicio.estadoservicio_set.all %}
+                    {% for estado in servicio.estadoservicio_set.all %}
                         {% if estado.estado_id == 11 %}
                         <span class="badge badge-info">Ingresado</span>
                         {% endif %}
@@ -94,7 +74,7 @@
                         {% if estado.estado_id == 16 %}
                         <span class="badge badge-success">Retirado</span>
                         {% endif %}
-                     {% endfor %}-->
+                     {% endfor %}
                 </td>
                 <td class="project-actions text-right">
                     <a class="btn btn-primary btn-sm" href="{% url "DetallesServicio" servicio.id %}">
