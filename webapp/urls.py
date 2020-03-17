@@ -14,6 +14,6 @@ urlpatterns = [
     path('crear-vehiculo', views.crearVehiculo, name='CrearVehiculo'),
     path('login', views.login, name='signin'),#el name se cambia de login a signin para que no de error en las vistas de recuperar password.
     path('logout', views.logout, name='logout'),
-    path('listar-usuarios', views.verUsuarios, name='ListarUsuarios')
+    path('listar-usuarios', views.verUsuarios, name='ListarUsuarios'),
     path('registration/', include('django.contrib.auth.urls')),
 ]
