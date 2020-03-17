@@ -30,10 +30,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Grand+Hotel&display=swap" rel="stylesheet">
-    <!-- jQuery -->
-    <script src="{% static 'webapp/plugins/jquery/jquery.min.js' %}"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="{% static 'webapp/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+  
+  <!-- Aquí se cargarán las css específicas de un template hijo -->
+  {% block stylesheets %} {% endblock %}
+  
+  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
@@ -62,16 +63,18 @@
 
       <!-- Main content -->
       <section class="content">
-        {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-              <h5><i class="icon fas fa-check"></i> Mensaje!</h5>
-              {{ message }}
-            </div>
-          {% endfor %}
-        {% endif %}
-        {% block content %}  {% endblock %}
+        
+            <!-- {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h5><i class="icon fas fa-check"></i> Mensaje!</h5>
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %} -->
+            {% block content %}  {% endblock %}
+          
       </section>
       <!-- /.content -->
     </div>
@@ -111,7 +114,14 @@
   <script src="{% static 'webapp/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
   <!-- AdminLTE App -->
   <script src="{% static 'webapp/js/adminlte.js' %}"></script>
- 
+  <!-- jQuery -->
+  <script src="{% static 'webapp/plugins/jquery/jquery.min.js' %}"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="{% static 'webapp/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+
+
+  <!-- Aquí se cargarán los scripts específicos del template hijo -->
+  {% block javascripts %}  {% endblock %}
 
 </body>
 </html>
