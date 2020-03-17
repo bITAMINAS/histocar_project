@@ -158,6 +158,11 @@
             <button type='submit' class="btn btn-primary btn-lg mt-2 mb-2">Agregar servicio</button>
             </div>
         </form>
+
+
+        {% block javascripts %}       
+        <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
+        <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
         <script>
           toastr.options = {
   "closeButton": true,
@@ -179,6 +184,8 @@
 
 
         </script>
+
+        {% endblock %}
       </div>
     </div>
 
