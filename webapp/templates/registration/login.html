@@ -172,11 +172,11 @@
               <form method="POST">{% csrf_token %}
                 <div class="form-label-group">
                  
-                    {%if form.documento.errors %}
-                    {% render_field form.documento class="form-control is-invalid" %}
-                      {% for error in form.documento.errors %} {{ error }} {% endfor %}
+                    {%if form.username.errors %}
+                    {% render_field form.username class="form-control is-invalid" %}
+                      {% for error in form.username.errors %} {{ error }} {% endfor %}
                  {% else %}
-                   {% render_field form.documento class="form-control" %}
+                   {% render_field form.username class="form-control" %}
                  {% endif %}
                   <label for="inputEmail">Documento</label>
                 </div>

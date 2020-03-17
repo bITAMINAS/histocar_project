@@ -86,7 +86,7 @@ def login(request):
     else:
         form = Login()
 
-    return render(request,'webapp/login.html',{'form':form, 'seccion': seccion})
+    return render(request,'registration/login.html',{'form':form, 'seccion': seccion})
 
 def logout(request):
     django_logout(request)
