@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
 from django.utils.translation import gettext_lazy as _
 from django.forms import ModelForm, Select, MultipleChoiceField
+
+
 class ServicioForm(forms.ModelForm):
     class Meta:
         model = Servicio
@@ -19,20 +21,6 @@ class ServicioForm(forms.ModelForm):
         #La manera de guardar este campo es buscar en google acerca de guardar un m2m select. 
         
 
-
-# class CrearServicioForm(forms.Form):
-#     name = forms.CharField(
-#         label='Nombre',
-#     )
-
-#     email = forms.EmailField(
-#         label='Correo electrónico',
-#     )
-
-#     message = forms.CharField(
-#         label='Mensaje',
-#         widget=forms.Textarea,
-#     )
 
 class crearVehiculos(forms.ModelForm):
     class Meta:
@@ -45,9 +33,10 @@ class crearVehiculos(forms.ModelForm):
             'tipoCombustible': _('Combustible')
         }
 
+
+
 class registroUsuario(UserCreationForm):
     error_css_class = 'form-control is-invalid'
-
 
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
@@ -58,15 +47,15 @@ class registroUsuario(UserCreationForm):
         model = Usuario
         fields = ('documento', 'email', 'telefono', 'nombre', 'apellido')
         labels = {
-            'documento': _('Cedula de identidad'),
+            'documento': _('Cédula de identidad'),
         }
         help_texts = {
             'documento': _('Sin puntos ni guiones, 8 carcateres'),
-            'password1': _('No puede ser solo numeros'),
+            'password1': _('No puede ser sólo números'),
         }
         error_messages = {
             'documento': {
-                'max_length': _("Te pasaste de numeros"),
+                'max_length': _("Largo excedido, máximo 8 caracteres."),
             },
         }
 
@@ -85,6 +74,7 @@ class registroUsuario(UserCreationForm):
         if commit:
             user.save()
         return user
+
 
 
 class Login(forms.Form): # Note: forms.Form NOT forms.ModelForm
