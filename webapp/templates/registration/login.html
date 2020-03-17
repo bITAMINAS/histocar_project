@@ -1,0 +1,40 @@
+{% extends 'registration/baseregis.html' %}
+{% load widget_tweaks %}
+             {% block content %}
+              <form method="POST">{% csrf_token %}
+                <div class="form-label-group">
+                 
+                    {%if form.username.errors %}
+                    {% render_field form.username class="form-control is-invalid" %}
+                      {% for error in form.username.errors %} {{ error }} {% endfor %}
+                 {% else %}
+                   {% render_field form.username class="form-control" %}
+                 {% endif %}
+                  <label for="inputEmail">Documento</label>
+                </div>
+
+                <div class="form-label-group">
+                    {%if form.password.errors %}
+                    {% render_field form.password class="form-control is-invalid" %}
+                      {% for error in form.password.errors %} {{ error }} {% endfor %}
+                 {% else %}
+                   {% render_field form.password class="form-control" %}
+                 {% endif %}
+                  <label for="inputPassword">Contraseña</label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Ingresar</button>
+                <p><a href="{% url 'password_reset' %}">reset password</a></p>
+                <script>
+                    // tell the embed parent frame the height of the content
+                    if (window.parent && window.parent.parent){
+                      window.parent.parent.postMessage(["resultsFrame", {
+                        height: document.body.getBoundingClientRect().height,
+                        slug: "efvg9j7a"
+                      }], "*")
+                    }
+                
+                    // always overwrite window.name, in case users try to set it manually
+                    window.name = "result"
+                  </script>
+              </form>
+              {% endblock %}
