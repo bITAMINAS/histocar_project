@@ -65,6 +65,11 @@ def verUsuarios(request):
     seccion = 'Ver Usuarios'
     return render(request, template_name, {'usuarios': usuarios, 'seccion': seccion})
 
+def detallesUsuario(request, usuario_id):
+    usuario = Usuario.objects.get(pk=usuario_id)
+    seccion = 'Detalles de Usuario'
+    return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion})
+
 def crearVehiculo(request):
     template_name='webapp/vehiculo-crear.html'
     seccion = 'Alta de nuevo vehiculo'
