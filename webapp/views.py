@@ -5,11 +5,11 @@ from django.contrib.auth import authenticate, login as django_login, logout as d
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-#Cargamos vistas de los modelos
+#Cargamos los modelos
 from .models import Servicio, Usuario, Vehiculo
 from .forms import ServicioForm, registroUsuario, Login, crearVehiculos
 
-# Create your views here.
+
 
 def index(request):
     template_name='webapp/index.html'
@@ -17,12 +17,17 @@ def index(request):
     seccion = 'Inicio'
     return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
 
+
+
+# ---- vistas SERVICIO --------------------------------------------------------- 
+
 @login_required(login_url='login')
 def verServicios(request):
     template_name='webapp/servicios-lista.html'
     servicios = Servicio.objects.all().order_by('id')
     seccion = 'Ver Servicios'
     return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
+
 
 @login_required(login_url='login')
 def crearServicio(request):
@@ -40,10 +45,15 @@ def crearServicio(request):
         form= ServicioForm()
     return render(request, 'webapp/servicios-crear.html', {'form': form, 'seccion': seccion})
 
+
 def detallesServicio(request, servicio_id):
     servicio = Servicio.objects.get(pk=servicio_id)
     seccion = 'Detalles de Servicio'
     return render(request, 'webapp/servicios-detalle.html', {'servicio': servicio, 'seccion': seccion})
+
+
+
+# ---- vistas USUARIO ---------------------------------------------------------
 
 def crearUsuario(request):
     template_name='webapp/crear_usuario.html'
@@ -58,12 +68,27 @@ def crearUsuario(request):
         form = registroUsuario()
     return render(request, template_name, {'form': form, 'seccion': seccion})
 
+
 @login_required(login_url='login')
 def verUsuarios(request):
     template_name='webapp/usuarios-lista.html'
     usuarios = Usuario.objects.all().order_by('id')
     seccion = 'Ver Usuarios'
     return render(request, template_name, {'usuarios': usuarios, 'seccion': seccion})
+
+
+def delete(request, usuario_id):
+    template_name='webapp/usuario-delete.html'
+    # Recuperamos la instancia de la persona y la borramos
+    instancia = Usuario.objects.get(id=usuario_id)
+    instancia.delete()
+
+    # Después redireccionamos de nuevo a la lista
+    return redirect('/')
+
+
+
+# ---- vistas VEHÍCULO ---------------------------------------------------------
 
 def crearVehiculo(request):
     template_name='webapp/vehiculo-crear.html'
@@ -77,6 +102,7 @@ def crearVehiculo(request):
     else:
         form = crearVehiculos()
     return render(request, template_name, {'form': form, 'seccion': seccion})
+
 
 def login(request):
     seccion= 'Ingreso de usuario'
@@ -94,6 +120,7 @@ def login(request):
         form = Login()
 
     return render(request,'registration/login.html',{'form':form, 'seccion': seccion})
+
 
 def logout(request):
     # Finalizamos la sesión
