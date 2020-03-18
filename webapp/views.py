@@ -76,6 +76,10 @@ def verUsuarios(request):
     seccion = 'Ver Usuarios'
     return render(request, template_name, {'usuarios': usuarios, 'seccion': seccion})
 
+def detallesUsuario(request, usuario_id):
+    usuario = Usuario.objects.get(pk=usuario_id)
+    seccion = 'Detalles de Usuario'
+    return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion})
 
 def bajaUsuario(request, usuario_id):
     template_name='webapp/usuario-delete.html'
