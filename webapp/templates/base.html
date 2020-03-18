@@ -37,8 +37,7 @@
   
   <!-- Aquí se cargarán las css específicas de un template hijo -->
   {% block stylesheets %} {% endblock %}
-  
-  
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
@@ -67,84 +66,76 @@
 
       <!-- Main content -->
       <section class="content">
-  
-{% if messages %}
-  {% for message in messages %}
-  <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
-  <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
-  <script>
-    $('').ready(function() {
-      toastr.{{ message.tags }}('{{ message }}','Mensaje')
-    });
-  </script>
-  <script>
-    toastr.options = {
-      "closeButton": true,
-      "debug": false,
-      "newestOnTop": false,
-      "progressBar": true,
-      "positionClass": "toast-top-right",
-      "preventDuplicates": false,
-      "onclick": null,
-      "showDuration": "300",
-      "hideDuration": "1000",
-      "timeOut": "9000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
-  }  
-  </script>
-  {% endfor %}
-{% endif %}
+        {% if messages %}
+        {% for message in messages %}
+        <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
+        <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
+        <script>
+          $('').ready(function() {
+           toastr.{{ message.tags }}('{{ message }}','Mensaje')
+         });
+       </script>
+       <script>
+        toastr.options = {
+          "closeButton": true,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": true,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": "9000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }  
+      </script>
+      {% endfor %}
+      {% endif %}
 
-            {% block content %}  {% endblock %}
-          
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    <!-- Main Footer -->
-    {%include "footer.html"%}
-    <!-- /.footer -->
-
+      {% block content %}  {% endblock %}
+      
+    </section>
+    <!-- /.content -->
   </div>
-  <!-- ./wrapper -->
+  <!-- /.content-wrapper -->
 
+  <!-- Main Footer -->
+  {%include "footer.html"%}
+  <!-- /.footer -->
 
+</div>
+<!-- ./wrapper -->
 
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  
-  
-  <!-- Bootstrap 4 -->
-  <script src="{% static 'webapp/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <!-- ChartJS -->
-  <script src="{% static 'webapp/plugins/chart.js/Chart.min.js' %}"></script>
-  <!-- Sparkline -->
-  <script src="{% static 'webapp/plugins/sparklines/sparkline.js' %}"></script>
-  <!-- JQVMap -->
-  <script src="{% static 'webapp/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
-  <script src="{% static 'webapp/plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
-  <!-- jQuery Knob Chart -->
-  <script src="{% static 'webapp/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
-  <!-- daterangepicker -->
-  <script src="{% static 'webapp/plugins/moment/moment.min.js' %}"></script>
-  <script src="{% static 'webapp/plugins/daterangepicker/daterangepicker.js' %}"></script>
-  <!-- Tempusdominus Bootstrap 4 -->
-  <script src="{% static 'webapp/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
-  <!-- Summernote -->
-  <script src="{% static 'webapp/plugins/summernote/summernote-bs4.min.js' %}"></script>
-  <!-- overlayScrollbars -->
-  <script src="{% static 'webapp/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
-  <!-- AdminLTE App -->
-  <script src="{% static 'webapp/js/adminlte.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'webapp/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- ChartJS -->
+<script src="{% static 'webapp/plugins/chart.js/Chart.min.js' %}"></script>
+<!-- Sparkline -->
+<script src="{% static 'webapp/plugins/sparklines/sparkline.js' %}"></script>
+<!-- JQVMap -->
+<script src="{% static 'webapp/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
+<script src="{% static 'webapp/plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{% static 'webapp/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
+<!-- daterangepicker -->
+<script src="{% static 'webapp/plugins/moment/moment.min.js' %}"></script>
+<script src="{% static 'webapp/plugins/daterangepicker/daterangepicker.js' %}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{% static 'webapp/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+<!-- Summernote -->
+<script src="{% static 'webapp/plugins/summernote/summernote-bs4.min.js' %}"></script>
+<!-- overlayScrollbars -->
+<script src="{% static 'webapp/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'webapp/js/adminlte.js' %}"></script>
 
-
-
-  <!-- Aquí se cargarán los scripts específicos del template hijo -->
-  {% block javascripts %}  {% endblock %}
+<!-- Aquí se cargarán los scripts específicos del template hijo -->
+{% block javascripts %}  {% endblock %}
 
 </body>
 </html>
