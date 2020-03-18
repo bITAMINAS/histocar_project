@@ -9,18 +9,22 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
 from django.utils.translation import gettext_lazy as _
 from django.forms import ModelForm, Select, MultipleChoiceField
+from django.utils.datastructures import MultiValueDict
 
+################################################################################
+
+#fix bug 10 https://stackoverflow.com/questions/14969969/django-representing-user-groups-manytomanyfield-as-a-select-in-form
+class SelectSingleAsList(Select):
+    def value_from_datadict(self, data, files, name):
+        if isinstance(data, (MultiValueDict)):
+            return data.getlist(name)  # NOTE this returns a list rather than a single value.
+        return data.get(name, None)
 
 class ServicioForm(forms.ModelForm):
     class Meta:
         model = Servicio
         fields = ('fecha', 'textoOtros', 'kilometros', 'costo', 'vehiculo',  'tareas',  'estados')
-        widgets = {
-        #    'estados': forms.Select(),
-        }
-        #La manera de guardar este campo es buscar en google acerca de guardar un m2m select. 
-        
-
+        widgets = { 'estados': SelectSingleAsList,}
 
 class crearVehiculos(forms.ModelForm):
     class Meta:

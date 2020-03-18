@@ -37,9 +37,8 @@
   
   <!-- Aquí se cargarán las css específicas de un template hijo -->
   {% block stylesheets %} {% endblock %}
-  
-  
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
@@ -67,39 +66,42 @@
 
       <!-- Main content -->
       <section class="content">
-  
-{% if messages %}
-  {% for message in messages %}
-  <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
-  <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
-  <script>
-    $('').ready(function() {
-      toastr.{{ message.tags }}('{{ message }}','Mensaje')
-    });
-  </script>
-  <script>
-    toastr.options = {
-      "closeButton": true,
-      "debug": false,
-      "newestOnTop": false,
-      "progressBar": true,
-      "positionClass": "toast-top-right",
-      "preventDuplicates": false,
-      "onclick": null,
-      "showDuration": "300",
-      "hideDuration": "1000",
-      "timeOut": "9000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
-  }  
-  </script>
-  {% endfor %}
-{% endif %}
+        <!-- Estos scripts son para mostrar mensajes emergentes toastr  -->
+        <!-- Mensajes toastr -->
+        {% if messages %}
+          {% for message in messages %}
+            <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
+            <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
+            <script>
+              $('').ready(function() {
+                toastr.{{ message.tags }}('{{ message }}','Mensaje')
+              });
+            </script>
+            <script>
+              toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "9000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }  
+            </script>
+          {% endfor %}
+        {% endif %}
+        <!-- /.mensajes-toastr -->
 
-            {% block content %}  {% endblock %}
+        <!-- Aquí se incrustará el contenido del bloque "content" de los template hijos -->
+        {% block content %}  {% endblock %}
           
       </section>
       <!-- /.content -->
@@ -109,15 +111,13 @@
     <!-- Main Footer -->
     {%include "footer.html"%}
     <!-- /.footer -->
-
   </div>
   <!-- ./wrapper -->
 
 
 
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  
-  
+    
   <!-- Bootstrap 4 -->
   <script src="{% static 'webapp/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <!-- ChartJS -->
@@ -140,7 +140,6 @@
   <script src="{% static 'webapp/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
   <!-- AdminLTE App -->
   <script src="{% static 'webapp/js/adminlte.js' %}"></script>
-
 
 
   <!-- Aquí se cargarán los scripts específicos del template hijo -->
