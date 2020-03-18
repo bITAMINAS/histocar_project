@@ -15,5 +15,6 @@ urlpatterns = [
     path('login', views.login, name='signin'),#el name se cambia de login a signin para que no de error en las vistas de recuperar password.
     path('logout', views.logout, name='logout'),
     path('listar-usuarios', views.verUsuarios, name='ListarUsuarios'),
+    path('usuario-baja/<int:usuario_id>', views.detallesServicio, name='UsuarioBaja'),
     path('registration/', include('django.contrib.auth.urls')),
 ]

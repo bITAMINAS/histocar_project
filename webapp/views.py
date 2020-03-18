@@ -77,7 +77,7 @@ def verUsuarios(request):
     return render(request, template_name, {'usuarios': usuarios, 'seccion': seccion})
 
 
-def delete(request, usuario_id):
+def bajaUsuario(request, usuario_id):
     template_name='webapp/usuario-delete.html'
     # Recuperamos la instancia de la persona y la borramos
     instancia = Usuario.objects.get(id=usuario_id)
@@ -104,6 +104,9 @@ def crearVehiculo(request):
     return render(request, template_name, {'form': form, 'seccion': seccion})
 
 
+
+# ---- vistas LOGIN ---------------------------------------------------------
+
 def login(request):
     seccion= 'Ingreso de usuario'
     if request.method == 'POST':
@@ -114,7 +117,7 @@ def login(request):
             user = authenticate(documento=documento, password=password)
             if user is not None:
                 if user.is_active:
-                    django_login(request,user)
+                    django_login(request, user)
                     return redirect('/') 
     else:
         form = Login()
