@@ -2,107 +2,93 @@
 {% block content %} 
 
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3">
-    
-        <!-- Profile Image -->
-        <div class="card card-primary card-outline">
-          <div class="card-body box-profile">
-            <div class="text-center">
-              <i class="fas fa-car fa-5x"style="color:rgb(150, 150, 150);" ></i>
-            </div>
-    
-            <h3 class="profile-username text-center">{{ servicio.vehiculo.modelo.marca }} {{ servicio.vehiculo.modelo.nombre}}</h3>
-    
-            <p class="text-muted text-center">{{ servicio.vehiculo.matricula }}</p>
-    
-            <ul class="list-group list-group-unbordered mb-3">
-              <li class="list-group-item">
-                <b>Fecha</b> <a class="float-right">{{ servicio.fecha|date:'d/m/Y' }}</a>
-              </li>
-              <li class="list-group-item">
-                <b>Kilómetros</b> <a class="float-right">{{ servicio.kilometros}}</a>
-              </li>
-              <li class="list-group-item">
-                <b>Costo</b> <a class="float-right">{{ servicio.costo}}</a>
-              </li>
-            </ul>
-    
-            <!-- <a href="#" class="btn btn-primary btn-block"><b>{{servicio.estadoActual}}</b></a> -->
+  <div class="row">
+    <div class="col-md-3">
+
+      <!-- Profile Image -->
+      <div class="card card-primary card-outline">
+        <div class="card-body box-profile">
+          <div class="text-center">
+            <i class="fas fa-car fa-5x"style="color:rgb(150, 150, 150);" ></i>
           </div>
-          <!-- /.card-body -->
+          <h3 class="profile-username text-center">{{ servicio.vehiculo.modelo.marca }} {{ servicio.vehiculo.modelo.nombre}}</h3>
+          <p class="text-muted text-center">{{ servicio.vehiculo.matricula }}</p>
+          <ul class="list-group list-group-unbordered mb-3">
+            <li class="list-group-item">
+              <b>Fecha</b> <a class="float-right">{{ servicio.fecha|date:'d/m/Y' }}</a>
+            </li>
+            <li class="list-group-item">
+              <b>Kilómetros</b> <a class="float-right">{{ servicio.kilometros}}</a>
+            </li>
+            <li class="list-group-item">
+              <b>Costo</b> <a class="float-right">{{ servicio.costo}}</a>
+            </li>
+          </ul>
+
+          <!-- <a href="#" class="btn btn-primary btn-block"><b>{{servicio.estadoActual}}</b></a> -->
         </div>
-        <!-- /.card -->
-    
-        <!-- About Me Box -->
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">Cliente</h3>
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body">
-            <strong><i class="fas fa-book mr-1"></i> Nombre</strong>
-    
-            <p class="text-muted">
-              {{ servicio.vehiculo.duenio }}
-            </p>
-    
-            <hr>
-    
-            <strong><i class="far fa-file-alt mr-1"></i> Información de contacto</strong>
-    
-            <p class="text-muted">Tel.: {{ servicio.vehiculo.duenio.telefono }} <br> E-mail: {{ servicio.vehiculo.duenio.email }}</p>
-      
-            <hr>
-    
-            <strong><i class="fas fa-map-marker-alt mr-1"></i> Dirección</strong>
-    
-            <p class="text-muted">{{ servicio.vehiculo.duenio.dirCalle }}, {{ servicio.vehiculo.duenio.dirNumero }}<br>
-              {{ servicio.vehiculo.duenio.dirCiudad }}<br>
-              {{ servicio.vehiculo.duenio.dirDepartamento }}
-            </p>
-          </div>
-          <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
+        <!-- /.card-body -->
       </div>
-      <!-- /.col -->
-      <div class="col-md-9">
-        <div class="card">
-          <div class="card-header p-2">
-            <ul class="nav nav-pills">
-              <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Tareas relizadas</a></li>
-              <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Otros</a></li>
-            </ul>
-          </div><!-- /.card-header -->
-          <div class="card-body">
-            <div class="tab-content">
-              <div class="active tab-pane" id="activity">
-                <!-- Post -->
-                <div class="post">
-                  <ul> 
-                    {% for tarea in servicio.tareas.all %}
-                    <li>{{tarea.nombre}}</li>
-                    {% endfor %}
-                  </ul>  
- 
-                </div>
-                <!-- /.post -->
-    
-              </div>
-    
-              <div class="tab-pane" id="settings">
-                
-              </div>
-              <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
-          </div><!-- /.card-body -->
+      <!-- /.card -->
+
+      <!-- About Me Box -->
+      <div class="card card-primary">
+        <div class="card-header"><h3 class="card-title">Cliente</h3></div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <strong><i class="fas fa-book mr-1"></i> Nombre</strong>   
+          <p class="text-muted">
+            {{ servicio.vehiculo.duenio }}
+          </p>    
+          <hr>    
+          <strong><i class="far fa-file-alt mr-1"></i> Información de contacto</strong>    
+          <p class="text-muted">Tel.: {{ servicio.vehiculo.duenio.telefono }} <br> E-mail: {{ servicio.vehiculo.duenio.email }}</p>      
+          <hr>    
+          <strong><i class="fas fa-map-marker-alt mr-1"></i> Dirección</strong>
+
+          <p class="text-muted">{{ servicio.vehiculo.duenio.dirCalle }}, {{ servicio.vehiculo.duenio.dirNumero }}<br>
+            {{ servicio.vehiculo.duenio.dirCiudad }}<br>
+            {{ servicio.vehiculo.duenio.dirDepartamento }}
+          </p>
         </div>
-        <!-- /.nav-tabs-custom -->
+        <!-- /.card-body -->
       </div>
-      <!-- /.col -->
+      <!-- /.card -->
     </div>
-    <!-- /.row -->
- </div><!-- /.container-fluid -->
- {%endblock%}
+    <!-- /.col -->
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header p-2">
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Tareas relizadas</a></li>
+            <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Otros</a></li>
+          </ul>
+        </div><!-- /.card-header -->
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="active tab-pane" id="activity">
+              <!-- Post -->
+              <div class="post">
+                <ul> 
+                  {% for tarea in servicio.tareas.all %}
+                  <li>{{tarea.nombre}}</li>
+                  {% endfor %}
+                </ul>  
+              </div>
+              <!-- /.post -->
+            </div>
+            <div class="tab-pane" id="settings">
+
+            </div>
+            <!-- /.tab-pane -->
+          </div>
+          <!-- /.tab-content -->
+        </div><!-- /.card-body -->
+      </div>
+      <!-- /.nav-tabs-custom -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</div><!-- /.container-fluid -->
+{%endblock%}

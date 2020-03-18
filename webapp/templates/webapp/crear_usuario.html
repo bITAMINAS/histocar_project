@@ -1,174 +1,169 @@
 {% extends "base.html" %}
 {% block content %} 
 {% load widget_tweaks %}
- <!-- Content Row -->
- <!-- Toastr -->
- {% load static %}
-
-
-
-  <div class="col-xl-12 col-md-12 mb-12">
-    <div class="card shadow mb-3">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Registro de nuevo usuario</h6>
-      </div>
-      <div class="card-body">
-        
-        <form method="POST" class="RegistroUsuario">{% csrf_token %}
-          <div class="col-sm-6">
-            <!-- campoNombre y campoApellido -->
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="campoNombre">{{form.nombre.label}}</label>
-                      {%if form.nombre.errors %}
-                        {% render_field form.nombre class="form-control is-invalid" %}
-                          {% for error in form.nombre.errors %}
-                        <script>
-                          $('').ready(function() {
-                            toastr.error('{{ error }}','{{form.nombre.label}}')
-                          });
-                        </script>
-                      {% endfor %}
-                     {% else %}
-                       {% render_field form.nombre class="form-control" %}
-                     {% endif %}
-                    </div>
-                    </div>
-                    <div class="col-sm-6">
-                     <div class="form-group">
-                  <label for="campoApellido">{{form.apellido.label}}</label>
-                      {%if form.apellido.errors %}
-                        {% render_field form.apellido class="form-control is-invalid" %}
-                          {% for error in form.apellido.errors %}
-                        <script>
-                          $('').ready(function() {
-                            toastr.error('{{ error }}','{{form.apellido.label}}')
-                          });
-                        </script>
-                      {% endfor %}
-                     {% else %}
-                       {% render_field form.apellido class="form-control" %}
-                     {% endif %}
-                </div>
-              </div>
-            </div>
-            <!-- campoDocumento -->
-            <div class="form-group">
-              <label for="campoDocumento">{{form.documento.label}}</label>
-                  {%if form.documento.errors %}
-                    {% render_field form.documento class="form-control is-invalid" %}
-                      {% for error in form.documento.errors %}
-                    <script>
-                      $('').ready(function() {
-                        toastr.error('{{ error }}','{{form.documento.label}}')
-                      });
-                    </script>
-                  {% endfor %}
-                  {% else %}
-                    {% render_field form.documento class="form-control" %}
-                  {% endif %}
-            </div>
-            <!-- campoEmail -->
-            <div class="form-group">
-              <label for="campoEmail">{{form.email.label}}</label>
-                  {%if form.email.errors %}
-                    {% render_field form.email class="form-control is-invalid" %}
-                      {% for error in form.email.errors %}
-                    <script>
-                      $('').ready(function() {
-                        toastr.error('{{ error }}','{{form.email.label}}')
-                      });
-                    </script>
-                  {% endfor %}
-                  {% else %}
-                    {% render_field form.email class="form-control" %}
-                  {% endif %}
-            </div>
-            <!-- campoTelefono -->
-            <div class="form-group">
-              <label for="campoTelefono">{{form.telefono.label}}</label>
-                  {%if form.telefono.errors %}
-                    {% render_field form.telefono class="form-control is-invalid" %}
-                      {% for error in form.telefono.errors %}
-                    <script>
-                      $('').ready(function() {
-                        toastr.error('{{ error }}','{{form.telefono.label}}')
-                      });
-                    </script>
-                  {% endfor %}
-                  {% else %}
-                    {% render_field form.telefono class="form-control" %}
-                  {% endif %}
-            </div>
-            
-            <!-- campoContrasenia y campoRepetirContrasenia -->
-            <div class="row">
-              <div class="col-sm-6">
-              <div class="form-group">
-                <label for="campoContrasenia">Contraseña</label>
-                    {%if form.password1.errors %}
-                      {% render_field form.password1 class="form-control is-invalid" %}
-                        {% for error in form.password1.errors %}
-                      <script>
-                        $('').ready(function() {
-                          toastr.error('{{ error }}','Contraseña')
-                        });
-                      </script>
-                    {% endfor %}
-                   {% else %}
-                     {% render_field form.password1 class="form-control" %}
-                   {% endif %}
-              </div>
-              </div>
-              <div class="col-sm-6">
-
-              <div class="form-group">
-                <label for="campoRepetirContrasenia">Confirmar contraseña</label>
-                    {%if form.password2.errors %}
-                      {% render_field form.password2 class="form-control is-invalid" %}
-                        {% for error in form.password2.errors %}
-                      <script>
-                        $('').ready(function() {
-                          toastr.error('{{ error }}','Confirmar contraseña')
-                        });
-                      </script>
-                    {% endfor %}
-                   {% else %}
-                     {% render_field form.password2 class="form-control" %}
-                   {% endif %}
-              </div>
-              </div>
-            </div>
-            <button type='submit' class="btn btn-primary btn-md mt-2 mb-2">Agregar Cliente</button>
-          </div>
-        </form>
-        </div>
-        
-      </div>
+<!-- Content Row -->
+{% load static %}
+<div class="col-xl-12 col-md-12 mb-12">
+  <div class="card shadow mb-3">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Registro de nuevo usuario</h6>
     </div>
+    <div class="card-body">
 
+      <form method="POST" class="RegistroUsuario">{% csrf_token %}
+        <div class="col-sm-6">
+          <!-- campoNombre y campoApellido -->
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="campoNombre">{{form.nombre.label}}</label>
+                {%if form.nombre.errors %}
+                {% render_field form.nombre class="form-control is-invalid" %}
+                {% for error in form.nombre.errors %}
+                <script>
+                  $('').ready(function() {
+                    toastr.error('{{ error }}','{{form.nombre.label}}')
+                  });
+                </script>
+                {% endfor %}
+                {% else %}
+                {% render_field form.nombre class="form-control" %}
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-sm-6">
+             <div class="form-group">
+              <label for="campoApellido">{{form.apellido.label}}</label>
+              {%if form.apellido.errors %}
+              {% render_field form.apellido class="form-control is-invalid" %}
+              {% for error in form.apellido.errors %}
+              <script>
+                $('').ready(function() {
+                  toastr.error('{{ error }}','{{form.apellido.label}}')
+                });
+              </script>
+              {% endfor %}
+              {% else %}
+              {% render_field form.apellido class="form-control" %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <!-- campoDocumento -->
+        <div class="form-group">
+          <label for="campoDocumento">{{form.documento.label}}</label>
+          {%if form.documento.errors %}
+          {% render_field form.documento class="form-control is-invalid" %}
+          {% for error in form.documento.errors %}
+          <script>
+            $('').ready(function() {
+              toastr.error('{{ error }}','{{form.documento.label}}')
+            });
+          </script>
+          {% endfor %}
+          {% else %}
+          {% render_field form.documento class="form-control" %}
+          {% endif %}
+        </div>
+        <!-- campoEmail -->
+        <div class="form-group">
+          <label for="campoEmail">{{form.email.label}}</label>
+          {%if form.email.errors %}
+          {% render_field form.email class="form-control is-invalid" %}
+          {% for error in form.email.errors %}
+          <script>
+            $('').ready(function() {
+              toastr.error('{{ error }}','{{form.email.label}}')
+            });
+          </script>
+          {% endfor %}
+          {% else %}
+          {% render_field form.email class="form-control" %}
+          {% endif %}
+        </div>
+        <!-- campoTelefono -->
+        <div class="form-group">
+          <label for="campoTelefono">{{form.telefono.label}}</label>
+          {%if form.telefono.errors %}
+          {% render_field form.telefono class="form-control is-invalid" %}
+          {% for error in form.telefono.errors %}
+          <script>
+            $('').ready(function() {
+              toastr.error('{{ error }}','{{form.telefono.label}}')
+            });
+          </script>
+          {% endfor %}
+          {% else %}
+          {% render_field form.telefono class="form-control" %}
+          {% endif %}
+        </div>
+
+        <!-- campoContrasenia y campoRepetirContrasenia -->
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="campoContrasenia">Contraseña</label>
+              {%if form.password1.errors %}
+              {% render_field form.password1 class="form-control is-invalid" %}
+              {% for error in form.password1.errors %}
+              <script>
+                $('').ready(function() {
+                  toastr.error('{{ error }}','Contraseña')
+                });
+              </script>
+              {% endfor %}
+              {% else %}
+              {% render_field form.password1 class="form-control" %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="campoRepetirContrasenia">Confirmar contraseña</label>
+              {%if form.password2.errors %}
+              {% render_field form.password2 class="form-control is-invalid" %}
+              {% for error in form.password2.errors %}
+              <script>
+                $('').ready(function() {
+                  toastr.error('{{ error }}','Confirmar contraseña')
+                });
+              </script>
+              {% endfor %}
+              {% else %}
+              {% render_field form.password2 class="form-control" %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <button type='submit' class="btn btn-primary btn-md mt-2 mb-2">Agregar Cliente</button>
+      </div>
+    </form>
   </div>
+
+</div>
+</div>
+
+</div>
 <!-- End of Content Row -->
 <!-- InputMask -->
 <!-- REQUIRED SCRIPTS -->
 <script>
   toastr.options = {
-"closeButton": true,
-"debug": false,
-"newestOnTop": false,
-"progressBar": true,
-"positionClass": "toast-top-right",
-"preventDuplicates": false,
-"onclick": null,
-"showDuration": "300",
-"hideDuration": "1000",
-"timeOut": "9000",
-"extendedTimeOut": "1000",
-"showEasing": "swing",
-"hideEasing": "linear",
-"showMethod": "fadeIn",
-"hideMethod": "fadeOut"
-}  
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "9000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }  
 </script>
 {% endblock %}
