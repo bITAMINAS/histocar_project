@@ -4,15 +4,20 @@
 <!-- Content Row -->
 <!-- Toastr -->
 {% load static %}
-{% block stylesheet %}       
+{% block stylesheet %}   
+<link rel="stylesheet" href="{% static 'webapp/plugins/select2/css/select2.min.css' %}">
+  <link rel="stylesheet" href="{% static 'webapp/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">    
 <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
 {% endblock %}
 <div class="col-xl-12 col-md-12 mb-12">
   <div class="card shadow mb-3">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Agregar nuevo servicio</h6>
+      <h6 class="m-0 font-weight-bold text-primary">Editar servicio {{ servicio.id }}</h6>
     </div>
     <div class="card-body">
+        <p>En este formulario usted podra editar el servicio que selecciono, puede poner las tareas, agregar otras
+            y cambiar el estado del servicio, recuerde cambiar la fecha.
+        </p>
       <form method="POST" class="ServicioForm">{% csrf_token %}
         <div class="form-group">
           <!-- Links de interes 
@@ -42,7 +47,7 @@
                 {% for error in form.vehiculo.errors %}
                 <script>
                   $('').ready(function() {
-                    toastr.error('{{ error }}','Fecha')
+                    toastr.error('{{ error }}','Vehiculo')
                   });
                 </script>
                 {% endfor %}
@@ -60,7 +65,7 @@
                 {% for error in form.textoOtros.errors %}
                 <script>
                   $('').ready(function() {
-                    toastr.error('{{ error }}','Fecha')
+                    toastr.error('{{ error }}','Otros')
                   });
                 </script>
                 {% endfor %}
@@ -76,7 +81,7 @@
                 {% for error in form.kilometros.errors %}
                 <script>
                   $('').ready(function() {
-                    toastr.error('{{ error }}','Fecha')
+                    toastr.error('{{ error }}','Kilometros')
                   });
                 </script>
                 {% endfor %}
@@ -92,7 +97,7 @@
                 {% for error in form.costo.errors %}
                 <script>
                   $('').ready(function() {
-                    toastr.error('{{ error }}','Fecha')
+                    toastr.error('{{ error }}','Costo')
                   });
                 </script>
                 {% endfor %}
@@ -108,12 +113,12 @@
                 {% for error in form.tareas.errors %}
                 <script>
                   $('').ready(function() {
-                    toastr.error('{{ error }}','Fecha')
+                    toastr.error('{{ error }}','Tareas')
                   });
                 </script>
                 {% endfor %}
             {% else %}
-              {% render_field form.tareas class="form-control" %}
+              {% render_field form.tareas class="form-control select2" %}
             {% endif %}
           </div>
 
@@ -124,7 +129,7 @@
                 {% for error in form.estados.errors %}
                 <script>
                   $('').ready(function() {
-                    toastr.error('{{ error }}','Fecha')
+                    toastr.error('{{ error }}','Estados')
                   });
                 </script>
                 {% endfor %}
@@ -132,11 +137,19 @@
               {% render_field form.estados class="form-control" %}
             {% endif %}
           </div>
-          <button type='submit' class="btn btn-primary btn-lg mt-2 mb-2">Agregar servicio</button>
+          <button type='submit' class="btn btn-primary btn-lg mt-2 mb-2">Editar servicio</button>
         </div>
       </form>
           {% block javascripts %}       
+          <script>
+            $(document).ready(function() {
+              $('#id_tareas').select2({
+                  theme: 'bootstrap4'
+              });
+            });
+          </script>
           <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
+          <script src="{% static 'webapp/plugins/select2/js/select2.full.min.js' %}"></script>
           <script>
             toastr.options = {
               "closeButton": true,
