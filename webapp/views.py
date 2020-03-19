@@ -7,7 +7,7 @@ from django.contrib import messages
 
 #Cargamos los modelos
 from .models import Servicio, Usuario, Vehiculo
-from .forms import ServicioForm, registroUsuario, Login, crearVehiculos
+from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm
 
 
 
@@ -51,6 +51,25 @@ def detallesServicio(request, servicio_id):
     seccion = 'Detalles de Servicio'
     return render(request, 'webapp/servicios-detalle.html', {'servicio': servicio, 'seccion': seccion})
 
+def editarServicio(request, pk):
+    seccion = 'Editar Servicio'
+    servicio = Servicio.objects.get(pk=pk)
+    if request.method == "POST":
+        form = editarServicioForm(request.POST,instance=servicio
+        )
+        if form.is_valid():
+            form.fecha     = request.POST["fecha"]
+            form.tareas    = request.POST["tareas"]
+            form.textoOtros= request.POST["textoOtros"]
+            form.kilometros= request.POST["kilometros"]
+            form.costo     = request.POST["costo"]
+            form.save()
+            return redirect("VerServicios")
+    else:
+        form = editarServicioForm(instance = servicio)
+    
+    
+    return render(request, 'webapp/servicios-modificar.html', {'servicio': servicio,'form': form, 'seccion': seccion})
 
 
 # ---- vistas USUARIO ---------------------------------------------------------
@@ -116,9 +135,9 @@ def login(request):
     if request.method == 'POST':
         form = Login(data = request.POST)
         if form.is_valid():
-            documento = request.POST['documento']
+            username = request.POST['username']
             password = request.POST['password']
-            user = authenticate(documento=documento, password=password)
+            user = authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
                     django_login(request, user)
