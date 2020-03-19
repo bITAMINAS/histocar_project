@@ -26,6 +26,13 @@ class ServicioForm(forms.ModelForm):
         fields = ('fecha', 'textoOtros', 'kilometros', 'costo', 'vehiculo',  'tareas',  'estados')
         widgets = { 'estados': SelectSingleAsList,}
 
+class editarServicioForm(forms.ModelForm):
+    class Meta:
+        model = Servicio
+        fields = ('fecha', 'textoOtros', 'kilometros', 'costo', 'vehiculo',  'tareas',  'estados')
+        widgets = { 'estados': SelectSingleAsList,}
+        
+
 class crearVehiculos(forms.ModelForm):
     class Meta:
         model = Vehiculo
