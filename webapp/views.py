@@ -51,19 +51,30 @@ def detallesServicio(request, servicio_id):
     seccion = 'Detalles de Servicio'
     return render(request, 'webapp/servicios-detalle.html', {'servicio': servicio, 'seccion': seccion})
 
+
 def editarServicio(request, pk):
     seccion = 'Editar Servicio'
     servicio = Servicio.objects.get(pk=pk)
     if request.method == "POST":
-        form = editarServicioForm(request.POST,instance=servicio
-        )
+        form = editarServicioForm(request.POST,instance=servicio)
         if form.is_valid():
             form.fecha     = request.POST["fecha"]
             form.tareas    = request.POST["tareas"]
             form.textoOtros= request.POST["textoOtros"]
             form.kilometros= request.POST["kilometros"]
             form.costo     = request.POST["costo"]
+            
             form.save()
+            # estado = request.POST["estado"]
+            
+            #servicio1 = form.save(commit=False)
+
+            #  if .estados.latest('estadoservicio__fecha') != servicio1.estado
+            #      servicio.estados.add(estado)
+                 
+           # servicio1.save()
+            #form.save_m2m()
+
             return redirect("VerServicios")
     else:
         form = editarServicioForm(instance = servicio)
@@ -101,13 +112,13 @@ def detallesUsuario(request, usuario_id):
     return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion})
 
 def bajaUsuario(request, usuario_id):
-    template_name='webapp/usuario-delete.html'
-    # Recuperamos la instancia de la persona y la borramos
+    # Recuperamos la instancia de la persona
     instancia = Usuario.objects.get(id=usuario_id)
-    instancia.delete()
-
+    instancia.is_active=False
+    instancia.save()
+    messages.success(request, 'Usuario dado de baja existosamente.')
     # Después redireccionamos de nuevo a la lista
-    return redirect('/')
+    return redirect('ListarUsuarios')
 
 
 
