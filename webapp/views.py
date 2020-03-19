@@ -7,7 +7,7 @@ from django.contrib import messages
 
 #Cargamos los modelos
 from .models import Servicio, Usuario, Vehiculo
-from .forms import ServicioForm, registroUsuario, Login, crearVehiculos
+from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm
 
 
 
@@ -52,6 +52,36 @@ def detallesServicio(request, servicio_id):
     return render(request, 'webapp/servicios-detalle.html', {'servicio': servicio, 'seccion': seccion})
 
 
+def editarServicio(request, pk):
+    seccion = 'Editar Servicio'
+    servicio = Servicio.objects.get(pk=pk)
+    if request.method == "POST":
+        form = editarServicioForm(request.POST,instance=servicio)
+        if form.is_valid():
+            form.fecha     = request.POST["fecha"]
+            form.tareas    = request.POST["tareas"]
+            form.textoOtros= request.POST["textoOtros"]
+            form.kilometros= request.POST["kilometros"]
+            form.costo     = request.POST["costo"]
+            
+            form.save()
+            # estado = request.POST["estado"]
+            
+            #servicio1 = form.save(commit=False)
+
+            #  if .estados.latest('estadoservicio__fecha') != servicio1.estado
+            #      servicio.estados.add(estado)
+                 
+           # servicio1.save()
+            #form.save_m2m()
+
+            return redirect("VerServicios")
+    else:
+        form = editarServicioForm(instance = servicio)
+    
+    
+    return render(request, 'webapp/servicios-modificar.html', {'servicio': servicio,'form': form, 'seccion': seccion})
+
 
 # ---- vistas USUARIO ---------------------------------------------------------
 
@@ -82,13 +112,13 @@ def detallesUsuario(request, usuario_id):
     return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion})
 
 def bajaUsuario(request, usuario_id):
-    template_name='webapp/usuario-delete.html'
-    # Recuperamos la instancia de la persona y la borramos
+    # Recuperamos la instancia de la persona
     instancia = Usuario.objects.get(id=usuario_id)
-    instancia.delete()
-
+    instancia.is_active=False
+    instancia.save()
+    messages.success(request, 'Usuario dado de baja existosamente.')
     # Después redireccionamos de nuevo a la lista
-    return redirect('/')
+    return redirect('ListarUsuarios')
 
 
 
@@ -116,9 +146,9 @@ def login(request):
     if request.method == 'POST':
         form = Login(data = request.POST)
         if form.is_valid():
-            documento = request.POST['documento']
+            username = request.POST['username']
             password = request.POST['password']
-            user = authenticate(documento=documento, password=password)
+            user = authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
                     django_login(request, user)
