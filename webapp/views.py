@@ -116,9 +116,9 @@ def login(request):
     if request.method == 'POST':
         form = Login(data = request.POST)
         if form.is_valid():
-            documento = request.POST['documento']
+            username = request.POST['username']
             password = request.POST['password']
-            user = authenticate(documento=documento, password=password)
+            user = authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
                     django_login(request, user)
