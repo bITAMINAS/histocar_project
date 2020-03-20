@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 #Cargamos los modelos
-from .models import Servicio, Usuario, Vehiculo
+from .models import Servicio, Usuario, Vehiculo, Estado
 from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm
 
 
@@ -52,28 +52,33 @@ def detallesServicio(request, servicio_id):
     return render(request, 'webapp/servicios-detalle.html', {'servicio': servicio, 'seccion': seccion})
 
 
-def editarServicio(request, pk):
+def editarServicio(request, servicio_id):
     seccion = 'Editar Servicio'
-    servicio = Servicio.objects.get(pk=pk)
+    servicio = Servicio.objects.get(pk=servicio_id)
     if request.method == "POST":
         form = editarServicioForm(request.POST,instance=servicio)
         if form.is_valid():
-            form.fecha     = request.POST["fecha"]
-            form.tareas    = request.POST["tareas"]
-            form.textoOtros= request.POST["textoOtros"]
-            form.kilometros= request.POST["kilometros"]
-            form.costo     = request.POST["costo"]
+            FormEstado_id = request.POST["estados"]
+            print('Estadooooooooooo:' + FormEstado_id)
+            servicio1 = form.save(commit=False)
             
-            form.save()
-            # estado = request.POST["estado"]
             
-            #servicio1 = form.save(commit=False)
 
-            #  if .estados.latest('estadoservicio__fecha') != servicio1.estado
-            #      servicio.estados.add(estado)
-                 
-           # servicio1.save()
-            #form.save_m2m()
+            #si el estado_id del form es distinto al al ultimo estado_id registrado          
+            estadoServicio = servicio.estados.latest('estadoservicio__fecha')
+            FormEstadoServicio = int(FormEstado_id)#servicio1.estados.latest('estadoservicio__fecha')
+            if estadoServicio.id != FormEstadoServicio:
+                print(FormEstadoServicio)
+                
+                e=Estado.objects.get(pk=FormEstadoServicio)
+                servicio.estados.add(e)
+                #servicio.estados_set.add(estado_id=FormEstadoServicio, servicio_id=servicio_id)
+            #     # servicio.estados.add(estadoForm)
+                servicio.save()
+                servicio1.save()
+            #    servicio1.save()
+            #form.save()
+                #form.save_m2m()
 
             return redirect("VerServicios")
     else:
