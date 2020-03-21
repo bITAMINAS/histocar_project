@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 #Cargamos los modelos
-from .models import Servicio, Usuario, Vehiculo
+from .models import Servicio, Usuario, Vehiculo, EstadoServicio
 from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm
 
 
@@ -55,10 +55,9 @@ def detallesServicio(request, servicio_id):
 def editarServicio(request, pk):
     seccion = 'Editar Servicio'
     servicio = Servicio.objects.get(pk=pk)
+    estadoservicio = EstadoServicio.objects.get(servicio_id=pk)
     if request.method == "POST":
-        form = editarServicioForm(request.POST,instance=servicio)
-        if form.is_valid():
-            form.fecha     = request.POST["fecha"]
+        form.fecha     = request.POST["fecha"]
             form.tareas    = request.POST["tareas"]
             form.textoOtros= request.POST["textoOtros"]
             form.kilometros= request.POST["kilometros"]
@@ -74,8 +73,16 @@ def editarServicio(request, pk):
                  
            # servicio1.save()
             #form.save_m2m()
-
-            return redirect("VerServicios")
+            
+        #form = editarServicioForm(request.POST,instance=servicio)
+        #if form.is_valid():
+        #    estado = request.POST["estados"]
+        #    servicio1 = form.save(commit=False)
+        #    if servicio.estados.all() != estado:
+        #        
+        #        
+        #    servicio1.save(force_insert=True)
+        #    return redirect("VerServicios")
     else:
         form = editarServicioForm(instance = servicio)
     
