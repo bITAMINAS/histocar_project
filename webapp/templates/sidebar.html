@@ -25,25 +25,18 @@
             </p>
           </a>
         </li>
-
-        <li class="nav-header">Servicios</li>
-        <li class="nav-item">
-          <a href="{% url "CrearServicio" %}" class="nav-link">
-            <i class="nav-icon fas fa-plus"></i>
-            <p>
-              Crear servicio
-              <!--<span class="badge badge-info right">2</span>-->
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{% url "VerServicios" %}" class="nav-link">
-            <i class="nav-icon fas fa-eye"></i>
-            <p>
-              Ver servicios
-            </p>
-          </a>
-        </li>
+        {% if user.is_authenticated %}
+          {% if user.tipoUsuario == 1 %}
+            usuario tipo cliente
+          {% endif %}
+          {% if user.tipoUsuario == 2 %}
+            usuario tipo empleado
+          {% endif %}
+          {% if user.tipoUsuario == 3 %}
+            usuario tipo administrador
+          {% endif %}
+        {% endif %}
+        
 
         <li class="nav-header">Usuarios</li>
         <li class="nav-item">
