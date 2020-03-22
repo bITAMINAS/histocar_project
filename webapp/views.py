@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 #Cargamos los modelos
-from .models import Servicio, Usuario, Vehiculo, Estado
+from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Vehiculo
 from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm
 
 
@@ -81,6 +81,34 @@ def editarServicio(request, servicio_id):
                 #form.save_m2m()
 
             return redirect("VerServicios")
+    # servicio = Servicio.objects.get(pk=pk)
+    # estadoservicio = EstadoServicio.objects.get(servicio_id=pk)
+    # if request.method == "POST":
+    #     form.fecha     = request.POST["fecha"]
+    #     form.tareas    = request.POST["tareas"]
+    #     form.textoOtros= request.POST["textoOtros"]
+    #     form.kilometros= request.POST["kilometros"]
+    #     form.costo     = request.POST["costo"]
+        
+    #     form.save()
+        # estado = request.POST["estado"]
+        
+        #servicio1 = form.save(commit=False)
+        #  if .estados.latest('estadoservicio__fecha') != servicio1.estado
+        #      servicio.estados.add(estado)
+             
+           # servicio1.save()
+            #form.save_m2m()
+            
+        #form = editarServicioForm(request.POST,instance=servicio)
+        #if form.is_valid():
+        #    estado = request.POST["estados"]
+        #    servicio1 = form.save(commit=False)
+        #    if servicio.estados.all() != estado:
+        #        
+        #        
+        #    servicio1.save(force_insert=True)
+        #    return redirect("VerServicios")
     else:
         form = editarServicioForm(instance = servicio)
     
@@ -169,3 +197,16 @@ def logout(request):
     do_logout(request)
     # Redireccionamos a la portada
     return redirect('/')
+###############################################################################
+###############################################################################
+###############################################################################
+####VISTAS CLIENTE###############
+
+####Vista listar vehiculos#####
+@login_required(login_url='login')
+def verVehiculosCliente(request):
+    template_name='webapp/cliente/vehiculo-listar.html'
+    usuario = request.user.id
+    vehiculos = Vehiculo.objects.all().filter(duenio_id=usuario)
+    seccion = 'Ver mis vehiculos'
+    return render(request, template_name, {'vehiculos': vehiculos, 'seccion': seccion})
