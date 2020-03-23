@@ -1,5 +1,4 @@
 from webapp import views
-
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
@@ -20,6 +19,6 @@ urlpatterns = [
     path('registration/', include('django.contrib.auth.urls')),
     path('detalles-usuario/<int:usuario_id>', views.detallesUsuario, name='DetallesUsuario'),
     path('ver-vehiculos', views.verVehiculosCliente, name='VerVehiculos'),
-    path('editar-usuario/<int:usuario_id>', views.editarUsuario, name='EditarUsuario'),
+    path('editar-Usuario/<int:pk>', views.editarUsuario, name='EditarUsuario'),
 
 ]

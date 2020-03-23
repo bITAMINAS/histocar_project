@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Mon Mar 23 2020 14:09:29 GMT-0300 (hora estándar de Argentina)
+------------------------------------------------------
+
+Modified files:
+* db.sqlite3
+* webapp/urls.py
+
+
+Created files:
+* .autogit/logs/log-23-2-2020-13-39-15.txt
+
+
+Deleted files:
+
+
+Renamed files:
