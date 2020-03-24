@@ -17,12 +17,7 @@
     </div>
     <div class="card-body">
       <form method="POST" class="editarUsuarioForm">{% csrf_token %}
-        <div class="form-group">
-          <!-- Links de interes 
-            https://github.com/jazzband/django-widget-tweaks  
-            https://getbootstrap.com/docs/4.4/components/forms/
-           -->
-           <div class="form-group">
+         <div class="form-group">
             <label for="{{form.nombre.label}}">{{form.nombre.label}}</label>
             {%if form.nombre.errors %}
               {% render_field form.nombre class="form-control is-invalid" %}
