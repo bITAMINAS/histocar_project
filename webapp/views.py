@@ -120,12 +120,18 @@ def detallesUsuario(request, usuario_id):
 def editarUsuario(request, pk):
     seccion = 'Editar Usuario'
     usuario = Usuario.objects.get(pk=pk)
+    form = editarUsuarioForm(request.POST)
    
     if request.method == "POST":
-        form = editarUsuarioForm(request.POST or None)
         if form.is_valid():
+        
+            form.nombre = request.POST['nombre']
+            form.apellido = request.POST['apellido']
+            form.email     = request.POST["email"]
+            form.telefono    = request.POST["telefono"]
+        
             form.save()
-            
+    
     else:
         form = editarUsuarioForm(instance = usuario)
     
