@@ -4,10 +4,8 @@
 <!-- Content Row -->
 <!-- Toastr -->
 {% load static %}
-{% block stylesheet %}   
-<link rel="stylesheet" href="{% static 'webapp/plugins/select2/css/select2.min.css' %}">
-  <link rel="stylesheet" href="{% static 'webapp/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">    
-<link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
+{% block stylesheet %}
+      <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
 {% endblock %}
 <div class="col-xl-12 col-md-12 mb-12">
   <div class="card shadow mb-3">
@@ -15,7 +13,7 @@
       <h6 class="m-0 font-weight-bold text-primary">Editar Usuario {{ usuario.id }}</h6>
     </div>
     <div class="card-body">
-      <form method="POST" class="editarUsuariosForm">{% csrf_token %}
+      <form method="POST" class="editarUsuarioForm">{% csrf_token %}
         <div class="form-group">
           <!-- Links de interes 
             https://github.com/jazzband/django-widget-tweaks  
@@ -78,7 +76,7 @@
                 {% for error in form.telefono.errors %}
                 <script>
                   $('').ready(function() {
-                    toastr.error('{{ error }}','Otros')
+                    toastr.error('{{ error }}','Telefono')
                   });
                 </script>
                 {% endfor %}
@@ -90,15 +88,8 @@
             </div>
             </form>
           {% block javascripts %}       
-          <script>
-            $(document).ready(function() {
-              $('#id_tareas').select2({
-                  theme: 'bootstrap4'
-              });
-            });
           </script>
           <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
-          <script src="{% static 'webapp/plugins/select2/js/select2.full.min.js' %}"></script>
           <script>
             toastr.options = {
               "closeButton": true,

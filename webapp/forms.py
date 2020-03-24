@@ -99,7 +99,7 @@ class Login(forms.Form): # Note: forms.Form NOT forms.ModelForm
         fields = ['email', 'password']
 
 
-class editarUsuarios(forms.ModelForm):
+class editarUsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ('nombre', 'apellido', 'email', 'telefono')
