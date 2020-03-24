@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
+from datetime import datetime
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 #Cargamos los modelos
-from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Vehiculo
+from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Vehiculo, Estado
 from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm
 
 
@@ -52,40 +53,32 @@ def detallesServicio(request, servicio_id):
     return render(request, 'webapp/servicios-detalle.html', {'servicio': servicio, 'seccion': seccion})
 
 
-def editarServicio(request, pk):
+def editarServicio(request, servicio_id):
     seccion = 'Editar Servicio'
-    servicio = Servicio.objects.get(pk=pk)
-    estadoservicio = EstadoServicio.objects.get(servicio_id=pk)
+    servicio = Servicio.objects.get(pk=servicio_id)
+    estadoAnteriorServicio = servicio.estados.latest('estadoservicio__fecha').id
+
     if request.method == "POST":
-        form.fecha     = request.POST["fecha"]
-        form.tareas    = request.POST["tareas"]
-        form.textoOtros= request.POST["textoOtros"]
-        form.kilometros= request.POST["kilometros"]
-        form.costo     = request.POST["costo"]
-        
-        form.save()
-        # estado = request.POST["estado"]
-        
-        #servicio1 = form.save(commit=False)
-        #  if .estados.latest('estadoservicio__fecha') != servicio1.estado
-        #      servicio.estados.add(estado)
-             
-           # servicio1.save()
-            #form.save_m2m()
+        form = editarServicioForm(request.POST, instance=servicio)
+        if form.is_valid():
+            FormEstado_id = request.POST["estados"]
+            print('Estadooooooooooo:' + FormEstado_id)
+            pending_servicio = form.save(commit=False)                    
             
-        #form = editarServicioForm(request.POST,instance=servicio)
-        #if form.is_valid():
-        #    estado = request.POST["estados"]
-        #    servicio1 = form.save(commit=False)
-        #    if servicio.estados.all() != estado:
-        #        
-        #        
-        #    servicio1.save(force_insert=True)
-        #    return redirect("VerServicios")
+            estadoActualServicio = int(FormEstado_id)
+            
+            #si el estado_id del form es distinto al al ultimo estado_id registrado
+            if estadoAnteriorServicio != estadoActualServicio:               
+                e=Estado.objects.get(pk=estadoActualServicio)
+                s=servicio
+                
+                servicioEstado = EstadoServicio(estado=e, servicio=s, fecha=datetime.now())
+                servicioEstado.save()
+            return redirect("VerServicios")
+
     else:
-        form = editarServicioForm(instance = servicio)
-    
-    
+        form = editarServicioForm(initial={'estados':estadoAnteriorServicio}, instance = servicio)
+        
     return render(request, 'webapp/servicios-modificar.html', {'servicio': servicio,'form': form, 'seccion': seccion})
 
 
