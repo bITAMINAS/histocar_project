@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Tue Mar 24 2020 18:42:09 GMT-0300 (hora estándar de Argentina)
+------------------------------------------------------
+
+Modified files:
+* webapp/models.py
+
+
+Created files:
+* .autogit/logs/log-24-2-2020-18-11-56.txt
+
+
+Deleted files:
+
+
+Renamed files:
