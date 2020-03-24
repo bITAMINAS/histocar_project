@@ -120,12 +120,15 @@ def detallesUsuario(request, usuario_id):
 def editarUsuario(request, pk):
     seccion = 'Editar Usuario'
     usuario = Usuario.objects.get(pk=pk)
-
+    form_class = editarUsuarioForm
+    form = form_class(request.POST or None)
     if request.method == "POST":
-        form.nombre = request.POST['nombre']
-        form.apellido = request.POST['apellido']
-        form.email     = request.POST["email"]
-        form.telefono    = request.POST["telefono"]
+
+        if form.is_valid():
+            nombre = request.POST.get('nombre')
+            apellido = request.POST.get('apellido')
+            email     = request.POST.get("email")
+            telefono    = request.POST.get("telefono")
         
         form.save()
     
@@ -133,7 +136,7 @@ def editarUsuario(request, pk):
         form = editarUsuarioForm(instance = usuario)
     
     
-    return render(request, 'webapp/usario-editar.html', {'usuario': usuario,'form': form, 'seccion': seccion})  
+    return render(request, 'webapp/usuario-editar.html', {'usuario': usuario,'form': form, 'seccion': seccion})  
 
 def bajaUsuario(request, usuario_id):
     # Recuperamos la instancia de la persona

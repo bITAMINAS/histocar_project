@@ -1,0 +1,20 @@
+-------------------- Auto-Git Log --------------------
+		Tue Mar 24 2020 16:41:17 GMT-0300 (hora estándar de Argentina)
+------------------------------------------------------
+
+Modified files:
+* webapp/forms.py
+* webapp/templates/webapp/usuario-editar.html
+* webapp/templates/webapp/usuarios-lista.html
+* webapp/urls.py
+* webapp/views.py
+
+
+Created files:
+* .autogit/logs/log-24-2-2020-16-11-5.txt
+
+
+Deleted files:
+
+
+Renamed files:
