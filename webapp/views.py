@@ -7,7 +7,7 @@ from django.contrib import messages
 
 #Cargamos los modelos
 from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Vehiculo
-from .forms import ServicioForm, registroUsuario, Login, crearVehiculos 
+from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarUsuarioForm 
 
 
 
@@ -130,7 +130,7 @@ def editarUsuario(request, pk):
         form.save()
     
     else:
-        form = registroUsuarioForm(instance = usuario)
+        form = editarUsuarioForm(instance = usuario)
     
     
     return render(request, 'webapp/usario-editar.html', {'usuario': usuario,'form': form, 'seccion': seccion})  
