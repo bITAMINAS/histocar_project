@@ -1,0 +1,29 @@
+{% extends 'registration/baseregis.html' %}
+{% load widget_tweaks %}
+             {% block content %}
+              <form method="POST">{% csrf_token %}
+                <div class="form-label-group">
+                 
+                    {%if form.username.errors %}
+                    {% render_field form.username class="form-control is-invalid" %}
+                      {% for error in form.username.errors %} {{ error }} {% endfor %}
+                 {% else %}
+                   {% render_field form.username class="form-control" %}
+                 {% endif %}
+                  <label for="inputEmail">Documento</label>
+                </div>
+
+                <div class="form-label-group">
+                    {%if form.password.errors %}
+                    {% render_field form.password class="form-control is-invalid" %}
+                      {% for error in form.password.errors %} {{ error }} {% endfor %}
+                 {% else %}
+                   {% render_field form.password class="form-control" %}
+                 {% endif %}
+                  <label for="inputPassword">Contraseña</label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Ingresar</button>
+                <div class="text-center"><a class="small" href="{% url 'password_reset' %}">Ayuda! Olvide mi contraseña</a></div>
+
+              </form>
+              {% endblock %}

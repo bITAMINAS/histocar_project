@@ -25,7 +25,18 @@
             </p>
           </a>
         </li>
-
+        {% if user.is_authenticated %}
+          {% if user.tipoUsuario == 1 %}
+            usuario tipo cliente
+          {% endif %}
+          {% if user.tipoUsuario == 2 %}
+            usuario tipo empleado
+          {% endif %}
+          {% if user.tipoUsuario == 3 %}
+            usuario tipo administrador
+          {% endif %}
+        {% endif %}
+        
         <li class="nav-header">Servicios</li>
         <li class="nav-item">
           <a href="{% url "CrearServicio" %}" class="nav-link">

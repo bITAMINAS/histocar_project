@@ -25,7 +25,7 @@
 
 .titulo-logo{
   font-family: 'Grand Hotel', cursive;
-  font-size: 48px;
+  font-size: 90px;
   text-align: left
 }
 
@@ -141,7 +141,6 @@
 
 </head>
 <body>
-    {% load widget_tweaks %}
     <div class="container-fluid">
   <div class="row no-gutter">
     <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
@@ -151,14 +150,13 @@
           <div class="row">
             <div class="col-md-9 col-lg-8 mx-auto">
               
-              <div class="titulo-logo">HistoCar</div><br/>  
+              <div class="titulo-logo text-center">HistoCar</div><br/>  
               <h3 class="login-heading mb-4">Bienvenido</h3><br/>
-              <p></p><br/>
-              <p>{% if form.errors %}
+              {% if form.errors %}<p>
                 <!-- Error messaging -->
                 <div id="errors">
                   <div class="inner">
-                    <p>There were some errors in the information you entered. Please correct the following:</p>
+                    <p>Existe alguna informacion incorrecta al intentar entrar, por favor verifique lo siguiente:</p>
                     {{ form.non_field_errors }}
                     <ul>
                       {% for field in form %}
@@ -168,42 +166,15 @@
                   </div>
                 </div>
                 <!-- /Error messaging -->
-              {% endif %}</p>
-              <form method="POST">{% csrf_token %}
-                <div class="form-label-group">
-                 
-                    {%if form.documento.errors %}
-                    {% render_field form.documento class="form-control is-invalid" %}
-                      {% for error in form.documento.errors %} {{ error }} {% endfor %}
-                 {% else %}
-                   {% render_field form.documento class="form-control" %}
-                 {% endif %}
-                  <label for="inputEmail">Documento</label>
-                </div>
+              </p>{% endif %}
 
-                <div class="form-label-group">
-                    {%if form.password.errors %}
-                    {% render_field form.password class="form-control is-invalid" %}
-                      {% for error in form.password.errors %} {{ error }} {% endfor %}
-                 {% else %}
-                   {% render_field form.password class="form-control" %}
-                 {% endif %}
-                  <label for="inputPassword">Contraseña</label>
-                </div>
-                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Ingresar</button>
-                <script>
-                    // tell the embed parent frame the height of the content
-                    if (window.parent && window.parent.parent){
-                      window.parent.parent.postMessage(["resultsFrame", {
-                        height: document.body.getBoundingClientRect().height,
-                        slug: "efvg9j7a"
-                      }], "*")
-                    }
-                
-                    // always overwrite window.name, in case users try to set it manually
-                    window.name = "result"
-                  </script>
-              </form>
+
+              
+              {% block content %}{% endblock %}
+
+
+
+
             </div>
           </div>
         </div>

@@ -1,78 +1,86 @@
-{% extends "base.html" %}
-{% block content %} 
 
-<!-- Default box -->
-<div class="card">
-<div class="card-header">
-    <h3 class="card-title">Usuarios</h3>
-    <div class="text-right">
-        <a href="{% url "CrearUsuario" %}" class="btn btn-sm btn-primary">Nuevo Usuario</a>
-    </div>
-</div>
-<div class="card-body p-0">
-    <table class="table table-striped projects">
-        <thead>
+{% extends "base.html" %}
+{% load static %}
+{% block stylesheets %}
+<!-- DataTables -->
+<link rel="stylesheet" href="{% static 'webapp/plugins/datatables-bs4/css/dataTables.bootstrap4.css' %}">
+{% endblock %}
+
+{% block content %} 
+<div class="row">
+  <div class="col-12">
+    <div class="card card-primary card-outline">
+      <div class="card-header">
+        <h3 class="card-title">Lista de usuarios</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <table id="usuarios" class="table  table-bordered table-hover dataTable">
+          <thead>
             <tr>
-                <th style="width: 1%">
-                    #
-                </th>
-                <th style="width: 20%">
-                    Documento
-                </th>
-                <th style="width: 30%">
-                    Nombre
-                </th>
-                <th style="width: 8%" class="text-center">
-                    Teléfono
-                </th>
-                <th style="width: 20%">
-                </th>
+              <th style="width: 1%" >ID</th>
+              <th style="width: 10%">Documento</th>
+              <th style="width: 10%">Nombre(s)</th>
+              <th style="width: 10%">Apellido</th>
+              <th style="width: 10%">Teléfono</th>
+              <th>E-Mail</th>
+              <th style="width: 10%" > </th>
             </tr>
-        </thead>
-        <tbody>
-            {% for usuario in usuarios %}  
+          </thead>
+
+          <tbody>
+          {% for usuario in usuarios %} 
             <tr>
-                <td>
-                    {{usuario.id}}
-                </td>
-                <td>
-                    <a>
-                        {{ usuario.documento }} 
-                    </a>
-                </td>
-                <td>
-                    <a>
-                        {{ usuario.nombre }} {{ usuario.apellido }} 
-                    </a>
-                </td>
-                <td>
-                    <a>
-                        {{ usuario.telefono }}  
-                    </a>
-                </td>
-                <td class="project-actions text-right">
-                    <a class="btn btn-primary btn-sm" href="#">
-                        <i class="fas fa-folder">
-                        </i>
-                        Ver
-                    </a>
-                    <a class="btn btn-info btn-sm" href="#">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Modificar
-                    </a>
-                    <a class="btn btn-danger btn-sm" href="#">
-                        <i class="fas fa-trash">
-                        </i>
-                        Eliminar
-                    </a>
-                </td>
+              <td>{{ usuario.id }}</td>
+              <td>{{ usuario.documento }}</td>
+              <td>{{ usuario.nombre }}</td>
+              <td>{{ usuario.apellido }}</td>
+              <td>{{ usuario.telefono }} </td>
+              <td>{{ usuario.email }} </td>
+              <td class="text-right">
+                <div class="btn-group">
+                  <a class="btn btn-default" href="{% url "DetallesUsuario" usuario.id %}" role="button">
+                    <i class="fas fa-eye" ></i>
+                  </a>
+                  <a class="btn btn-default" href="#" role="button">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a class="btn btn-default" href="{% url "UsuarioBaja" usuario.id %}" role="button" 
+                    onClick="return confirm('¿Seguro que quieres dar de baja a {{usuario.nombre}} {{ usuario.apellido }}?');">
+                    <i class="far fa-trash-alt" style="color:rgba(211, 0, 0, 0.692);"></i>
+                  </a>
+                              
+                </div>
+              </td>
             </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+          {% endfor %}
+          </tbody>
+		
+        </table>
+      </div>
+	<!-- /.card-body -->
+  </div>
+  <!-- /.col -->
 </div>
-<!-- /.card-body -->
-</div>
-<!-- /.card -->
+<!-- /.row --> 
+
+{%endblock%}
+
+{% block javascripts %}
+<!-- DataTables -->
+<script src="{% static 'webapp/plugins/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'webapp/plugins/datatables-bs4/js/dataTables.bootstrap4.js' %}"></script>
+<script>
+  $(function () {
+    //   $("#usuarios").DataTable();
+    $('#usuarios').DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+    });
+  });
+</script>
 {%endblock%}
