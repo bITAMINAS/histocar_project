@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
+from datetime import datetime
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 #Cargamos los modelos
-from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Vehiculo
+from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Vehiculo, Estado
 from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm
 
 
@@ -55,64 +56,29 @@ def detallesServicio(request, servicio_id):
 def editarServicio(request, servicio_id):
     seccion = 'Editar Servicio'
     servicio = Servicio.objects.get(pk=servicio_id)
+    estadoAnteriorServicio = servicio.estados.latest('estadoservicio__fecha').id
+
     if request.method == "POST":
-        form = editarServicioForm(request.POST,instance=servicio)
+        form = editarServicioForm(request.POST, instance=servicio)
         if form.is_valid():
             FormEstado_id = request.POST["estados"]
             print('Estadooooooooooo:' + FormEstado_id)
-            servicio1 = form.save(commit=False)
+            pending_servicio = form.save(commit=False)                    
             
+            estadoActualServicio = int(FormEstado_id)
             
-
-            #si el estado_id del form es distinto al al ultimo estado_id registrado          
-            estadoServicio = servicio.estados.latest('estadoservicio__fecha')
-            FormEstadoServicio = int(FormEstado_id)#servicio1.estados.latest('estadoservicio__fecha')
-            if estadoServicio.id != FormEstadoServicio:
-                print(FormEstadoServicio)
+            #si el estado_id del form es distinto al al ultimo estado_id registrado
+            if estadoAnteriorServicio != estadoActualServicio:               
+                e=Estado.objects.get(pk=estadoActualServicio)
+                s=servicio
                 
-                e=Estado.objects.get(pk=FormEstadoServicio)
-                servicio.estados.add(e)
-                #servicio.estados_set.add(estado_id=FormEstadoServicio, servicio_id=servicio_id)
-            #     # servicio.estados.add(estadoForm)
-                servicio.save()
-                servicio1.save()
-            #    servicio1.save()
-            #form.save()
-                #form.save_m2m()
-
+                servicioEstado = EstadoServicio(estado=e, servicio=s, fecha=datetime.now())
+                servicioEstado.save()
             return redirect("VerServicios")
-    # servicio = Servicio.objects.get(pk=pk)
-    # estadoservicio = EstadoServicio.objects.get(servicio_id=pk)
-    # if request.method == "POST":
-    #     form.fecha     = request.POST["fecha"]
-    #     form.tareas    = request.POST["tareas"]
-    #     form.textoOtros= request.POST["textoOtros"]
-    #     form.kilometros= request.POST["kilometros"]
-    #     form.costo     = request.POST["costo"]
-        
-    #     form.save()
-        # estado = request.POST["estado"]
-        
-        #servicio1 = form.save(commit=False)
-        #  if .estados.latest('estadoservicio__fecha') != servicio1.estado
-        #      servicio.estados.add(estado)
-             
-           # servicio1.save()
-            #form.save_m2m()
-            
-        #form = editarServicioForm(request.POST,instance=servicio)
-        #if form.is_valid():
-        #    estado = request.POST["estados"]
-        #    servicio1 = form.save(commit=False)
-        #    if servicio.estados.all() != estado:
-        #        
-        #        
-        #    servicio1.save(force_insert=True)
-        #    return redirect("VerServicios")
+
     else:
-        form = editarServicioForm(instance = servicio)
-    
-    
+        form = editarServicioForm(initial={'estados':estadoAnteriorServicio}, instance = servicio)
+        
     return render(request, 'webapp/servicios-modificar.html', {'servicio': servicio,'form': form, 'seccion': seccion})
 
 
