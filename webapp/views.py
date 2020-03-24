@@ -122,7 +122,7 @@ def editarUsuario(request, pk):
     usuario = Usuario.objects.get(pk=pk)
 
     if request.method == "POST":
-        form.name = request.POST['nombre']
+        form.nombre = request.POST['nombre']
         form.apellido = request.POST['apellido']
         form.email     = request.POST["email"]
         form.telefono    = request.POST["telefono"]
