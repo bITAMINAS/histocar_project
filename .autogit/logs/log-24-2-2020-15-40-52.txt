@@ -1,0 +1,20 @@
+-------------------- Auto-Git Log --------------------
+		Tue Mar 24 2020 15:40:52 GMT-0300 (hora estándar de Argentina)
+------------------------------------------------------
+
+Modified files:
+* db.sqlite3
+* webapp/templates/webapp/usuario-editar.html
+* webapp/urls.py
+
+
+Created files:
+* .autogit/logs/log-24-2-2020-15-10-38.txt
+* webapp/migrations/0013_auto_20200324_1521.py
+* webapp/templates/webapp/servicios-modificar.html
+
+
+Deleted files:
+
+
+Renamed files:
