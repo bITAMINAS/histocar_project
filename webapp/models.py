@@ -17,7 +17,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     nombre = models.CharField(max_length=20, default="")
     apellido = models.CharField(max_length=20, default="")
     documento = models.CharField(unique=True, max_length=8, default="")
-    email = models.EmailField(unique=False, default="") #unique=True sirve para que no se repita en la bd
+    email = models.EmailField(unique=True, default="") #unique=True sirve para que no se repita en la bd
     telefono = models.CharField(max_length=20, default="")
     tipoUsuario = models.IntegerField(default=1) # 1=CLiente, 2=Empleado, 3=Administrador
     dirDepartamento = models.CharField('Departamento', choices=Departamentos.choices, max_length=20, default="")
