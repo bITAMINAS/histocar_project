@@ -102,9 +102,9 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="campoContrasenia">Contraseña</label>
+              <label for="campoContrasenia">{{form.password1.label}}</label>
               {%if form.password1.errors %}
-              {% render_field form.password1 class="form-control is-invalid" %}
+              {% render_field form.password1 class="form-contrl is-invalid" %}
               {% for error in form.password1.errors %}
               <script>
                 $('').ready(function() {
@@ -119,7 +119,7 @@
           </div>
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="campoRepetirContrasenia">Confirmar contraseña</label>
+              <label for="campoRepetirContrasenia">{{form.password2.label}}</label>
               {%if form.password2.errors %}
               {% render_field form.password2 class="form-control is-invalid" %}
               {% for error in form.password2.errors %}
