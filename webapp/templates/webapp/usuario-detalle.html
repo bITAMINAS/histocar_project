@@ -48,7 +48,12 @@
               <!-- Post -->
               <div class="post">
                 <ul> 
-                
+                  {% for servicio in servicios %}
+                    <li>{{servicio.fecha}}, {{servicio.estado}}</li>
+                    {% for tarea in servicios.tareas %}
+                    <li>{{tarea.nombre}}</li>
+                    {% endfor %}
+                {% endfor %}
                 </ul>  
               </div>
               <!-- /.post -->
