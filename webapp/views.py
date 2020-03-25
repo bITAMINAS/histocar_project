@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 #Cargamos los modelos
-from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Vehiculo, Estado
+from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Estado
 from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm
 
 
@@ -107,8 +107,9 @@ def verUsuarios(request):
 
 def detallesUsuario(request, usuario_id):
     usuario = Usuario.objects.get(pk=usuario_id)
+    vehiculos = Vehiculo.objects.filter(duenio__id=usuario_id)
     seccion = 'Detalles de Usuario'
-    return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion})
+    return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion, 'vehiculos': vehiculos})
 
 def bajaUsuario(request, usuario_id):
     # Recuperamos la instancia de la persona
