@@ -27,11 +27,13 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
+    is_client = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
 
     USERNAME_FIELD = 'documento'
     REQUIRED_FIELDS = ['email','telefono']
     objects = UsuarioMejorado()
+    
     def __str__(self):
         return self.nombre + ' ' + self.apellido
     
