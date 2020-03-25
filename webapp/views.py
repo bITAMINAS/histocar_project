@@ -25,7 +25,8 @@ def index(request):
 @login_required(login_url='login')
 def verServicios(request):
     template_name='webapp/servicios-lista.html'
-    servicios = Servicio.objects.all().order_by('id')
+    servicios = Servicio.objects.all() #.order_by('id')
+    servicios
     seccion = 'Ver Servicios'
     return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
 
