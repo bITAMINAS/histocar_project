@@ -134,7 +134,7 @@ def editarUsuario(request, pk):
         form = editarUsuarioForm(instance=usuario)
     
     
-    return render(request, 'webapp/usuario-editar.html', {'form': form})  
+    return render(request, 'webapp/usuario-editar.html', {'usuario': usuario, 'seccion': seccion, 'form': form})  
 
    
 def bajaUsuario(request, usuario_id):

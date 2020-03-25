@@ -20,5 +20,6 @@ urlpatterns = [
     path('detalles-usuario/<int:usuario_id>', views.detallesUsuario, name='DetallesUsuario'),
     path('ver-vehiculos', views.verVehiculosCliente, name='VerVehiculos'),
     path('editar-usuario/<int:pk>', views.editarUsuario, name='EditarUsuario'),
+    
    
 ]
