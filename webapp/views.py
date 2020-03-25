@@ -5,9 +5,12 @@ from django.contrib.auth import authenticate, login as django_login, logout as d
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+
 #Cargamos los modelos
 from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Vehiculo
-from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarUsuarioForm 
+from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarUsuarioForm
+ 
+ 
 
 
 
@@ -120,24 +123,20 @@ def detallesUsuario(request, usuario_id):
 def editarUsuario(request, pk):
     seccion = 'Editar Usuario'
     usuario = Usuario.objects.get(pk=pk)
-    form = editarUsuarioForm(request.POST)
-   
+    form = editarUsuarioForm(request.POST, instance = usuario)
     if request.method == "POST":
         if form.is_valid():
-        
-            form.nombre = request.POST['nombre']
-            form.apellido = request.POST['apellido']
-            form.email     = request.POST["email"]
-            form.telefono    = request.POST["telefono"]
-        
-            form.save()
-    
+            usuario=form.save()
+            usuario.save()
+            messages.success(request, 'Usuario editado exitosamente.')
+            return redirect('ListarUsuarios')
     else:
-        form = editarUsuarioForm(instance = usuario)
+        form = editarUsuarioForm(instance=usuario)
     
     
-    return render(request, 'webapp/usuario-editar.html', {'usuario': usuario,'form': form, 'seccion': seccion})  
+    return render(request, 'webapp/usuario-editar.html', {'form': form})  
 
+   
 def bajaUsuario(request, usuario_id):
     # Recuperamos la instancia de la persona
     instancia = Usuario.objects.get(id=usuario_id)

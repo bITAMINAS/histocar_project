@@ -109,3 +109,5 @@ class editarUsuarioForm(forms.ModelForm):
             'email': _('Email'),
             'telefono': _('Telefono'),
         }
+
+        
