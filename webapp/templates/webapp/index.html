@@ -11,37 +11,12 @@
     <!-- =========================================================== -->
 
     <h5 class="mb-2">Servicios Recientes</h5>
-    
-    
-    <div class="row-fluid" >
-      <div class="accordion-toggle" data-toggle="collapse" data-target="#collapseThree">
-          <div class="span1">1</div>
-          <div class="span3">Mark</div>
-          <div class="span3">Otto</div>
-          <div class="span3">@mdo</div>
-      </div>
-
-      <div class="span1">
-          <button type="button" class="btn btn-primary"><i class="icon-search icon-white"></i></button>
-      </div>
-    </div>
-
-    <div id="collapseThree" class="row-fluid collapse in">
-        <div class="span1"></div>
-        <div class="span9">
-            Details 1 <br/>
-            Details 2 <br/>
-            Details 3 <br/>
-        </div>
-    </div>
-
-
+       
     <div class="row">
       <div class="col-12">
-      <div class="card card-primary">
         <div class="card card-outline card-primary">
           <div class="card-header">
-            <h3 class="card-title">En progreso</h3>
+            <h3 class="card-title">Primary Outline</h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -50,72 +25,44 @@
             <!-- /.card-tools -->
           </div>
           <!-- /.card-header -->
-          <div class="card-body table-responsive p-0">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Responsive Hover Table</h3>
-
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                    </div>
+          <div class="card-body">
+            <div id="accordion">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h4 class="card-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="collapsed" aria-expanded="false">
+                      <div class="container grid-striped"></div>
+                        <div class="row py-2">
+                          <div class="col">
+                              Thing one
+                          </div>
+                          <div class="col">
+                              Thing two
+                          </div>
+                          <div class="col">
+                              Thing three
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse in collapse" style="">
+                  <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                    3
+                    wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
+                    laborum
                   </div>
                 </div>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>User</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Reason</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>183</td>
-                      <td>John Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-success">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                      <td>219</td>
-                      <td>Alexander Pierce</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-warning">Pending</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                      <td>657</td>
-                      <td>Bob Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-primary">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                      <td>175</td>
-                      <td>Mike Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-danger">Denied</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
             </div>
+
+
+
           </div>
           <!-- /.card-body -->
         </div>
-        <!-- /.card -->
-      </div>
       <!-- /.col -->
     </div>
     <!-- /.row -->
