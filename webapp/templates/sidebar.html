@@ -74,6 +74,16 @@
           </a>
         </li>
         <li class="nav-header">Vehículos</li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{% url "VerVehiculos" %}" class="nav-link">
+            <i class="nav-icon fas fa-car"></i>
+            <p>
+              Mis vehiculos
+            </p>
+          </a>
+        </li>
+        {% endif %}
         <li class="nav-item">
           <a href="{% url "CrearVehiculo" %}" class="nav-link">
             <i class="nav-icon fas fa-car"></i>
