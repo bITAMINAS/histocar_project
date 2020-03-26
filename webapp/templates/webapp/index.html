@@ -4,6 +4,14 @@
     .hiddenRow {
       padding: 0 !important;
     }
+
+
+    .table{
+    th,
+    td {
+      vertical-align: middle;
+    }
+    }
   </style>
   
 
@@ -25,41 +33,44 @@
             <!-- /.card-tools -->
           </div>
           <!-- /.card-header -->
-          <div class="card-body">
-            <div id="accordion">
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h4 class="card-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="collapsed" aria-expanded="false">
-                      <div class="container grid-striped"></div>
-                        <div class="row py-2">
-                          <div class="col">
-                              Thing one
-                          </div>
-                          <div class="col">
-                              Thing two
-                          </div>
-                          <div class="col">
-                              Thing three
-                          </div>
+          <div class="card-body p-0">
+          {% comment %} ======================== {% endcomment %}
+
+            <table class="table table-bordered">
+              {% for servicio in servicios %}
+                <tr>
+                  <td style="width:1%">
+                    <a class="btn" data-toggle="collapse" href="#collapseme{{servicio.id}}" role="button" aria-expanded="false" aria-controls="collapseGroup">
+                      <i class="fas fa-angle-down"></i>
+                    </a>
+                  </td>
+                  <td style="width: 10px">
+                    {{servicio.fecha|date:'d/m/Y'}}
+                  </td>
+                  <td>
+                    column
+                  </td>
+                  <td style="width: 40px">
+                    <span class="badge badge-pill bg-primary">Finalizado</span>
+                  </td>
+                </tr>
+
+                <tr id="collapseme{{servicio.id}}" class="collapse out">
+                  <td colspan="6" style="padding-left:0rem; padding:0rem" >
+                      <div class="py-3 pl-5 bg-light" > 
+                        <div class="row"> 
+                          <div class="col">Should be collapsed</div>
+                          <div class="col">Should be collapsed</div>
+
                         </div>
                       </div>
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse in collapse" style="">
-                  <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                    3
-                    wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                    laborum
-                  </div>
-                </div>
-              </div>
-            </div>
+                  </td>
+                </tr>
+              {% endfor %}
+              
+            </table>
 
-
-
+          {% comment %} ======================== {% endcomment %}
           </div>
           <!-- /.card-body -->
         </div>
