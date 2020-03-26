@@ -14,7 +14,7 @@
             <img src="/static/webapp/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <h3 class="profile-username text-center">{{ usuario.nombre }} {{ usuario.apellido}}</h3>
-          <p class="text-muted text-center">usuario.vehiculo.matricula</p>
+          <p class="text-muted text-center">{{usuario.documento}}</p>
           <ul class="list-group list-group-unbordered mb-3">
             <li class="list-group-item">
               <b>Dirección</b> <a class="float-right">{{ usuario.dirCalle}} {{ usuario.dirNumero }}</a>
@@ -47,14 +47,31 @@
             <div class="active tab-pane" id="services">
               <!-- Post -->
               <div class="post">
-                <ul> 
+                <div id="accordion">
                   {% for servicio in servicios %}
-                    <li>{{servicio.fecha}}, {{servicio.estado}}</li>
-                    {% for tarea in servicios.tareas %}
-                    <li>{{tarea.nombre}}</li>
-                    {% endfor %}
-                {% endfor %}
-                </ul>  
+                    <!-- fila -->
+                    <div class="card ">
+                    <div class="card-header">
+                      <h4 class="card-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ servicio.id }}" class="collapsed" aria-expanded="false">
+                        <div class="row">
+                          <div class="col-9">{{ servicio.fecha }}</div> 
+                          <div class="col-3">{{ servicio.estadoActual }}</div> 
+                        </div>
+                      </a>
+                      </h4>
+                    </div>
+                    <div id="collapse{{ servicio.id }}" class="panel-collapse in collapse" style="">
+                      <div class="card-body">
+                      {% for tarea in servicio.tareas.all %}
+                        <li>{{ tarea.nombre }}</li>
+                            {% endfor %}
+                      </div>
+                    </div>
+                    </div>
+                    <!-- ./fila -->
+                  {% endfor %}
+                </div>
               </div>
               <!-- /.post -->
             </div>

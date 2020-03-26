@@ -108,7 +108,7 @@ def verUsuarios(request):
 def detallesUsuario(request, usuario_id):
     usuario = Usuario.objects.get(pk=usuario_id)
     vehiculos = Vehiculo.objects.filter(duenio__id=usuario_id)
-    servicios = Servicio.objects.filter(vehiculo__id=usuario_id)
+    servicios = Servicio.objects.filter(vehiculo__duenio__id=usuario_id)
     seccion = 'Detalles de Usuario'
     return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion, 'vehiculos': vehiculos, 'servicios': servicios})
 
