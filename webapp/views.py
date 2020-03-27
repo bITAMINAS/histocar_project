@@ -25,7 +25,8 @@ def index(request):
 @login_required(login_url='login')
 def verServicios(request):
     template_name='webapp/servicios-lista.html'
-    servicios = Servicio.objects.all().order_by('id')
+    servicios = Servicio.objects.all() #.order_by('id')
+    servicios
     seccion = 'Ver Servicios'
     return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
 
@@ -178,3 +179,17 @@ def verVehiculosCliente(request):
     vehiculos = Vehiculo.objects.all().filter(duenio_id=usuario)
     seccion = 'Ver mis vehiculos'
     return render(request, template_name, {'vehiculos': vehiculos, 'seccion': seccion})
+
+@login_required(login_url='login')
+def borrarVehiculoCliente(request, vehiculo_id):
+    usuario = request.user.id
+    #obtengo el id del vehiculo a borrar
+    instancia = Vehiculo.objects.get(id=vehiculo_id)
+    #reviso que el vehiculo pertenezca al usuario logueado actualmente
+    if usuario == instancia.duenio_id:
+        instancia.delete()
+        messages.success(request, 'Vehiculo dado de baja correctamente')    
+    else:
+        messages.warning(request, 'Ocurrio un problema, quizas no es tu vehiculo.')
+
+    return redirect('VerVehiculos')
