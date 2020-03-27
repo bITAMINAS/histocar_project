@@ -2,18 +2,37 @@
 {% block content %} 
   <style>
     .hiddenRow {
-      padding: 0 !important;
+      padding: 0 4px !important;
     }
-
 
     .table{
     th,
-    td {
+    td{
       vertical-align: middle;
     }
     }
+
+    .btn-tool2:after
+    {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f107";
+    }
+    .btn-tool2.collapsed:after
+    {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f105";
+    }
+
   </style>
-  
+  <script>
+     $('.accordion-toggle').click(function(){
+        $('.hiddenRow').hide();
+        $(this).next('tr').find('.hiddenRow').show();
+      });
+  </script>
+
 
   <div class="container-fluid">
     <!-- =========================================================== -->
@@ -24,7 +43,7 @@
       <div class="col-12">
         <div class="card card-outline card-primary">
           <div class="card-header">
-            <h3 class="card-title">Primary Outline</h3>
+            <h3 class="card-title">Ingresados</h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -35,34 +54,39 @@
           <!-- /.card-header -->
           <div class="card-body p-0">
           {% comment %} ======================== {% endcomment %}
-
-            <table class="table table-bordered">
-              {% for servicio in servicios %}
+            <table class="table" >
+              {% for servicio in ssIngresados %}
                 <tr>
                   <td style="width:1%">
-                    <a class="btn" data-toggle="collapse" href="#collapseme{{servicio.id}}" role="button" aria-expanded="false" aria-controls="collapseGroup">
-                      <i class="fas fa-angle-down"></i>
-                    </a>
+                    <a class="btn-sm btn-tool2 collapsed accordion-toggle" data-toggle="collapse" href="#collapseme{{servicio.id}}" role="button" aria-expanded="false" aria-controls="collapseGroup" ></a>
                   </td>
                   <td style="width: 10px">
                     {{servicio.fecha|date:'d/m/Y'}}
                   </td>
                   <td>
-                    column
+                    {{servicio.vehiculo.modelo.marca.nombre}} {{servicio.vehiculo.modelo.nombre}} | {{servicio.vehiculo.matricula}} 
                   </td>
                   <td style="width: 40px">
-                    <span class="badge badge-pill bg-primary">Finalizado</span>
+                    <span class="badge badge-pill bg-primary" style="width:100px" >{{servicio.estadoActual}}</span>
                   </td>
                 </tr>
 
-                <tr id="collapseme{{servicio.id}}" class="collapse out">
-                  <td colspan="6" style="padding-left:0rem; padding:0rem" >
-                      <div class="py-3 pl-5 bg-light" > 
+                <tr >
+                  <td colspan="6"  class="hiddenRow">
+                      <div class="py-3 pl-5 bg-light collapse" id="collapseme{{servicio.id}}"  > 
                         <div class="row"> 
                           <div class="col">Should be collapsed</div>
                           <div class="col">Should be collapsed</div>
 
-                        </div>
+                          </div>
+                          <div class="row"> 
+                            <div class="col">Should be collapsed</div>
+                            <div class="col">Should be collapsed</div>
+                          </div>
+                          <div class="row"> 
+                            <div class="col">Should be collapsed</div>
+                            <div class="col">Should be collapsed</div>
+                          </div>
                       </div>
                   </td>
                 </tr>
@@ -73,6 +97,7 @@
           {% comment %} ======================== {% endcomment %}
           </div>
           <!-- /.card-body -->
+          
         </div>
       <!-- /.col -->
     </div>
