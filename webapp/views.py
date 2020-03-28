@@ -76,7 +76,9 @@ def editarServicio(request, servicio_id):
                 s=servicio
                 
                 servicioEstado = EstadoServicio(estado=e, servicio=s, fecha=datetime.now())
+                servicio.save()
                 servicioEstado.save()
+ 
             return redirect("VerServicios")
 
     else:
