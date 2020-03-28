@@ -55,8 +55,8 @@
                       <h4 class="card-title">
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ servicio.id }}" class="collapsed" aria-expanded="false">
                         <div class="row">
-                          <div class="col-9">{{ servicio.fecha }}</div> 
-                          <div class="col-3">{{ servicio.estadoActual }}</div> 
+                          <div class="col-9">{{ servicio.fecha|date:'d/m/Y' }}</div> 
+                          <div class="col-9">{{ servicio.estadoActual }}</div> 
                         </div>
                       </a>
                       </h4>
