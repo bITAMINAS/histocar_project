@@ -48,7 +48,7 @@ class Servicio(models.Model):
     tareas = models.ManyToManyField('Tarea')
     estados = models.ManyToManyField('Estado', through='EstadoServicio', verbose_name='Estado')
 
-    #@property
+    @property
     def estadoActual(self):
         estado = self.estados.latest('estadoservicio__fecha')
         return estado.nombre
