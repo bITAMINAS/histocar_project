@@ -15,10 +15,11 @@ from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarS
 def index(request):
     template_name='webapp/index.html'
     servicios = Servicio.objects.all().order_by('id')
-    ssIngresados = servicios.filter(vehiculo__modelo__nombre__startswith="T")
-    print(ssIngresados)
+    #ssIngresados = servicios.filter(estado__)
+
+    #print(ssIngresados)
     seccion = 'Inicio'
-    return render(request, template_name, {'servicios': servicios, 'seccion': seccion, 'ssIngresados': ssIngresados})
+    return render(request, template_name, {'servicios': servicios, 'seccion': seccion})#, 'ssIngresados': ssIngresados})
 
 
 
