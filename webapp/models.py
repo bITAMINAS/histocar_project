@@ -79,9 +79,7 @@ class EstadoServicio(models.Model):
     servicio = models.ForeignKey('Servicio', on_delete=models.CASCADE)
     estado = models.ForeignKey('Estado', on_delete=models.CASCADE)
     fecha = models.DateTimeField(default=datetime.now())
-    # fecha queda como campo null = true porque es el fix del bug 7
     # https://exceptionshub.com/not-null-constraint-failed-after-adding-to-models-py.html
-
 
 class Vehiculo(models.Model):
     TiposCombustibles = models.TextChoices('Combustible', 'Nafta Gasoil Híbrido Eléctrico Hidrógeno GLP')
