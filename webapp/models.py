@@ -44,7 +44,7 @@ class Servicio(models.Model):
     kilometros = models.IntegerField(default=0)
     puntuacion = models.IntegerField(default=0)
     costo = models.IntegerField(default=0)
-    vehiculo = models.ForeignKey('Vehiculo', on_delete=models.CASCADE, default="")
+    vehiculo = models.ForeignKey('Vehiculo', on_delete=models.CASCADE, default="", verbose_name='Vehículo')
     tareas = models.ManyToManyField('Tarea')
     estados = models.ManyToManyField('Estado', through='EstadoServicio', verbose_name='Estado')
 
