@@ -66,21 +66,22 @@ def editarServicio(request, servicio_id):
         form = editarServicioForm(request.POST, instance=servicio)
         if form.is_valid():
             FormEstado_id = request.POST["estados"]
-            print('Estadooooooooooo:' + FormEstado_id)
+
             pending_servicio = form.save(commit=False)                    
             
             estadoActualServicio = int(FormEstado_id)
-            
+            pending_servicio.estadoAc = estadoActualServicio
+
             #si el estado_id del form es distinto al al ultimo estado_id registrado
             if estadoAnteriorServicio != estadoActualServicio:               
                 e=Estado.objects.get(pk=estadoActualServicio)
-                s=servicio
+                s=pending_servicio
                 
                 servicioEstado = EstadoServicio(estado=e, servicio=s, fecha=datetime.now())
                 
                 servicioEstado.save()
-                servicio.save()
- 
+            #servicio.save()
+            pending_servicio.save()
             return redirect("VerServicios")
 
     else:
