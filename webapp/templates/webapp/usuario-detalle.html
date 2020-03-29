@@ -65,12 +65,14 @@
                       <div class="card-body">
                       {% for tarea in servicio.tareas.all %}
                         <li>{{ tarea.nombre }}</li>
-                            {% endfor %}
-
-                      <div class="form-group">
-                        <label for="Otras tareas">Otras tareas</label>
-                        <textarea name="textoOtros" cols="40" rows="8" maxlength="240" class="form-control" required="" id="id_textoOtros"> {{ servicio.textoOtros }} </textarea>
+                            {% endfor %}                  
+                          
+                      <br>
+                      <div class="">
+                        <strong><i class="far fa-file-alt mr-1"></i> Otras tareas</strong>
+                        <p class="text-muted"> {{ servicio.textoOtros }} </p>
                       </div>
+                           
                       </div>
                     </div>
                     </div>
