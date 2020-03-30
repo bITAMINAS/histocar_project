@@ -15,11 +15,18 @@ from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarS
 def index(request):
     template_name='webapp/index.html'
     servicios = Servicio.objects.all().order_by('id')
-    #ssIngresados = servicios.filter(estado__)
-
+    ssIngresados = servicios.filter(estadoAc=11)
+    ssEnProgreso = servicios.filter(estadoAc=12)
+    ssSuspendido = servicios.filter(estadoAc=13)
+    ssFinalizado = servicios.filter(estadoAc=14)
+    ssParaRetirar = servicios.filter(estadoAc=15)
+    ssRetirado = servicios.filter(estadoAc=16)
+    print(ssIngresados)
     #print(ssIngresados)
     seccion = 'Inicio'
-    return render(request, template_name, {'servicios': servicios, 'seccion': seccion})#, 'ssIngresados': ssIngresados})
+    context = {'servicios': servicios, 'seccion': seccion, 'ssIngresados': ssIngresados, 'ssEnProgreso': ssEnProgreso,
+                'ssSuspendido': ssSuspendido, 'ssFinalizado': ssFinalizado, 'ssParaRetirar': ssParaRetirar, 'ssRetirado': ssRetirado}
+    return render(request, template_name, context)
 
 
 

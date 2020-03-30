@@ -1,5 +1,129 @@
 {% extends "base.html" %}
 {% block content %} 
+  
+  <script>
+     $('.accordion-toggle').click(function(){
+        $('.hiddenRow').hide();
+        $(this).next('tr').find('.hiddenRow').show();
+      });
+  </script>
+
+
+  <div class="container-fluid">
+    <h5 class="mb-2">Servicios Recientes</h5>
+       
+    <div class="row">
+      <div class="col-md-6">
+
+        <!-- INGRESADOS -->
+        <div class="card  card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Ingresados</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+              </button>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body p-0">
+            <table class="table" >
+              {% for servicio in ssIngresados %}
+                <tr>
+                  <td style="width:10px">
+                    <a class="btn-sm  btn-tool2 collapsed accordion-toggle" style="color:dimgray" data-toggle="collapse" href="#collapseme{{servicio.id}}" role="button" aria-expanded="false" aria-controls="collapseGroup" ></a>
+                  </td>
+                  <td>
+                    {{ servicio.fecha|date:'d/m/Y' }}
+                  </td>
+                  <td>
+                    {{ servicio.vehiculo.modelo.marca.nombre }} {{ servicio.vehiculo.modelo.nombre }} <br>
+                    <small> {{ servicio.vehiculo.matricula }} </small>
+                  </td>
+                  <td>
+                    {{ servicio.vehiculo.duenio }} 
+                  </td>
+                </tr>
+
+                <tr >
+                  <td colspan="6"  class="hiddenRow">
+                      <div class="py-3 pl-5 bg-light collapse" id="collapseme{{servicio.id}}"  > 
+                        <div class="row"> 
+                          <div class="col">Should be collapsed</div>
+                          <div class="col">Should be collapsed</div>
+                        </div>
+                      </div>
+                  </td>
+                </tr>
+              {% endfor %}
+              
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+        <!-- EN PROGRESO -->
+        <div class="card  card-success">
+          <div class="card-header">
+            <h3 class="card-title">En pogreso</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+              </button>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body p-0">
+            <table class="table" >
+              {% for servicio in ssEnProgreso %}
+                <tr>
+                  <td style="width: 10px">
+                    <a class="btn-sm btn-tool2 collapsed accordion-toggle" style="color:dimgray" data-toggle="collapse" href="#collapseme{{servicio.id}}" role="button" aria-expanded="false" aria-controls="collapseGroup" ></a>
+                  </td>
+                  <td>
+                    {{servicio.fecha|date:'d/m/Y'}}
+                  </td>
+                  <td>
+                    {{ servicio.vehiculo.modelo.marca.nombre }} {{ servicio.vehiculo.modelo.nombre }} <br>
+                    <small> {{ servicio.vehiculo.matricula }} </small>
+                  </td>
+                  <td>
+                    {{ servicio.vehiculo.duenio }} 
+                  </td>
+                </tr>
+
+                <tr >
+                  <td colspan="6"  class="hiddenRow">
+                      <div class="py-3 pl-5 bg-light collapse" id="collapseme{{servicio.id}}"  > 
+                        <div class="row"> 
+                          <div class="col">Should be collapsed</div>
+                          <div class="col">Should be collapsed</div>
+                        </div>
+                      </div>
+                  </td>
+                </tr>
+              {% endfor %}
+              
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+      </div>
+      <!-- /.col -->
+
+
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+{%endblock%}
+
+{% block stylesheets %} 
   <style>
     .hiddenRow {
       padding: 0 4px !important;
@@ -26,85 +150,7 @@
     }
 
   </style>
-  <script>
-     $('.accordion-toggle').click(function(){
-        $('.hiddenRow').hide();
-        $(this).next('tr').find('.hiddenRow').show();
-      });
-  </script>
-
-
-  <div class="container-fluid">
-    <!-- =========================================================== -->
-
-    <h5 class="mb-2">Servicios Recientes</h5>
-       
-    <div class="row">
-      <div class="col-12">
-        <div class="card card-outline card-primary">
-          <div class="card-header">
-            <h3 class="card-title">Ingresados</h3>
-
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-              </button>
-            </div>
-            <!-- /.card-tools -->
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body p-0">
-          {% comment %} ======================== {% endcomment %}
-            <table class="table" >
-              {% for servicio in servicios %}
-                <tr>
-                  <td style="width:1%">
-                    <a class="btn-sm btn-tool2 collapsed accordion-toggle" data-toggle="collapse" href="#collapseme{{servicio.id}}" role="button" aria-expanded="false" aria-controls="collapseGroup" ></a>
-                  </td>
-                  <td style="width: 10px">
-                    {{servicio.fecha|date:'d/m/Y'}}
-                  </td>
-                  <td>
-                    {{servicio.vehiculo.modelo.marca.nombre}} {{servicio.vehiculo.modelo.nombre}} | {{servicio.vehiculo.matricula}} 
-                  </td>
-                  <td style="width: 40px">
-                    <span class="badge badge-pill bg-primary" style="width:100px" >{{servicio.estadoActual}}</span>
-                  </td>
-                </tr>
-
-                <tr >
-                  <td colspan="6"  class="hiddenRow">
-                      <div class="py-3 pl-5 bg-light collapse" id="collapseme{{servicio.id}}"  > 
-                        <div class="row"> 
-                          <div class="col">Should be collapsed</div>
-                          <div class="col">Should be collapsed</div>
-
-                          </div>
-                          <div class="row"> 
-                            <div class="col">Should be collapsed</div>
-                            <div class="col">Should be collapsed</div>
-                          </div>
-                          <div class="row"> 
-                            <div class="col">Should be collapsed</div>
-                            <div class="col">Should be collapsed</div>
-                          </div>
-                      </div>
-                  </td>
-                </tr>
-              {% endfor %}
-              
-            </table>
-
-          {% comment %} ======================== {% endcomment %}
-          </div>
-          <!-- /.card-body -->
-          
-        </div>
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
+{% endblock %}
 
 
 
-  </div>
-  <!-- /.container-fluid -->
-{%endblock%}

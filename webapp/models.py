@@ -97,11 +97,6 @@ class EstadoServicio(models.Model):
     estado = models.ForeignKey('Estado', on_delete=models.CASCADE)
     fecha = models.DateTimeField(default=datetime.now())
 
-    def save(self, *args, **kwargs):
-        self.servicio.estadoAct = self.estado.id
-        self.servicio.save()
-        super(EstadoServicio, self).save(*args, **kwargs)
-
     class Meta:
         get_latest_by = "fecha"
 
