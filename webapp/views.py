@@ -8,7 +8,7 @@ from django.contrib import messages
 
 #Cargamos los modelos
 from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Estado
-from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm
+from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm, crearVehiculosCliente
 
 
 
@@ -123,6 +123,8 @@ def bajaUsuario(request, usuario_id):
 
 
 
+
+
 # ---- vistas VEHÍCULO ---------------------------------------------------------
 
 def crearVehiculo(request):
@@ -137,6 +139,35 @@ def crearVehiculo(request):
     else:
         form = crearVehiculos()
     return render(request, template_name, {'form': form, 'seccion': seccion})
+
+# def crearVehiculoCliente(request):
+#     template_name='webapp/cliente/vehiculo-crear-cliente.html'
+#     seccion = 'Alta de nuevo vehiculo'
+#     if request.method == 'POST':
+#         form = crearVehiculosCliente(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Vehiculo creado y asignado correctamente')
+#             return redirect('index')
+#     else:
+#         form = crearVehiculos()
+#     return render(request, template_name, {'form': form, 'seccion': seccion})
+
+def crearVehiculoCliente(request):
+    template_name='webapp/cliente/vehiculo-crear-cliente.html'
+    seccion = 'Alta de nuevo vehiculo'
+    usuario = request.user.id
+    if request.method == 'POST':
+        form = crearVehiculosCliente(request.POST)
+        if form.is_valid():
+            usuario= form.save()
+            messages.success(request, 'Vehiculo creado y asignado correctamente')
+            return redirect('index')
+    else:
+        form = crearVehiculosCliente()
+    return render(request, template_name, {'form': form, 'seccion': seccion})
+
+
 
 
 
@@ -175,7 +206,7 @@ def logout(request):
 def verVehiculosCliente(request):
     template_name='webapp/cliente/vehiculo-listar.html'
     usuario = request.user.id
-    vehiculos = Vehiculo.objects.all().filter(duenio_id=usuario)
+    vehiculos = Vehiculo.objects.all()
     seccion = 'Ver mis vehiculos'
     return render(request, template_name, {'vehiculos': vehiculos, 'seccion': seccion})
 
