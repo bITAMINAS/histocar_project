@@ -56,7 +56,7 @@
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ servicio.id }}" class="collapsed" aria-expanded="false">
                         <div class="row">
                           <div class="col-9">{{ servicio.fecha|date:'d/m/Y' }}</div> 
-                          <div class="col-9">{{ servicio.estadoActual }}</div> 
+                          <div class="col-9"><span class="badge badge-pill bg-secondary" style="width:100px" >{{servicio.estadoActual}}</span></div> 
                         </div>
                       </a>
                       </h4>
