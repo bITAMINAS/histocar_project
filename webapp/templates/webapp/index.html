@@ -14,15 +14,15 @@
     
     
     <div class="row-fluid" >
+    <div class="card card-primary p-2">
+    
       <div class="accordion-toggle" data-toggle="collapse" data-target="#collapseThree">
-          <div class="span1">1</div>
           <div class="span3">Mark</div>
           <div class="span3">Otto</div>
-          <div class="span3">@mdo</div>
+          <div class="span3">Luis</div>
       </div>
 
       <div class="span1">
-          <button type="button" class="btn btn-primary"><i class="icon-search icon-white"></i></button>
       </div>
     </div>
 
@@ -33,13 +33,14 @@
             Details 2 <br/>
             Details 3 <br/>
         </div>
+     </div>
     </div>
 
 
     <div class="row">
       <div class="col-12">
-      <div class="card card-primary">
-        <div class="card card-outline card-primary">
+      <a class="my-2 btn btn-primary" href="{% url "VerServicios" %}" role="button">Ver servicios</a>
+        <div class="card card-primary card-outline">
           <div class="card-header">
             <h3 class="card-title">En progreso</h3>
 
@@ -51,7 +52,6 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body table-responsive p-0">
-            <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Responsive Hover Table</h3>
 

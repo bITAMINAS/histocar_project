@@ -42,7 +42,7 @@
                   <a class="btn btn-default" href="{% url "DetallesUsuario" usuario.id %}" role="button">
                     <i class="fas fa-eye" ></i>
                   </a>
-                  <a class="btn btn-default" href="#" role="button">
+                  <a class="btn btn-default" href="{% url "EditarUsuario" pk=usuario.pk %}" role="button">
                     <i class="fas fa-edit"></i>
                   </a>
                   <a class="btn btn-default" href="{% url "UsuarioBaja" usuario.id %}" role="button" 

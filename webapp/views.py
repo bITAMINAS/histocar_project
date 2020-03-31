@@ -8,7 +8,7 @@ from django.contrib import messages
 
 #Cargamos los modelos
 from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Estado
-from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm
+from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm, crearVehiculosCliente, editarUsuarioForm
 
 
 
@@ -83,6 +83,14 @@ def editarServicio(request, servicio_id):
     return render(request, 'webapp/servicios-modificar.html', {'servicio': servicio,'form': form, 'seccion': seccion})
 
 
+def borrarServicio(request, servicio_id):
+    instancia = Servicio.objects.get(id=servicio_id)
+    instancia.is_active=False
+    instancia.save()
+    messages.success(request, 'Servicio dado de baja existosamente.')
+    return redirect('VerServicios')
+
+
 # ---- vistas USUARIO ---------------------------------------------------------
 
 def crearUsuario(request):
@@ -114,6 +122,22 @@ def detallesUsuario(request, usuario_id):
     seccion = 'Detalles de Usuario'
     return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion, 'vehiculos': vehiculos})
 
+def editarUsuario(request, pk):
+    seccion = 'Editar Usuario'
+    usuario = Usuario.objects.get(pk=pk)
+    form = editarUsuarioForm(request.POST, instance = usuario)
+    if request.method == "POST":
+        if form.is_valid():
+            usuario=form.save()
+            usuario.save()
+            messages.success(request, 'Usuario editado exitosamente.')
+            return redirect('ListarUsuarios')
+    else:
+        form = editarUsuarioForm(instance=usuario)
+    
+    
+    return render(request, 'webapp/usuario-editar.html', {'usuario': usuario, 'seccion': seccion, 'form': form})  
+
 def bajaUsuario(request, usuario_id):
     # Recuperamos la instancia de la persona
     instancia = Usuario.objects.get(id=usuario_id)
@@ -138,6 +162,21 @@ def crearVehiculo(request):
             return redirect('index')
     else:
         form = crearVehiculos()
+    return render(request, template_name, {'form': form, 'seccion': seccion})
+
+def crearVehiculoCliente(request, duenio_id):
+    template_name='webapp/cliente/vehiculo-crear-cliente.html'
+    seccion = 'Alta de nuevo vehiculo'
+    if request.method == 'POST':
+        form = crearVehiculosCliente(request.POST)
+        if form.is_valid():
+            cliente = Vehiculo(duenio_id = usuario)
+            cliente.save()
+            form.save()
+            messages.success(request, 'Vehiculo creado y asignado correctamente')
+            return redirect('index')
+    else:
+        form = crearVehiculosCliente()
     return render(request, template_name, {'form': form, 'seccion': seccion})
 
 
