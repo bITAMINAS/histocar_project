@@ -44,6 +44,16 @@ class crearVehiculos(forms.ModelForm):
             'tipoCombustible': _('Combustible')
         }
 
+class crearVehiculosCliente(forms.ModelForm):
+     class Meta:
+        model = Vehiculo
+        fields = ('modelo', 'color', 'nroChasis', 'matricula', 'anio', 'tipoCombustible')
+        labels = {
+            'nroChasis': _('Número de chasis'),
+            'anio': _('Año'),
+            'tipoCombustible': _('Combustible')
+        }
+
 
 
 class registroUsuario(UserCreationForm):
@@ -104,3 +114,14 @@ class Login(forms.Form): # Note: forms.Form NOT forms.ModelForm
 
     class Meta:
         fields = ['username', 'password']
+
+class editarUsuarioForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ('nombre', 'apellido', 'email', 'telefono')
+        labels = {
+            'nombre': _('Nombre'),
+            'apellido': _('Apellido'),
+            'email': _('Email'),
+            'telefono': _('Telefono'), 
+        }

@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
 {% endblock %}
 <div class="col-xl-12 col-md-12 mb-12">
-  <div class="card shadow mb-3">
+  <div class="card card-primary card-outline">
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">Crear servicio</h6>
     </div>
@@ -137,7 +137,7 @@
               {% render_field form.estados class="form-control" %}
             {% endif %}
           </div>
-          <button type='submit' class="btn btn-primary btn-lg mt-2 mb-2">Editar servicio</button>
+          <button type='submit' class="btn btn-primary btn">Nuevo servicio</button>
         </div>
       </form>
           {% block javascripts %}       

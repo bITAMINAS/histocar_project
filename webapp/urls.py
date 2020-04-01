@@ -11,6 +11,7 @@ urlpatterns = [
     path('crear-servicio', views.crearServicio, name='CrearServicio'),
     path('detalles-servicio/<int:servicio_id>', views.detallesServicio, name='DetallesServicio'),
     path('modificar-servicio/<int:servicio_id>', views.editarServicio, name='ModificarServicio'),
+    path('eliminar-servicio/<int:servicio_id>', views.borrarServicio, name='BorrarServicio'),
     path('registro-usuario', views.crearUsuario, name='CrearUsuario'),
     path('crear-vehiculo', views.crearVehiculo, name='CrearVehiculo'),
     path('login', views.login, name='signin'),#el name se cambia de login a signin para que no de error en las vistas de recuperar password.
@@ -21,4 +22,6 @@ urlpatterns = [
     path('detalles-usuario/<int:usuario_id>', views.detallesUsuario, name='DetallesUsuario'),
     path('ver-vehiculos', views.verVehiculosCliente, name='VerVehiculos'),
     path('vehiculo-baja/<int:vehiculo_id>', views.borrarVehiculoCliente, name="BorrarVehiculoCliente"),
+    path('perfil-vehiculo-alta', views.crearVehiculoCliente, name='AltaVehiculoCliente'),
+    path('editar-usuario/<int:pk>', views.editarUsuario, name='EditarUsuario'),
 ]
