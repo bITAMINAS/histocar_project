@@ -86,11 +86,13 @@ def editarServicio(request, servicio_id):
 # ---- vistas USUARIO ---------------------------------------------------------
 
 def crearUsuario(request):
-    template_name='webapp/crear_usuario.html'
+    template_name='webapp/usuarios-crear.html'
     seccion = 'Alta de nuevo Usuario'
     if request.method == 'POST':
         form = registroUsuario(request.POST)
         if form.is_valid():
+            permiso = request.POST["permiso"]
+            print('permisooooooooooo:' + permiso)
             form.save()
             messages.success(request, 'Usuario creado correctamente')
             return redirect('index')
