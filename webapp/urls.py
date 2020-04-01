@@ -20,4 +20,5 @@ urlpatterns = [
     path('registration/', include('django.contrib.auth.urls')),
     path('detalles-usuario/<int:usuario_id>', views.detallesUsuario, name='DetallesUsuario'),
     path('ver-vehiculos', views.verVehiculosCliente, name='VerVehiculos'),
+    path('vehiculo-baja/<int:vehiculo_id>', views.borrarVehiculoCliente, name="BorrarVehiculoCliente"),
 ]

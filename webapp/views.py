@@ -100,11 +100,13 @@ def editarServicio(request, servicio_id):
 # ---- vistas USUARIO ---------------------------------------------------------
 
 def crearUsuario(request):
-    template_name='webapp/crear_usuario.html'
+    template_name='webapp/usuarios-crear.html'
     seccion = 'Alta de nuevo Usuario'
     if request.method == 'POST':
         form = registroUsuario(request.POST)
         if form.is_valid():
+            permiso = request.POST["permiso"]
+            print('permisooooooooooo:' + permiso)
             form.save()
             messages.success(request, 'Usuario creado correctamente')
             return redirect('index')
@@ -123,8 +125,9 @@ def verUsuarios(request):
 def detallesUsuario(request, usuario_id):
     usuario = Usuario.objects.get(pk=usuario_id)
     vehiculos = Vehiculo.objects.filter(duenio__id=usuario_id)
+    servicios = Servicio.objects.filter(vehiculo__duenio__id=usuario_id)
     seccion = 'Detalles de Usuario'
-    return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion, 'vehiculos': vehiculos})
+    return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion, 'vehiculos': vehiculos, 'servicios': servicios})
 
 def bajaUsuario(request, usuario_id):
     # Recuperamos la instancia de la persona
@@ -192,3 +195,17 @@ def verVehiculosCliente(request):
     vehiculos = Vehiculo.objects.all().filter(duenio_id=usuario)
     seccion = 'Ver mis vehiculos'
     return render(request, template_name, {'vehiculos': vehiculos, 'seccion': seccion})
+
+@login_required(login_url='login')
+def borrarVehiculoCliente(request, vehiculo_id):
+    usuario = request.user.id
+    #obtengo el id del vehiculo a borrar
+    instancia = Vehiculo.objects.get(id=vehiculo_id)
+    #reviso que el vehiculo pertenezca al usuario logueado actualmente
+    if usuario == instancia.duenio_id:
+        instancia.delete()
+        messages.success(request, 'Vehiculo dado de baja correctamente')    
+    else:
+        messages.warning(request, 'Ocurrio un problema, quizas no es tu vehiculo.')
+
+    return redirect('VerVehiculos')

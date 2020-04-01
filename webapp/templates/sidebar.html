@@ -25,17 +25,6 @@
             </p>
           </a>
         </li>
-        {% if user.is_authenticated %}
-          {% if user.tipoUsuario == 1 %}
-            usuario tipo cliente
-          {% endif %}
-          {% if user.tipoUsuario == 2 %}
-            usuario tipo empleado
-          {% endif %}
-          {% if user.tipoUsuario == 3 %}
-            usuario tipo administrador
-          {% endif %}
-        {% endif %}
         
         <li class="nav-header">Servicios</li>
         <li class="nav-item">
@@ -73,7 +62,18 @@
             </p>
           </a>
         </li>
+        {% if user.is_authenticated %}
         <li class="nav-header">Vehículos</li>
+        {% if user.is_client %}
+        <li class="nav-item">
+          <a href="{% url "VerVehiculos" %}" class="nav-link">
+            <i class="nav-icon fas fa-car"></i>
+            <p>
+              Mis vehiculos
+            </p>
+          </a>
+        </li>
+        {% endif %}
         <li class="nav-item">
           <a href="{% url "CrearVehiculo" %}" class="nav-link">
             <i class="nav-icon fas fa-car"></i>
@@ -82,6 +82,7 @@
             </p>
           </a>
         </li>
+        {% endif %}
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

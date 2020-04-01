@@ -57,7 +57,7 @@ class Servicio(models.Model):
     kilometros = models.IntegerField(default=0)
     puntuacion = models.IntegerField(default=0)
     costo = models.IntegerField(default=0)
-    vehiculo = models.ForeignKey('Vehiculo', on_delete=models.CASCADE, default="")
+    vehiculo = models.ForeignKey('Vehiculo', on_delete=models.CASCADE, default="", verbose_name='Vehículo')
     tareas = models.ManyToManyField('Tarea')
     estados = models.ManyToManyField('Estado', through='EstadoServicio', verbose_name='Estado')
     estadoAc = models.IntegerField(default=0)
@@ -100,7 +100,6 @@ class EstadoServicio(models.Model):
     class Meta:
         get_latest_by = "fecha"
 
-
 class Vehiculo(models.Model):
     TiposCombustibles = models.TextChoices('Combustible', 'Nafta Gasoil Híbrido Eléctrico Hidrógeno GLP')
     Colores = models.TextChoices('Color', 'Blanco Rojo Negro Azul Bordó Marrón Gris_Plata Gris_Ceniza Amarillo Verde Otro')
@@ -129,4 +128,4 @@ class Modelo(models.Model):
     marca = models.ForeignKey('Marca', on_delete=models.CASCADE) #Modelo pertenece a una Marca
 
     def __str__(self):
-        return self.nombre
+        return self.nombre 

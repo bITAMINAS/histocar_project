@@ -39,8 +39,9 @@
               <a href="#verservicios" class="btn btn-sm btn-primary">
                 <i class="fas fa-oil-can"></i>
               </a>
-              <a href="#borrar" class="btn btn-sm btn-danger">
-                <i class="fas fa-trash"></i> 
+              <a class="btn btn-default" href="{% url "BorrarVehiculoCliente" vehiculo.id %}" role="button" 
+                onClick="return confirm('¿Seguro que quieres dar de baja a {{ vehiculo.modelo.marca }} {{vehiculo.modelo }}, {{vehiculo.matricula}} ?');">
+                <i class="far fa-trash-alt" style="color:rgba(211, 0, 0, 0.692);"></i>
               </a>
             </div>
           </div>
