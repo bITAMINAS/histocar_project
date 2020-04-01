@@ -128,4 +128,4 @@ class Modelo(models.Model):
     marca = models.ForeignKey('Marca', on_delete=models.CASCADE) #Modelo pertenece a una Marca
 
     def __str__(self):
-        return self.nombre
+        return self.nombre 
