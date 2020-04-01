@@ -1,17 +1,20 @@
 {% extends "base.html" %}
 {% block content %} 
 
+
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3">
+    <!-- Col -->
+	  <div class="col-md-4">
 
       <!-- Profile Image -->
       <div class="card card-primary card-outline">
         <div class="card-body box-profile">
           <div class="text-center">
-            <img src="/static/webapp/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src="/static/webapp/img/anonymous user logo.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
-          <h3 class="profile-username text-center">{{ usuario.nombre }} {{ usuario.apellido}}</h3>         
+          <h3 class="profile-username text-center">{{ usuario.nombre }} {{ usuario.apellido}}</h3>
+          <p class="text-muted text-center">{{usuario.documento}}</p>
           <ul class="list-group list-group-unbordered mb-3">
             <li class="list-group-item">
               <b>Dirección</b> <a class="float-right">{{ usuario.dirCalle}} {{ usuario.dirNumero }}</a>
@@ -23,9 +26,80 @@
               <b>E-mail</b> <a class="float-right">{{ usuario.email}}</a>
             </li>
           </ul>
-          <a href="#" class="btn btn-primary btn-block"><b>Actualizar información</b></a>
         </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
+	  </div>
+    <!-- /.col -->
+	
+    <!-- Col -->
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header p-2">
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a class="nav-link active" href="#services" data-toggle="tab">Servicios</a></li>
+            <li class="nav-item"><a class="nav-link" href="#vehicles" data-toggle="tab">Vehículos</a></li>
+          </ul>
+        </div><!-- /.card-header -->
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="active tab-pane" id="services">
+              <!-- Post -->
+              <div class="post">
+                <div id="accordion">
+                  {% for servicio in servicios %}
+                    <!-- fila -->
+                    <div class="card ">
+                    <div class="card-header">
+                      <h4 class="card-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ servicio.id }}" class="collapsed" aria-expanded="false">
+                        <div class="row">
+                          <div class="col-9">{{ servicio.fecha|date:'d/m/Y' }}</div> 
+                          <div class="col-9"><span class="badge badge-pill bg-secondary" style="width:100px" >{{servicio.estadoActual}}</span></div> 
+                        </div>
+                      </a>
+                      </h4>
+                    </div>
+                    <div id="collapse{{ servicio.id }}" class="panel-collapse in collapse" style="">
+                      <div class="card-body">
+                      {% for tarea in servicio.tareas.all %}
+                        <li>{{ tarea.nombre }}</li>
+                            {% endfor %}                  
+                          
+                      <br>
+                      <div class="">
+                        <strong><i class="far fa-file-alt mr-1"></i> Otras tareas</strong>
+                        <p class="text-muted"> {{ servicio.textoOtros }} </p>
+                      </div>
+                           
+                      </div>
+                    </div>
+                    </div>
+                    <!-- ./fila -->
+                  {% endfor %}
+                </div>
+              </div>
+              <!-- /.post -->
+            </div>
+            <div class="tab-pane" id="vehicles">
+              <ul> 
+                {% for vehiculo in vehiculos %}
+                <li>{{vehiculo.modelo.marca.nombre}} {{vehiculo.modelo.nombre}} | {{vehiculo.matricula}}</li>
+                {% endfor %}
+              </ul> 
+            </div>
+            <!-- /.tab-pane -->
+          </div>
+          <!-- /.tab-content -->
+        </div><!-- /.card-body -->
+      </div>
+      <!-- /.nav-tabs-custom -->
+    </div>
+    <!-- /.col -->
+	
+  </div>
+  <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
 {%endblock%}

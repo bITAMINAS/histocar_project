@@ -27,14 +27,29 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
+    is_client = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
 
     USERNAME_FIELD = 'documento'
     REQUIRED_FIELDS = ['email','telefono']
     objects = UsuarioMejorado()
+    
     def __str__(self):
         return self.nombre + ' ' + self.apellido
+
+
+#=== MANAGERS ========================================
+
+# class ServicioManager(models.Manager):
     
+
+
+
+# class EstadoManager(models.Manager):
+#     def get_latest_estado_obj(self, estado):
+#         return self.get_queryset().filter(nombre=estado).latest()
+
+
 class Servicio(models.Model):
     fecha = models.DateTimeField()
     textoOtros = models.TextField('Otras tareas', max_length=240, default="")
@@ -42,11 +57,12 @@ class Servicio(models.Model):
     kilometros = models.IntegerField(default=0)
     puntuacion = models.IntegerField(default=0)
     costo = models.IntegerField(default=0)
-    vehiculo = models.ForeignKey('Vehiculo', on_delete=models.CASCADE, default="")
+    vehiculo = models.ForeignKey('Vehiculo', on_delete=models.CASCADE, default="", verbose_name='Vehículo')
     tareas = models.ManyToManyField('Tarea')
     estados = models.ManyToManyField('Estado', through='EstadoServicio', verbose_name='Estado')
+    estadoAc = models.IntegerField(default=0)
 
-    #@property
+    @property
     def estadoActual(self):
         estado = self.estados.latest('estadoservicio__fecha')
         return estado.nombre
@@ -59,11 +75,13 @@ class Servicio(models.Model):
 
     # https://learndjango.com/tutorials/django-best-practices-models#
 
+
 class Tarea(models.Model):
     nombre = models.CharField(max_length=240, default="")
 
     def __str__(self):
         return self.nombre
+
 
 class Estado(models.Model):
     nombre = models.CharField(max_length=50, default="")
@@ -72,13 +90,15 @@ class Estado(models.Model):
     def __str__(self):
         return self.nombre
 
+
 # Relación N:N entre Estado<>Servicio
 class EstadoServicio(models.Model):
     servicio = models.ForeignKey('Servicio', on_delete=models.CASCADE)
     estado = models.ForeignKey('Estado', on_delete=models.CASCADE)
     fecha = models.DateTimeField(default=datetime.now())
-    # fecha queda como campo null = true porque es el fix del bug 7
-    # https://exceptionshub.com/not-null-constraint-failed-after-adding-to-models-py.html
+
+    class Meta:
+        get_latest_by = "fecha"
 
 
 class Vehiculo(models.Model):
@@ -96,11 +116,13 @@ class Vehiculo(models.Model):
     def __str__(self):
         return self.modelo.marca.nombre + ' ' + self.modelo.nombre + ' - ' + self.matricula + ' - ' + self.duenio.nombre + ' '+ self.duenio.apellido
 
+
 class Marca(models.Model):
     nombre = models.CharField(max_length=20, default="")
 
     def __str__(self):
         return self.nombre
+
 
 class Modelo(models.Model):
     nombre = models.CharField(max_length=20, default="")

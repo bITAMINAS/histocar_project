@@ -51,8 +51,8 @@ class registroUsuario(UserCreationForm):
 
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Repetir contraseña', widget=forms.PasswordInput)
 
     class Meta:
         model = Usuario
@@ -69,6 +69,12 @@ class registroUsuario(UserCreationForm):
                 'max_length': _("Largo excedido, máximo 8 caracteres."),
             },
         }
+
+    
+    # class editarServicioForm(forms.ModelForm):
+    # class Meta:
+    #     model = Servicio
+
 
     def clean_password2(self):
         # Check that the two password entries match

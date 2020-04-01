@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 #Cargamos los modelos
-from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Vehiculo, Estado
+from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Estado
 from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm
 
 
@@ -15,8 +15,18 @@ from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarS
 def index(request):
     template_name='webapp/index.html'
     servicios = Servicio.objects.all().order_by('id')
+    ssIngresados = servicios.filter(estadoAc=11)
+    ssEnProgreso = servicios.filter(estadoAc=12)
+    ssSuspendido = servicios.filter(estadoAc=13)
+    ssFinalizado = servicios.filter(estadoAc=14)
+    ssParaRetirar = servicios.filter(estadoAc=15)
+    ssRetirado = servicios.filter(estadoAc=16)
+    print(ssIngresados)
+    #print(ssIngresados)
     seccion = 'Inicio'
-    return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
+    context = {'servicios': servicios, 'seccion': seccion, 'ssIngresados': ssIngresados, 'ssEnProgreso': ssEnProgreso,
+                'ssSuspendido': ssSuspendido, 'ssFinalizado': ssFinalizado, 'ssParaRetirar': ssParaRetirar, 'ssRetirado': ssRetirado}
+    return render(request, template_name, context)
 
 
 
@@ -25,7 +35,8 @@ def index(request):
 @login_required(login_url='login')
 def verServicios(request):
     template_name='webapp/servicios-lista.html'
-    servicios = Servicio.objects.all().order_by('id')
+    servicios = Servicio.objects.all() #.order_by('id')
+    
     seccion = 'Ver Servicios'
     return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
 
@@ -62,18 +73,22 @@ def editarServicio(request, servicio_id):
         form = editarServicioForm(request.POST, instance=servicio)
         if form.is_valid():
             FormEstado_id = request.POST["estados"]
-            print('Estadooooooooooo:' + FormEstado_id)
+
             pending_servicio = form.save(commit=False)                    
             
             estadoActualServicio = int(FormEstado_id)
-            
+            pending_servicio.estadoAc = estadoActualServicio
+
             #si el estado_id del form es distinto al al ultimo estado_id registrado
             if estadoAnteriorServicio != estadoActualServicio:               
                 e=Estado.objects.get(pk=estadoActualServicio)
-                s=servicio
+                s=pending_servicio
                 
                 servicioEstado = EstadoServicio(estado=e, servicio=s, fecha=datetime.now())
+                
                 servicioEstado.save()
+            #servicio.save()
+            pending_servicio.save()
             return redirect("VerServicios")
 
     else:
@@ -107,8 +122,10 @@ def verUsuarios(request):
 
 def detallesUsuario(request, usuario_id):
     usuario = Usuario.objects.get(pk=usuario_id)
+    vehiculos = Vehiculo.objects.filter(duenio__id=usuario_id)
+    servicios = Servicio.objects.filter(vehiculo__duenio__id=usuario_id)
     seccion = 'Detalles de Usuario'
-    return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion})
+    return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion, 'vehiculos': vehiculos, 'servicios': servicios})
 
 def bajaUsuario(request, usuario_id):
     # Recuperamos la instancia de la persona
@@ -176,3 +193,17 @@ def verVehiculosCliente(request):
     vehiculos = Vehiculo.objects.all().filter(duenio_id=usuario)
     seccion = 'Ver mis vehiculos'
     return render(request, template_name, {'vehiculos': vehiculos, 'seccion': seccion})
+
+@login_required(login_url='login')
+def borrarVehiculoCliente(request, vehiculo_id):
+    usuario = request.user.id
+    #obtengo el id del vehiculo a borrar
+    instancia = Vehiculo.objects.get(id=vehiculo_id)
+    #reviso que el vehiculo pertenezca al usuario logueado actualmente
+    if usuario == instancia.duenio_id:
+        instancia.delete()
+        messages.success(request, 'Vehiculo dado de baja correctamente')    
+    else:
+        messages.warning(request, 'Ocurrio un problema, quizas no es tu vehiculo.')
+
+    return redirect('VerVehiculos')
