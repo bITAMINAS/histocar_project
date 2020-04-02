@@ -11,7 +11,7 @@ from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Estado
 from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm
 
 
-
+@login_required(login_url='login')
 def index(request):
     template_name='webapp/index.html'
     servicios = Servicio.objects.all().order_by('id')

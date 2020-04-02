@@ -26,7 +26,19 @@
           </a>
         </li>
         
+
+        
         <li class="nav-header">Servicios</li>
+
+        <li class="nav-item">
+          <a href="{% url "VerServicios" %}" class="nav-link">
+            <i class="nav-icon fas fa-clipboard-check"></i>
+            <p>
+              Ver servicios
+            </p>
+          </a>
+        </li>
+
         <li class="nav-item">
           <a href="{% url "CrearServicio" %}" class="nav-link">
             <i class="nav-icon fas fa-plus"></i>
@@ -36,24 +48,35 @@
             </p>
           </a>
         </li>
+        
+
+
+        
+        <li class="nav-header">Clientes</li>
+
         <li class="nav-item">
-          <a href="{% url "VerServicios" %}" class="nav-link">
-            <i class="nav-icon fas fa-eye"></i>
+          <a href="{% url "ListarUsuarios" %}" class="nav-link">
+            <i class="nav-icon far fa-address-book"></i>
             <p>
-              Ver servicios
+              Ver Clientes
             </p>
           </a>
         </li>
 
-        <li class="nav-header">Usuarios</li>
         <li class="nav-item">
           <a href="{% url "CrearUsuario" %}" class="nav-link">
             <i class="nav-icon fas fa-user-plus"></i>
             <p>
-              Crear usuario
+              Crear cliente
             </p>
           </a>
         </li>
+        
+
+        
+
+        <li class="nav-header">Usuarios</li>
+
         <li class="nav-item">
           <a href="{% url "ListarUsuarios" %}" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
@@ -62,18 +85,20 @@
             </p>
           </a>
         </li>
-        {% if user.is_authenticated %}
-        <li class="nav-header">Vehículos</li>
-        {% if user.is_client %}
+
         <li class="nav-item">
-          <a href="{% url "VerVehiculos" %}" class="nav-link">
-            <i class="nav-icon fas fa-car"></i>
+          <a href="{% url "CrearUsuario" %}" class="nav-link">
+            <i class="nav-icon fas fa-user-plus"></i>
             <p>
-              Mis vehiculos
+              Crear usuario
             </p>
           </a>
         </li>
-        {% endif %}
+
+        
+
+        <li class="nav-header">Vehículos</li>
+
         <li class="nav-item">
           <a href="{% url "CrearVehiculo" %}" class="nav-link">
             <i class="nav-icon fas fa-car"></i>
@@ -82,7 +107,7 @@
             </p>
           </a>
         </li>
-        {% endif %}
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
