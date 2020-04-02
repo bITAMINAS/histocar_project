@@ -1,16 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
+from datetime import datetime
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-
 #Cargamos los modelos
-from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Vehiculo
-from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarUsuarioForm
- 
- 
+from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Estado
+from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm, crearVehiculosCliente, editarUsuarioForm
 
 
 
@@ -27,7 +25,8 @@ def index(request):
 @login_required(login_url='login')
 def verServicios(request):
     template_name='webapp/servicios-lista.html'
-    servicios = Servicio.objects.all().order_by('id')
+    servicios = Servicio.objects.all() #.order_by('id')
+    servicios
     seccion = 'Ver Servicios'
     return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
 
@@ -54,52 +53,59 @@ def detallesServicio(request, servicio_id):
     seccion = 'Detalles de Servicio'
     return render(request, 'webapp/servicios-detalle.html', {'servicio': servicio, 'seccion': seccion})
 
-
-def editarServicio(request, pk):
+def editarServicio(request, servicio_id):
     seccion = 'Editar Servicio'
-    servicio = Servicio.objects.get(pk=pk)
-    estadoservicio = EstadoServicio.objects.get(servicio_id=pk)
+    servicio = Servicio.objects.get(pk=servicio_id)
+    estadoAnteriorServicio = servicio.estados.latest('estadoservicio__fecha').id
+
     if request.method == "POST":
-        form.fecha     = request.POST["fecha"]
-        form.tareas    = request.POST["tareas"]
-        form.textoOtros= request.POST["textoOtros"]
-        form.kilometros= request.POST["kilometros"]
-        form.costo     = request.POST["costo"]
-        
-        form.save()
-        # estado = request.POST["estado"]
-        
-        #servicio1 = form.save(commit=False)
-        #  if .estados.latest('estadoservicio__fecha') != servicio1.estado
-        #      servicio.estados.add(estado)
-             
-           # servicio1.save()
-            #form.save_m2m()
+        form = editarServicioForm(request.POST, instance=servicio)
+        if form.is_valid():
+            FormEstado_id = request.POST["estados"]
+
+            pending_servicio = form.save(commit=False)                    
             
-        #form = editarServicioForm(request.POST,instance=servicio)
-        #if form.is_valid():
-        #    estado = request.POST["estados"]
-        #    servicio1 = form.save(commit=False)
-        #    if servicio.estados.all() != estado:
-        #        
-        #        
-        #    servicio1.save(force_insert=True)
-        #    return redirect("VerServicios")
+            estadoActualServicio = int(FormEstado_id)
+            pending_servicio.estadoAc = estadoActualServicio
+
+            #si el estado_id del form es distinto al al ultimo estado_id registrado
+            if estadoAnteriorServicio != estadoActualServicio:               
+                e=Estado.objects.get(pk=estadoActualServicio)
+                s=pending_servicio
+                
+                servicioEstado = EstadoServicio(estado=e, servicio=s, fecha=datetime.now())
+                
+                servicioEstado.save()
+            #servicio.save()
+            pending_servicio.save()
+            return redirect("VerServicios")
+
     else:
-        form = editarServicioForm(instance = servicio)
-    
-    
+        form = editarServicioForm(initial={'estados':estadoAnteriorServicio}, instance = servicio)
+        
     return render(request, 'webapp/servicios-modificar.html', {'servicio': servicio,'form': form, 'seccion': seccion})
+
+
+
+
+def borrarServicio(request, servicio_id):
+    instancia = Servicio.objects.get(id=servicio_id)
+    instancia.is_active=False
+    instancia.save()
+    messages.success(request, 'Servicio dado de baja existosamente.')
+    return redirect('VerServicios')
 
 
 # ---- vistas USUARIO ---------------------------------------------------------
 
 def crearUsuario(request):
-    template_name='webapp/crear_usuario.html'
+    template_name='webapp/usuarios-crear.html'
     seccion = 'Alta de nuevo Usuario'
     if request.method == 'POST':
         form = registroUsuario(request.POST)
         if form.is_valid():
+            permiso = request.POST["permiso"]
+            print('permisooooooooooo:' + permiso)
             form.save()
             messages.success(request, 'Usuario creado correctamente')
             return redirect('index')
@@ -117,8 +123,9 @@ def verUsuarios(request):
 
 def detallesUsuario(request, usuario_id):
     usuario = Usuario.objects.get(pk=usuario_id)
+    vehiculos = Vehiculo.objects.filter(duenio__id=usuario_id)
     seccion = 'Detalles de Usuario'
-    return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion})
+    return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion, 'vehiculos': vehiculos})
 
 def editarUsuario(request, pk):
     seccion = 'Editar Usuario'
@@ -136,7 +143,6 @@ def editarUsuario(request, pk):
     
     return render(request, 'webapp/usuario-editar.html', {'usuario': usuario, 'seccion': seccion, 'form': form})  
 
-   
 def bajaUsuario(request, usuario_id):
     # Recuperamos la instancia de la persona
     instancia = Usuario.objects.get(id=usuario_id)
@@ -161,6 +167,21 @@ def crearVehiculo(request):
             return redirect('index')
     else:
         form = crearVehiculos()
+    return render(request, template_name, {'form': form, 'seccion': seccion})
+
+def crearVehiculoCliente(request, duenio_id):
+    template_name='webapp/cliente/vehiculo-crear-cliente.html'
+    seccion = 'Alta de nuevo vehiculo'
+    if request.method == 'POST':
+        form = crearVehiculosCliente(request.POST)
+        if form.is_valid():
+            cliente = Vehiculo(duenio_id = usuario)
+            cliente.save()
+            form.save()
+            messages.success(request, 'Vehiculo creado y asignado correctamente')
+            return redirect('index')
+    else:
+        form = crearVehiculosCliente()
     return render(request, template_name, {'form': form, 'seccion': seccion})
 
 
@@ -203,3 +224,20 @@ def verVehiculosCliente(request):
     vehiculos = Vehiculo.objects.all().filter(duenio_id=usuario)
     seccion = 'Ver mis vehiculos'
     return render(request, template_name, {'vehiculos': vehiculos, 'seccion': seccion})
+
+@login_required(login_url='login')
+def borrarVehiculoCliente(request, vehiculo_id):
+    usuario = request.user.id
+    #obtengo el id del vehiculo a borrar
+    instancia = Vehiculo.objects.get(id=vehiculo_id)
+    #reviso que el vehiculo pertenezca al usuario logueado actualmente
+    if usuario == instancia.duenio_id:
+        instancia.delete()
+        messages.success(request, 'Vehiculo dado de baja correctamente')    
+    else:
+        messages.warning(request, 'Ocurrio un problema, quizas no es tu vehiculo.')
+
+    return redirect('VerVehiculos')
+
+   
+
