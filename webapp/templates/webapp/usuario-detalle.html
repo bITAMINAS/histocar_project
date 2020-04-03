@@ -83,6 +83,7 @@
               <!-- /.post -->
             </div>
             <div class="tab-pane" id="vehicles">
+            <a class="btn btn-primary" href="{% url "AltaVehiculoCliente" %}" role="button">Añadir vehículo</a>
               <ul> 
                 {% for vehiculo in vehiculos %}
                 <li>{{vehiculo.modelo.marca.nombre}} {{vehiculo.modelo.nombre}} | {{vehiculo.matricula}}</li>
