@@ -142,6 +142,33 @@ def bajaUsuario(request, usuario_id):
 
 # ---- vistas VEHÍCULO ---------------------------------------------------------
 
+@login_required(login_url='login')
+def clienteView(request):
+    template_name='webapp/cliente-detalle.html'
+    usuarios = Usuario.objects.all().order_by('id')
+    seccion = 'Detalle de Cliente'
+    return render(request, template_name, {'usuarios': usuarios, 'seccion': seccion})
+
+
+@login_required(login_url='login')
+def clientesView(request):
+    template_name='webapp/cliente-lista.html'
+    usuarios = Usuario.objects.all().order_by('id')
+    seccion = 'Lista de clientes'
+    return render(request, template_name, {'usuarios': usuarios, 'seccion': seccion})
+
+
+@login_required(login_url='login')
+def clienteCrearView(request):
+    template_name='webapp/cliente-crear.html'
+    usuarios = Usuario.objects.all().order_by('id')
+    seccion = 'Nuevo cliente'
+    return render(request, template_name, {'usuarios': usuarios, 'seccion': seccion})
+
+
+
+# ---- vistas VEHÍCULO ---------------------------------------------------------
+
 def crearVehiculo(request):
     template_name='webapp/vehiculo-crear.html'
     seccion = 'Alta de nuevo vehiculo'
