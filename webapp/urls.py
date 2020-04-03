@@ -24,5 +24,6 @@ urlpatterns = [
     # Clientes
     path('clientes', views.clientesView, name='Clientes'),
     path('cliente', views.clienteView, name='Cliente'),
+    path('cliente-crear', views.clienteCrearView, name='ClienteCrear'),
 
 ]
