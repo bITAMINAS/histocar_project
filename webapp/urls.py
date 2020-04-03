@@ -7,9 +7,9 @@ from django.conf.urls import url, include
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path('ver-servicios', views.verServicios, name='VerServicios'),
+    path('servicios', views.serviciosView, name='Servicios'),
     path('crear-servicio', views.crearServicio, name='CrearServicio'),
-    path('detalles-servicio/<int:servicio_id>', views.detallesServicio, name='DetallesServicio'),
+    path('servicio/<int:servicio_id>', views.servicioView, name='Servicio'),
     path('modificar-servicio/<int:servicio_id>', views.editarServicio, name='ModificarServicio'),
     path('registro-usuario', views.crearUsuario, name='CrearUsuario'),
     path('crear-vehiculo', views.crearVehiculo, name='CrearVehiculo'),

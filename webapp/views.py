@@ -33,7 +33,7 @@ def index(request):
 # ---- vistas SERVICIO --------------------------------------------------------- 
 
 @login_required(login_url='login')
-def verServicios(request):
+def serviciosView(request):
     template_name='webapp/servicios-lista.html'
     servicios = Servicio.objects.all() #.order_by('id')
     
@@ -58,7 +58,7 @@ def crearServicio(request):
     return render(request, 'webapp/servicios-crear.html', {'form': form, 'seccion': seccion})
 
 
-def detallesServicio(request, servicio_id):
+def servicioView(request, servicio_id):
     servicio = Servicio.objects.get(pk=servicio_id)
     seccion = 'Detalles de Servicio'
     return render(request, 'webapp/servicios-detalle.html', {'servicio': servicio, 'seccion': seccion})

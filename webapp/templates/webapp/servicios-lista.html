@@ -1,92 +1,106 @@
-{% extends "base.html" %}
-{% block content %} 
 
-<!-- Default box -->
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Servicios</h3>
-    <div class="text-right">
-      <a href="{% url "CrearServicio" %}" class="btn btn-sm btn-primary">Nuevo Servicio</a>
-    </div>
+{% extends "base.html" %}
+{% load static %}
+{% block stylesheets %}
+<!-- DataTables -->
+<link rel="stylesheet" href="{% static 'webapp/plugins/datatables-bs4/css/dataTables.bootstrap4.css' %}">
+{% endblock %}
+
+{% block content %} 
+<div class="row">
+  <div class="col-12">
+    <div class="card card-primary card-outline">
+      <div class="card-header">
+        <h3 class="card-title">Lista de servicios</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <table id="servicios" class="table table-hover dataTable">
+          <thead>
+            <tr>
+              <th style="width: 1%" >ID</th>
+              <th style="width: 15%">Fecha</th>
+              <th style="width: 30%">Servicio</th>
+              <th>Cliente</th>
+              <th style="width: 15%">Estado</th>
+              <th style="width: 10%" > </th>
+            </tr>
+          </thead>
+
+          <tbody>
+          {% for servicio in servicios %} 
+            <tr>
+              <td>{{ servicio.id }}</td>
+              <td>{{ servicio.fecha|date:'d-m-Y H:i' }}</td>
+              <td>{{ servicio.vehiculo.modelo.marca }} {{ servicio.vehiculo.modelo }} - {{ servicio.vehiculo.matricula }}</td>
+              <td>
+                <a>
+                  {{ servicio.vehiculo.duenio.nombre }} {{ servicio.vehiculo.duenio.apellido }}
+                </a>
+                <br/>
+                <small>
+                  Tel.: {{ servicio.vehiculo.duenio.telefono }}
+                </small>
+              </td>
+              <td class="project-state">
+                  {% if servicio.estadoAc == 11 %}
+                    <span class="badge badge-info">Ingresado</span>
+                  {% elif servicio.estadoAc == 12 %}
+                    <span class="badge badge-warning ">En progreso</span>
+                  {% elif servicio.estadoAc == 13 %}
+                    <span class="badge badge-danger ">Suspendido</span>
+                  {% elif servicio.estadoAc == 14 %}
+                    <span class="badge badge-success">Finalizado</span>
+                  {% elif servicio.estadoAc == 15 %}
+                    <span class="badge badge-info ">Para retirar</span>
+                  {% elif servicio.estadoAc == 16 %}
+                    <span class="badge badge-success">Retirado</span>
+                  {% endif %}
+              </td>
+              <td class="text-right">
+                <div class="btn-group">
+                  <a class="btn btn-default" href="{% url "Servicio" servicio.id %}" role="button">
+                    <i class="fas fa-eye" ></i>
+                  </a>
+                  <a class="btn btn-default" href="#" role="button">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a class="btn btn-default" href="" role="button" 
+                    onClick="return confirm('¿Seguro que quieres dar de baja el servicio ID: {{servicio.id}} ?');">
+                    <i class="far fa-trash-alt" style="color:rgba(211, 0, 0, 0.692);"></i>
+                  </a>
+                              
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+		
+        </table>
+      </div>
+	<!-- /.card-body -->
   </div>
-  <div class="card-body p-0">
-    <table class="table table-striped projects">
-      <thead>
-        <tr>
-          <th style="width: 1%">#</th>
-          <th style="width: 20%">Servicio</th>
-          <th style="width: 30%">Cliente</th>
-          <th style="width: 8%" class="text-center">Estado</th>
-          <th style="width: 20%"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for servicio in servicios %}  
-        <tr>
-          <td>
-            {{servicio.id}}
-          </td>
-          <td>
-            <a>
-              {{ servicio.vehiculo.modelo.marca }} {{ servicio.vehiculo.modelo }} - {{ servicio.vehiculo.matricula }}
-            </a>
-            <br/>
-            <small>
-              {{ servicio.fecha|date:'d-m-Y H:i' }} - {{ servicio.estadoActual }}
-            </small>
-          </td>
-          <td>
-            <a>
-              {{ servicio.vehiculo.duenio.nombre }} {{ servicio.vehiculo.duenio.apellido }}
-            </a>
-            <br/>
-            <small>
-              Tel.: {{ servicio.vehiculo.duenio.telefono }} &nbsp;
-              E-mail: {{ servicio.vehiculo.duenio.email }}
-            </small>
-          </td>
-          <td class="project-state">
-            {% for estado in servicio.estadoservicio_set.all %}
-              {% if estado.estado_id == 11 %}
-                <span class="badge badge-info">Ingresado</span>
-              {% endif %}
-              {% if estado.estado_id == 12 %}
-                <span class="badge badge-warning ">En progreso</span>
-              {% endif %}
-              {% if estado.estado_id == 13 %}
-                <span class="badge badge-danger ">Suspendido</span>
-              {% endif %}
-              {% if estado.estado_id == 14 %}
-                <span class="badge badge-success">Finalizado</span>
-              {% endif %}
-              {% if estado.estado_id == 15 %}
-                <span class="badge badge-info ">Para retirar</span>
-              {% endif %}
-              {% if estado.estado_id == 16 %}
-                <span class="badge badge-success">Retirado</span>
-              {% endif %}
-            {% endfor %}
-          </td>
-          <td class="project-actions text-right">
-            <a class="btn btn-primary btn-sm" href="{% url "DetallesServicio" servicio.id %}">
-              <i class="fas fa-folder"></i>
-              Ver
-            </a>
-            <a class="btn btn-info btn-sm" href="{% url "ModificarServicio" servicio.id %}">
-              <i class="fas fa-pencil-alt"></i>
-              Modificar
-            </a>
-            <a class="btn btn-danger btn-sm" href="#">
-              <i class="fas fa-trash"></i>
-              Eliminar
-            </a>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  <!-- /.card-body -->
+  <!-- /.col -->
 </div>
-<!-- /.card -->
+<!-- /.row --> 
+
+{%endblock%}
+
+{% block javascripts %}
+<!-- DataTables -->
+<script src="{% static 'webapp/plugins/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'webapp/plugins/datatables-bs4/js/dataTables.bootstrap4.js' %}"></script>
+<script>
+  $(function () {
+    //   $("#usuarios").DataTable();
+    $('#servicios').DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+    });
+  });
+</script>
 {%endblock%}
