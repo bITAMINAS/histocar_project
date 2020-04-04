@@ -113,8 +113,6 @@ def crearUsuario(request):
     if request.method == 'POST':
         form = registroUsuario(request.POST)
         if form.is_valid():
-            permiso = request.POST["permiso"]
-            print('permisooooooooooo:' + permiso)
             form.save()
             messages.success(request, 'Usuario creado correctamente')
             return redirect('index')
