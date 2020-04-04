@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="{% static 'webapp/plugins/datatables-bs4/css/dataTables.bootstrap4.css' %}">
 {% endblock %}
 
-<<<<<<< HEAD
 {% block content %} 
 <div class="row">
   <div class="col-12">
@@ -63,7 +62,7 @@
                   <a class="btn btn-default" href="{% url "Servicio" servicio.id %}" role="button">
                     <i class="fas fa-eye" ></i>
                   </a>
-                  <a class="btn btn-default" href="#" role="button">
+                  <a class="btn btn-default" href="{% url "ModificarServicio" servicio.id %}" role="button">
                     <i class="fas fa-edit"></i>
                   </a>
                   <a class="btn btn-default" href="" role="button" 
@@ -73,72 +72,6 @@
                               
                 </div>
               </td>
-=======
-{% block content %}
-<!-- Default box -->
-<div class="card">
-<div class="card-header">
-    <h3 class="card-title">Servicios</h3>
-    <div class="text-right">
-        <a href="{% url "CrearServicio" %}" class="btn btn-sm btn-primary">Nuevo Servicio</a>
-    </div>
-</div>
-<!-- /.card-header -->
-<div class="card-body">
-    <table id="usuarios" class="table  table-bordered table-hover dataTable">
-      <thead>
-        <tr>
-          <th style="width: 10%">Nombre(s)</th>
-          <th style="width: 10%">Apellido</th>
-          <th style="width: 10%">Teléfono</th>
-          <th style="width: 10%">Marca</th>
-          <th style="width: 10%">Modelo</th>
-          <th style="width: 10%">Matricula</th>
-          <th style="width: 10%">Fecha y Hora</th>
-        </tr>
-      </thead>
-        <tbody>
-        {% for servicio in servicios %}  
-            <tr>
-                <td>{{ servicio.vehiculo.duenio.nombre }}</td>
-                <td>{{ servicio.vehiculo.duenio.apellido }}</td>
-                <td>{{ servicio.vehiculo.duenio.telefono }}</td>
-                <td>{{ servicio.vehiculo.modelo.marca }} </td>
-                <td>{{ servicio.vehiculo.modelo }} </td>
-                <td>{{ servicio.vehiculo.matricula }} </td>
-                <td>{{ servicio.fecha|date:'d-m-Y H:i' }} </td>
-                <td class="project-state">
-                    {% for estado in servicio.estadoservicio_set.all %}
-                        {% if estado.estado_id == 11 %}
-                        <span class="badge badge-info">Ingresado</span>
-                        {% endif %}
-                        {% if estado.estado_id == 12 %}
-                        <span class="badge badge-warning ">En progreso</span>
-                        {% endif %}
-                        {% if estado.estado_id == 13 %}
-                        <span class="badge badge-danger ">Suspendido</span>
-                        {% endif %}
-                        {% if estado.estado_id == 14 %}
-                        <span class="badge badge-success">Finalizado</span>
-                        {% endif %}
-                        {% if estado.estado_id == 15 %}
-                        <span class="badge badge-info ">Para retirar</span>
-                        {% endif %}
-                        {% if estado.estado_id == 16 %}
-                        <span class="badge badge-success">Retirado</span>
-                        {% endif %}
-                     {% endfor %}
-                </td>
-                <td>
-                    <div class="btn-group"></div>
-                        <a class="btn btn-default" href="{% url "DetallesServicio" servicio.id %}" role="button">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        <a class="btn btn-default" href="{% url "ModificarServicio" servicio.id %}"" role="button">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                </td>
->>>>>>> guilllermo
             </tr>
           {% endfor %}
           </tbody>
@@ -149,12 +82,8 @@
   </div>
   <!-- /.col -->
 </div>
-<<<<<<< HEAD
 <!-- /.row --> 
 
-=======
-<!-- /.card -->
->>>>>>> guilllermo
 {%endblock%}
 
 {% block javascripts %}
@@ -164,11 +93,7 @@
 <script>
   $(function () {
     //   $("#usuarios").DataTable();
-<<<<<<< HEAD
     $('#servicios').DataTable({
-=======
-    $('#usuarios').DataTable({
->>>>>>> guilllermo
       "paging": true,
       "lengthChange": true,
       "searching": true,
@@ -178,8 +103,4 @@
     });
   });
 </script>
-<<<<<<< HEAD
 {%endblock%}
-=======
-{%endblock%}
->>>>>>> guilllermo
