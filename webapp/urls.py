@@ -32,7 +32,7 @@ urlpatterns = [
     path('vehiculo-baja/<int:vehiculo_id>', views.borrarVehiculoCliente, name="BorrarVehiculoCliente"),
     # Clientes
     path('clientes', views.clientesView, name='Clientes'),
-    path('cliente', views.clienteView, name='Cliente'),
+    path('cliente/<int:usuario_id>', views.clienteView, name='Cliente'),
     path('cliente-crear', views.clienteCrearView, name='ClienteCrear'),
 
     

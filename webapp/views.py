@@ -31,9 +31,6 @@ def index(request):
 
 
 
-# ---- vistas SERVICIO --------------------------------------------------------- 
-
-
 
 # ---- vistas SERVICIO --------------------------------------------------------- 
 
@@ -129,7 +126,7 @@ def crearUsuario(request):
 @login_required(login_url='login')
 def verUsuarios(request):
     template_name='webapp/usuarios-lista.html'
-    usuarios = Usuario.objects.all().order_by('id')
+    usuarios = Usuario.objects.filter(is_client=False).order_by('id')
     seccion = 'Ver Usuarios'
     return render(request, template_name, {'usuarios': usuarios, 'seccion': seccion})
 
@@ -168,27 +165,30 @@ def bajaUsuario(request, usuario_id):
 
 
 
-# ---- vistas VEHÍCULO ---------------------------------------------------------
+
+# ---- vistas CLIENTES ---------------------------------------------------------
 
 @login_required(login_url='login')
-def clienteView(request):
-    template_name='webapp/cliente-detalle.html'
-    usuarios = Usuario.objects.all().order_by('id')
-    seccion = 'Detalle de Cliente'
-    return render(request, template_name, {'usuarios': usuarios, 'seccion': seccion})
+def clienteView(request, usuario_id):
+    usuario = Usuario.objects.get(pk=usuario_id)
+    vehiculos = Vehiculo.objects.filter(duenio__id=usuario_id)
+    servicios = Servicio.objects.filter(vehiculo__duenio__id=usuario_id)
+    seccion = 'Detalles de cliente'
+    return render(request, 'webapp/usuario-detalle.html', {'usuario': usuario, 'seccion': seccion, 'vehiculos': vehiculos, 'servicios': servicios})
+
 
 
 @login_required(login_url='login')
 def clientesView(request):
-    template_name='webapp/cliente-lista.html'
-    usuarios = Usuario.objects.all().order_by('id')
-    seccion = 'Lista de clientes'
+    template_name='webapp/clientes-lista.html'
+    usuarios = Usuario.objects.filter(is_client=True).order_by('id')
+    seccion = 'Clientes'
     return render(request, template_name, {'usuarios': usuarios, 'seccion': seccion})
 
 
 @login_required(login_url='login')
 def clienteCrearView(request):
-    template_name='webapp/cliente-crear.html'
+    template_name='webapp/clientes-crear.html'
     usuarios = Usuario.objects.all().order_by('id')
     seccion = 'Nuevo cliente'
     return render(request, template_name, {'usuarios': usuarios, 'seccion': seccion})
