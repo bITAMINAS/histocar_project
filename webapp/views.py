@@ -92,7 +92,7 @@ def editarServicio(request, servicio_id):
                 servicioEstado.save()
             #servicio.save()
             pending_servicio.save()
-            return redirect("VerServicios")
+            return redirect("Servicios")
 
     else:
         form = editarServicioForm(initial={'estados':estadoAnteriorServicio}, instance = servicio)
@@ -105,7 +105,7 @@ def borrarServicio(request, servicio_id):
     instancia = Servicio.objects.get(id=servicio_id)
     instancia.delete()
     messages.success(request, 'Servicio dado de baja existosamente.')
-    return redirect('VerServicios')
+    return redirect('Servicios')
 
 
 # ---- vistas USUARIO ---------------------------------------------------------
