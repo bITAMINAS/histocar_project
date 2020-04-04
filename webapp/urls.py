@@ -1,4 +1,8 @@
 from webapp import views
+from django.contrib import admin
+from django.urls import path, include
+from django.contrib.auth import views as auth_views
+from django.conf.urls import url, include
 
 from django.contrib import admin
 from django.urls import path, include
@@ -26,4 +30,7 @@ urlpatterns = [
     path('cliente', views.clienteView, name='Cliente'),
     path('cliente-crear', views.clienteCrearView, name='ClienteCrear'),
 
+    path('editar-usuario/<int:pk>', views.editarUsuario, name='EditarUsuario'),
+    
+   
 ]
