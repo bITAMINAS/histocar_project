@@ -53,6 +53,9 @@ class registroUsuario(UserCreationForm):
     fields, plus a repeated password."""
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repetir contraseña', widget=forms.PasswordInput)
+    
+    TIPOS_USUARIO = [('1', 'Cliente'), ('2', 'Empleado')]
+    tipo_de_usuario = forms.ChoiceField(widget=forms.RadioSelect, choices=TIPOS_USUARIO,  initial='1')
 
     class Meta:
         model = Usuario

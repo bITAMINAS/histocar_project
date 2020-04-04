@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block content %} 
-{% load widget_tweaks %}
  <!-- Content Row -->
- {% load static %}
+  {% load widget_tweaks %}
+    <!-- Toastr -->
+  {% load static %}
   <div class="col-xl-12 col-md-12 mb-12">
-    <div class="card shadow mb-3">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Registro de nuevo vehículo</h6>
+    <div class="card card-default">
+      <div class="card-header">
+        <h3 class="card-title">Nuevo vehículo</h3>
       </div>
-      <div class="card-body">
-        
-        <form method="POST" class="RegistroUsuario">{% csrf_token %}
+      <form method="POST" class="RegistroUsuario">{% csrf_token %}
+        <div class="card-body">
           <div class="col-sm-6">
             <div class="form-group">
               <label for="{{form.duenio.label}}">{{form.duenio.label}}</label>
@@ -51,7 +51,6 @@
                 {% render_field form.modelo class="form-control" %}
               {% endif %}
             </div>
-
 
             <div class="form-group">
               <label for="{{form.color.label}}">{{form.color.label}}</label>
@@ -152,36 +151,43 @@
                 {% render_field form.tipoCombustible class="form-control" %}
               {% endif %}
             </div>
-
-            <button type='submit' class="btn btn-primary btn-md mt-2 mb-2">Agregar vehiculo</button>
           </div>
-        </form>
         </div>
-        
-      </div>
+        <div class="card-footer">
+          <button type='submit' class="btn btn-primary ">Guardar</button>
+        </div>
+      </form>
     </div>
-
   </div>
+
 <!-- End of Content Row -->
-<!-- InputMask -->
-<!-- REQUIRED SCRIPTS -->
-<script>
-  toastr.options = {
-    "closeButton": true,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": true,
-    "positionClass": "toast-top-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "9000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-  }  
-</script>
+{% endblock %}
+
+
+<!-- Stylesheets -->
+{% block stylesheets %} 
+
+{% endblock %}
+
+<!-- javascripts -->
+{% block javascripts %}   
+  <script>
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "9000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }  
+  </script>
 {% endblock %}

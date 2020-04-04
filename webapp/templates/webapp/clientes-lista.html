@@ -45,7 +45,7 @@
                   <a class="btn btn-default" href="" role="button">
                     <i class="fas fa-edit"></i>
                   </a>
-                  <a class="btn btn-default" href="" role="button" 
+                  <a class="btn btn-default" href="{% url "UsuarioBaja" usuario.id %}" role="button" 
                     onClick="return confirm('¿Seguro que quieres dar de baja a {{usuario.nombre}} {{ usuario.apellido }}?');">
                     <i class="far fa-trash-alt" style="color:rgba(211, 0, 0, 0.692);"></i>
                   </a>
