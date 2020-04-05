@@ -8,7 +8,7 @@ from django.contrib import messages
 
 #Cargamos los modelos
 from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Estado
-from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm, editarUsuarioForm
+from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm, editarUsuarioForm, crearVehiculosCliente
 
 
 
@@ -161,6 +161,22 @@ def editarUsuario(request, pk):
     return render(request, 'webapp/usuario-editar.html', {'usuario': usuario, 'seccion': seccion, 'form': form})  
 
 
+def editarUsuario(request, pk):
+    seccion = 'Editar Usuario'
+    usuario = Usuario.objects.get(pk=pk)
+    form = editarUsuarioForm(request.POST, instance = usuario)
+    if request.method == "POST":
+        if form.is_valid():
+            usuario=form.save()
+            usuario.save()
+            messages.success(request, 'Usuario editado exitosamente.')
+            return redirect('ListarUsuarios')
+    else:
+        form = editarUsuarioForm(instance=usuario)
+    
+    
+    return render(request, 'webapp/usuario-editar.html', {'usuario': usuario, 'seccion': seccion, 'form': form})  
+
 def bajaUsuario(request, usuario_id):
     # Recuperamos la instancia de la persona
     instancia = Usuario.objects.get(id=usuario_id)
@@ -222,14 +238,15 @@ def crearVehiculo(request):
         form = crearVehiculos()
     return render(request, template_name, {'form': form, 'seccion': seccion})
 
-def crearVehiculoCliente(request, duenio_id):
+def crearVehiculoCliente(request):
     template_name='webapp/cliente/vehiculo-crear-cliente.html'
     seccion = 'Vehículo'
+    usuario = request.user
     if request.method == 'POST':
         form = crearVehiculosCliente(request.POST)
         if form.is_valid():
-            cliente = Vehiculo(duenio_id = usuario)
-            cliente.save()
+            vehiculo = Vehiculo(commit=False)
+            vehiculo.duenio = usuario
             form.save()
             messages.success(request, 'Vehiculo creado y asignado correctamente')
             return redirect('index')

@@ -44,6 +44,16 @@ class crearVehiculos(forms.ModelForm):
             'tipoCombustible': _('Combustible')
         }
 
+class crearVehiculosCliente(forms.ModelForm):
+     class Meta:
+        model = Vehiculo
+        fields = ('modelo', 'color', 'nroChasis', 'matricula', 'anio', 'tipoCombustible')
+        labels = {
+            'nroChasis': _('Número de chasis'),
+            'anio': _('Año'),
+            'tipoCombustible': _('Combustible')
+        }
+
 
 
 class registroUsuario(UserCreationForm):

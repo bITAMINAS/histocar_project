@@ -30,6 +30,7 @@ urlpatterns = [
     path('ver-vehiculos', views.verVehiculosCliente, name='VerVehiculos'),
     path('crear-vehiculo', views.crearVehiculo, name='CrearVehiculo'),
     path('vehiculo-baja/<int:vehiculo_id>', views.borrarVehiculoCliente, name="BorrarVehiculoCliente"),
+    path('crear-vehiculo-cliente', views.crearVehiculoCliente, name='crearVehiculoCliente'),
     # Clientes
     path('clientes', views.clientesView, name='Clientes'),
     path('cliente/<int:usuario_id>', views.clienteView, name='Cliente'),
