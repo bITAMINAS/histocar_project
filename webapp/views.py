@@ -22,11 +22,14 @@ def index(request):
     ssFinalizado = servicios.filter(estadoAc=14)
     ssParaRetirar = servicios.filter(estadoAc=15)
     ssRetirado = servicios.filter(estadoAc=16)
+    clientes_count = Usuario.objects.filter(is_client=True, is_active=True).count()
+    vehiculos_count = Vehiculo.objects.filter(duenio__is_active=True).count()
     print(ssIngresados)
     #print(ssIngresados)
     seccion = 'Inicio'
     context = {'servicios': servicios, 'seccion': seccion, 'ssIngresados': ssIngresados, 'ssEnProgreso': ssEnProgreso,
-                'ssSuspendido': ssSuspendido, 'ssFinalizado': ssFinalizado, 'ssParaRetirar': ssParaRetirar, 'ssRetirado': ssRetirado}
+                'ssSuspendido': ssSuspendido, 'ssFinalizado': ssFinalizado, 'ssParaRetirar': ssParaRetirar, 
+                'ssRetirado': ssRetirado, 'clientes_count':clientes_count, 'vehiculos_count':vehiculos_count}
     return render(request, template_name, context)
 
 
@@ -154,28 +157,16 @@ def editarUsuario(request, pk):
             usuario=form.save()
             usuario.save()
             messages.success(request, 'Usuario editado exitosamente.')
-            return redirect('ListarUsuarios')
+
+            if usuario.is_client:
+                return redirect('Clientes')
+            else:
+                return redirect('ListarUsuarios')
     else:
         form = editarUsuarioForm(instance=usuario)
     
     return render(request, 'webapp/usuario-editar.html', {'usuario': usuario, 'seccion': seccion, 'form': form})  
-
-
-def editarUsuario(request, pk):
-    seccion = 'Editar Usuario'
-    usuario = Usuario.objects.get(pk=pk)
-    form = editarUsuarioForm(request.POST, instance = usuario)
-    if request.method == "POST":
-        if form.is_valid():
-            usuario=form.save()
-            usuario.save()
-            messages.success(request, 'Usuario editado exitosamente.')
-            return redirect('ListarUsuarios')
-    else:
-        form = editarUsuarioForm(instance=usuario)
-    
-    
-    return render(request, 'webapp/usuario-editar.html', {'usuario': usuario, 'seccion': seccion, 'form': form})  
+ 
 
 def bajaUsuario(request, usuario_id):
     # Recuperamos la instancia de la persona
