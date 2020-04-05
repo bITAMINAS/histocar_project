@@ -32,7 +32,7 @@
             <tr>
               <td>{{ servicio.id }}</td>
               <td>{{ servicio.fecha|date:'d-m-Y H:i' }}</td>
-              <td>{{ servicio.vehiculo.modelo.marca }} {{ servicio.vehiculo.modelo }} - {{ servicio.vehiculo.matricula }}</td>
+              <td>{{ servicio.vehiculo.modelo }} - {{ servicio.vehiculo.matricula }}</td>
               <td>
                 <a>
                   {{ servicio.vehiculo.duenio.nombre }} {{ servicio.vehiculo.duenio.apellido }}
