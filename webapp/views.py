@@ -8,7 +8,7 @@ from django.contrib import messages
 
 #Cargamos los modelos
 from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Estado
-from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm, editarUsuarioForm
+from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm, editarUsuarioForm, crearVehiculosCliente
 
 
 
@@ -238,14 +238,15 @@ def crearVehiculo(request):
         form = crearVehiculos()
     return render(request, template_name, {'form': form, 'seccion': seccion})
 
-def crearVehiculoCliente(request, duenio_id):
+def crearVehiculoCliente(request):
     template_name='webapp/cliente/vehiculo-crear-cliente.html'
     seccion = 'Vehículo'
+    usuario = request.user
     if request.method == 'POST':
         form = crearVehiculosCliente(request.POST)
         if form.is_valid():
-            cliente = Vehiculo(duenio_id = usuario)
-            cliente.save()
+            vehiculo = Vehiculo(commit=False)
+            vehiculo.duenio = usuario
             form.save()
             messages.success(request, 'Vehiculo creado y asignado correctamente')
             return redirect('index')
