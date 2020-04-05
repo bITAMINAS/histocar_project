@@ -37,12 +37,11 @@ class crearVehiculos(forms.ModelForm):
     class Meta:
         model = Vehiculo
         fields = ('modelo', 'color', 'nroChasis', 'matricula', 'anio', 'tipoCombustible', 'duenio')
-        labels = {
-            'duenio': _('Propietario'),
-            'nroChasis': _('Número de chasis'),
-            'anio': _('Año'),
-            'tipoCombustible': _('Combustible')
-        }
+        
+    def __init__(self, *args, **kwargs):
+        super(crearVehiculos, self).__init__(*args, **kwargs)
+        self.fields['duenio'].queryset = Usuario.objects.filter(is_client=True)
+
 
 class crearVehiculosCliente(forms.ModelForm):
      class Meta:
