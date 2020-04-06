@@ -52,7 +52,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
 class Servicio(models.Model):
     fecha = models.DateTimeField()
-    textoOtros = models.TextField('Otras tareas', max_length=240, default="")
+    textoOtros = models.TextField('Otras tareas', max_length=240, default="", blank=True)
     comentario = models.CharField(max_length=240, default="")
     kilometros = models.IntegerField('Kilómetros', default=0)
     puntuacion = models.IntegerField('Calificación',default=0)
