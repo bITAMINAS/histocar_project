@@ -37,8 +37,17 @@ class crearVehiculos(forms.ModelForm):
     class Meta:
         model = Vehiculo
         fields = ('modelo', 'color', 'nroChasis', 'matricula', 'anio', 'tipoCombustible', 'duenio')
+        
+    def __init__(self, *args, **kwargs):
+        super(crearVehiculos, self).__init__(*args, **kwargs)
+        self.fields['duenio'].queryset = Usuario.objects.filter(is_client=True)
+
+
+class crearVehiculosCliente(forms.ModelForm):
+     class Meta:
+        model = Vehiculo
+        fields = ('modelo', 'color', 'nroChasis', 'matricula', 'anio', 'tipoCombustible')
         labels = {
-            'duenio': _('Propietario'),
             'nroChasis': _('Número de chasis'),
             'anio': _('Año'),
             'tipoCombustible': _('Combustible')
@@ -53,6 +62,9 @@ class registroUsuario(UserCreationForm):
     fields, plus a repeated password."""
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repetir contraseña', widget=forms.PasswordInput)
+    
+    TIPOS_USUARIO = [('1', 'Cliente'), ('2', 'Empleado')]
+    tipo_de_usuario = forms.ChoiceField(widget=forms.RadioSelect, choices=TIPOS_USUARIO,  initial='1')
 
     class Meta:
         model = Usuario
@@ -103,4 +115,18 @@ class Login(forms.Form): # Note: forms.Form NOT forms.ModelForm
         label='Password')
 
     class Meta:
-        fields = ['username', 'password']
+        fields = ['email', 'password']
+
+
+class editarUsuarioForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ('nombre', 'apellido', 'email', 'telefono')
+        labels = {
+            'nombre': _('Nombre'),
+            'apellido': _('Apellido'),
+            'email': _('Email'),
+            'telefono': _('Telefono'), 
+        }
+
+        

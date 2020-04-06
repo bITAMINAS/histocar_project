@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block content %} 
+  <!-- Content Row -->
+  {% load widget_tweaks %}
+  <!-- Toastr -->
+  {% load static %}
+
+  <div class="col-xl-12 col-md-12 mb-12">
+    <div class="card card-default">
+      <div class="card-header">
+        <h3 class="card-title">Modificar usuario</h3>
+      </div>
+      <form method="POST" class="editarUsuarioForm">{% csrf_token %}
+        <div class="card-body">
+          <div class="form-group"> 
+              <label for="{{form.nombre.label}}">{{form.nombre.label}}</label>
+              {%if form.nombre.errors %}
+                {% render_field form.nombre class="form-control is-invalid" %}
+                  {% for error in form.nombre.errors %}
+                  <script>
+                    $('').ready(function() {
+                      toastr.error('{{ error }}','Nombre')
+                    });
+                  </script>
+                  {% endfor %}
+              {% else %}
+                {% render_field form.nombre class="form-control" %}
+              {% endif %}
+          </div>
+
+          <div class="form-group">
+            <label for="{{form.apellido.label}}">{{form.apellido.label}}</label>
+            {%if form.apellido.errors %}
+              {% render_field form.apellido class="form-control is-invalid" %}
+                {% for error in form.apellido.errors %}
+                <script>
+                  $('').ready(function() {
+                    toastr.error('{{ error }}','Apellido')
+                  });
+                </script>
+                {% endfor %}
+            {% else %}
+              {% render_field form.apellido class="form-control" %}
+            {% endif %}
+          </div>
+          <div class="form-group">
+            <label for="{{form.email.label}}">{{form.email.label}}</label>
+            {%if form.email.errors %}
+              {% render_field form.email class="form-control is-invalid" %}
+                {% for error in form.email.errors %}
+                <script>
+                  $('').ready(function() {
+                    toastr.error('{{ error }}','Email')
+                  });
+                </script>
+                {% endfor %}
+            {% else %}
+              {% render_field form.email class="form-control" %}
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            <label for="{{form.telefono.label}}">{{form.telefono.label}}</label>
+            {%if form.telefono.errors %}
+              {% render_field form.telfono class="form-control is-invalid" %}
+                {% for error in form.telefono.errors %}
+                <script>
+                  $('').ready(function() {
+                    toastr.error('{{ error }}','Telefono')
+                  });
+                </script>
+              {% endfor %}
+            {% else %}
+              {% render_field form.telefono class="form-control" %}
+            {% endif %}
+          </div>     
+        </div>
+        <div class="card-footer">
+          <button type='submit' class="btn btn-primary ">Guardar</button>
+        </div>
+      </form>          
+    </div>
+  </div>
+<!-- End of Content Row -->
+{% endblock %}
+  
+{% block stylesheets %} 
+  <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">    
+{% endblock %}
+
+{% block javascripts %}       
+  <script>
+    $(document).ready(function() {
+      $('#id_tareas').select2({
+          theme: 'bootstrap4'
+      });
+    });
+  </script>
+  <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
+  <script src="{% static 'webapp/plugins/select2/js/select2.full.min.js' %}"></script>
+  <script>
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "9000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }  
+    $(function () {
+    //Date range picker
+      $('#id_fecha').daterangepicker({
+        singleDatePicker: true,
+        timePicker: true,
+        locale: {
+        format: 'YYYY-MM-DD hh:mm'
+        }
+      })
+    })
+  </script>
+{% endblock %}

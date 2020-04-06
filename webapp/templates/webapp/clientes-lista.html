@@ -11,7 +11,7 @@
   <div class="col-12">
     <div class="card card-primary card-outline">
       <div class="card-header">
-        <h3 class="card-title">Lista de usuarios</h3>
+        <h3 class="card-title">Lista de clientes</h3>
       </div>
       <!-- /.card-header -->
       <div class="card-body">
@@ -39,7 +39,7 @@
               <td>{{ usuario.email }} </td>
               <td class="text-right">
                 <div class="btn-group">
-                  <a class="btn btn-default" href="{% url "DetallesUsuario" usuario.id %}" role="button">
+                  <a class="btn btn-default" href="{% url "Cliente" usuario.id %}" role="button">
                     <i class="fas fa-eye" ></i>
                   </a>
                   <a class="btn btn-default" href="{% url "EditarUsuario" usuario.id %}" role="button">
