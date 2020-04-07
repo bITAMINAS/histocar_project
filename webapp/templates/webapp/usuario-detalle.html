@@ -61,7 +61,7 @@
                       </a>
                       </h4>
                     </div>
-                    <div id="collapse{{ servicio.id }}" class="panel-collapse in collapse" style="">
+                    <div id="collapse{{ servicio.id }}" class="panel-collapse in collapse">
                       <div class="card-body">
                       {% for tarea in servicio.tareas.all %}
                         <li>{{ tarea.nombre }}</li>
