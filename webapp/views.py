@@ -52,8 +52,16 @@ def crearServicio(request):
 
     if request.method == "POST":
         form = ServicioForm(request.POST)
-        if form.is_valid():
+        if form.is_valid(): 
+            FormEstado_id = request.POST["estados"]
+            pending_servicio = form.save(commit=False)
+            estadoActualServicio = int(FormEstado_id)
+            pending_servicio.estadoAc = estadoActualServicio
+            
+            pending_servicio.save()
             form.save()
+            form.save_m2m()
+
             messages.success(request, 'Se creo el servicio correctamente')
             return redirect('index')
             
@@ -90,8 +98,9 @@ def editarServicio(request, servicio_id):
                 servicioEstado = EstadoServicio(estado=e, servicio=s, fecha=datetime.now())
                 
                 servicioEstado.save()
-            #servicio.save()
+
             pending_servicio.save()
+            form.save_m2m()
             return redirect("Servicios")
 
     else:
