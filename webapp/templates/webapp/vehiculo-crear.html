@@ -4,6 +4,11 @@
   {% load widget_tweaks %}
     <!-- Toastr -->
   {% load static %}
+  {% block stylesheet %}   
+    <link rel="stylesheet" href="{% static 'webapp/plugins/select2/css/select2.min.css' %}">
+      <link rel="stylesheet" href="{% static 'webapp/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">    
+    <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
+  {% endblock %}
   <div class="col-xl-12 col-md-12 mb-12">
     <div class="card card-default">
       <div class="card-header">
@@ -168,6 +173,14 @@
 
 <!-- javascripts -->
 {% block javascripts %}   
+<script src="{% static 'webapp/plugins/select2/js/select2.full.min.js' %}"></script>
+<script>
+  $(document).ready(function() {
+    $('#id_duenio').select2({
+        theme: 'bootstrap4'
+    });
+  });
+</script>
   <script>
     toastr.options = {
       "closeButton": true,
