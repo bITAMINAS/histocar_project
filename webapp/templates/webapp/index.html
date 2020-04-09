@@ -1,47 +1,136 @@
 {% extends "base.html" %}
 {% block content %} 
-  <style>
-    .hiddenRow {
-      padding: 0 !important;
-    }
-  </style>
   
+  <script>
+     $('.accordion-toggle').click(function(){
+        $('.hiddenRow').hide();
+        $(this).next('tr').find('.hiddenRow').show();
+      });
+  </script>
+
 
   <div class="container-fluid">
-    <!-- =========================================================== -->
+    <div class="row">
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3>{{ servicios|length }} </h3>
+
+            <p>Servicios realizados</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-tasks"></i>
+          </div>
+          <a href="{% url "Servicios" %}" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{ vehiculos_count }}</h3>
+
+            <p>Vehículos registrados</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-car"></i>
+          </div>
+          <a href="#" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+          <div class="inner">
+            <h3>{{ clientes_count }}</h3>
+
+            <p>Clientes</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-person-add"></i>
+          </div>
+          <a href="{% url "Clientes" %}" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>#,#</h3>
+
+            <p>Promedio de calificaciones</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+          <a href="#" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+    </div>
 
     <h5 class="mb-2">Servicios Recientes</h5>
-    
-    
-    <div class="row-fluid" >
-      <div class="accordion-toggle" data-toggle="collapse" data-target="#collapseThree">
-          <div class="span1">1</div>
-          <div class="span3">Mark</div>
-          <div class="span3">Otto</div>
-          <div class="span3">@mdo</div>
-      </div>
-
-      <div class="span1">
-          <button type="button" class="btn btn-primary"><i class="icon-search icon-white"></i></button>
-      </div>
-    </div>
-
-    <div id="collapseThree" class="row-fluid collapse in">
-        <div class="span1"></div>
-        <div class="span9">
-            Details 1 <br/>
-            Details 2 <br/>
-            Details 3 <br/>
-        </div>
-    </div>
-
-
+       
     <div class="row">
-      <div class="col-12">
-      <div class="card card-primary">
-        <div class="card card-outline card-primary">
+      <div class="col-md-6">
+
+        <!-- INGRESADOS -->
+        <div class="card  card-primary">
           <div class="card-header">
-            <h3 class="card-title">En progreso</h3>
+            <h3 class="card-title">Ingresados</h3>
+            
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+              </button>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body p-0">
+            <table class="table" >
+              {% for servicio in ssIngresados %}
+                <tr>
+                  <td style="width:10px">
+                    <a class="btn-sm  btn-tool2 collapsed accordion-toggle" style="color:dimgray" data-toggle="collapse" href="#collapseme{{servicio.id}}" role="button" aria-expanded="false" aria-controls="collapseGroup" ></a>
+                  </td>
+                  <td>
+                    {{ servicio.fecha|date:'d/m/Y' }}
+                  </td>
+                  <td>
+                    {{ servicio.vehiculo.modelo.marca.nombre }} {{ servicio.vehiculo.modelo.nombre }} <br>
+                    <small> {{ servicio.vehiculo.matricula }} </small>
+                  </td>
+                  <td>
+                    {{ servicio.vehiculo.duenio }} 
+                  </td>
+                </tr>
+
+                <tr >
+                  <td colspan="6"  class="hiddenRow">
+                      <div class="py-3 pl-5 bg-light collapse" id="collapseme{{servicio.id}}"  > 
+                        <div class="row"> 
+                          <div class="col">Should be collapsed</div>
+                          <div class="col">Should be collapsed</div>
+                        </div>
+                      </div>
+                  </td>
+                </tr>
+              {% endfor %}
+              
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+        <!-- EN PROGRESO -->
+        <div class="card  card-success">
+          <div class="card-header">
+            <h3 class="card-title">En pogreso</h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -50,78 +139,81 @@
             <!-- /.card-tools -->
           </div>
           <!-- /.card-header -->
-          <div class="card-body table-responsive p-0">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Responsive Hover Table</h3>
+          <div class="card-body p-0">
+            <table class="table" >
+              {% for servicio in ssEnProgreso %}
+                <tr>
+                  <td style="width: 10px">
+                    <a class="btn-sm btn-tool2 collapsed accordion-toggle" style="color:dimgray" data-toggle="collapse" href="#collapseme{{servicio.id}}" role="button" aria-expanded="false" aria-controls="collapseGroup" ></a>
+                  </td>
+                  <td>
+                    {{servicio.fecha|date:'d/m/Y'}}
+                  </td>
+                  <td>
+                    {{ servicio.vehiculo.modelo.marca.nombre }} {{ servicio.vehiculo.modelo.nombre }} <br>
+                    <small> {{ servicio.vehiculo.matricula }} </small>
+                  </td>
+                  <td>
+                    {{ servicio.vehiculo.duenio }} 
+                  </td>
+                </tr>
 
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>User</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Reason</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>183</td>
-                      <td>John Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-success">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                      <td>219</td>
-                      <td>Alexander Pierce</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-warning">Pending</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                      <td>657</td>
-                      <td>Bob Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-primary">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                      <td>175</td>
-                      <td>Mike Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-danger">Denied</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
+                <tr >
+                  <td colspan="6"  class="hiddenRow">
+                      <div class="py-3 pl-5 bg-light collapse" id="collapseme{{servicio.id}}"  > 
+                        <div class="row"> 
+                          <div class="col">Should be collapsed</div>
+                          <div class="col">Should be collapsed</div>
+                        </div>
+                      </div>
+                  </td>
+                </tr>
+              {% endfor %}
+              
+            </table>
           </div>
           <!-- /.card-body -->
         </div>
         <!-- /.card -->
+
       </div>
       <!-- /.col -->
+
+
     </div>
     <!-- /.row -->
-
-
-
   </div>
   <!-- /.container-fluid -->
 {%endblock%}
+
+{% block stylesheets %} 
+  <style>
+    .hiddenRow {
+      padding: 0 4px !important;
+    }
+
+    .table,
+    th,
+    td{
+      vertical-align: middle;
+    
+    }
+
+    .btn-tool2:after
+    {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f107";
+    }
+    .btn-tool2.collapsed:after
+    {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f105";
+    }
+
+  </style>
+{% endblock %}
+
+
+
