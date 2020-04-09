@@ -37,6 +37,9 @@ class crearVehiculos(forms.ModelForm):
     class Meta:
         model = Vehiculo
         fields = ('modelo', 'color', 'nroChasis', 'matricula', 'anio', 'tipoCombustible', 'duenio')
+        widgets = {
+            'tipoCombustible': forms.RadioSelect(),
+        }
         
     def __init__(self, *args, **kwargs):
         super(crearVehiculos, self).__init__(*args, **kwargs)

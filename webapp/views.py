@@ -41,7 +41,6 @@ def index(request):
 def serviciosView(request):
     template_name='webapp/servicios-lista.html'
     servicios = Servicio.objects.order_by('-id')
-    
     seccion = 'Servicios'
     return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
 

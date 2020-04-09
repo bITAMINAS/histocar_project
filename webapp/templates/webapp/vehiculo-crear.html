@@ -133,24 +133,21 @@
             </div>
 
             <div class="form-group">
-              <label for="{{form.tipoCombustible.label}}">{{form.tipoCombustible.label}}</label>
-              <!-- Si hay errores... -->
-              {%if form.tipoCombustible.errors %}
-                <!-- Muestro el campo con indicación de error... -->
-                {% render_field form.tipoCombustible class="form-control is-invalid" %}
-                <!-- ...y recorro los errores del campo mostrando los mensajes toastr-->
-                {% for error in form.tipoCombustible.errors %}
-                  <script>
-                    $('').ready(function() {
-                      toastr.error('{{ error }}','{{form.tipoCombustible.label}}')
-                    });
-                  </script>
-                {% endfor %}
-              {% else %}
-                <!-- Si no hay errores, muestro el control normal -->
-                {% render_field form.tipoCombustible class="form-control" %}
-              {% endif %}
+              {{ form.tipoCombustible.label_tag }}
+              {% for pk, choice in form.tipoCombustible.field.widget.choices %}
+              <div class="custom-control custom-radio">
+                  <input id="id_{{form.tipoCombustible.name}}_{{ forloop.counter0 }}" 
+                  name="{{form.tipoCombustible.name}}" 
+                  type="{{form.tipoCombustible.field.widget.input_type}}" value="{{pk}}" class="custom-control-input"
+                   {% ifequal form.tipoCombustible.data pk.0 %}
+                     checked="checked"
+                   {% endifequal %}/>
+                  <label for="id_{{form.tipoCombustible.name}}_{{ forloop.counter0 }}" class="custom-control-label">{{ choice }}</label>
+              </div>
+              {% endfor %}
             </div>
+    
+            
           </div>
         </div>
         <div class="card-footer">
