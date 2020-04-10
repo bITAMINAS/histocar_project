@@ -26,6 +26,9 @@
   <link rel="stylesheet" href="{% static 'webapp/plugins/daterangepicker/daterangepicker.css' %}">
   <!-- summernote -->
   <link rel="stylesheet" href="{% static 'webapp/plugins/summernote/summernote-bs4.css' %}">
+  
+  <!-- Aquí se cargarán las css específicas de un template hijo -->
+  {% block stylesheets %} {% endblock %}
 
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -35,8 +38,7 @@
   <!-- jQuery UI 1.11.4 -->
   <script src="{% static 'webapp/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
   
-  <!-- Aquí se cargarán las css específicas de un template hijo -->
-  {% block stylesheets %} {% endblock %}
+  
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

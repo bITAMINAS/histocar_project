@@ -1,188 +1,187 @@
 {% extends "base.html" %}
 {% block content %} 
-{% load widget_tweaks %}
-<!-- Content Row -->
-<!-- Toastr -->
-{% load static %}
-{% block stylesheet %}   
-<link rel="stylesheet" href="{% static 'webapp/plugins/select2/css/select2.min.css' %}">
-  <link rel="stylesheet" href="{% static 'webapp/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">    
-<link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
-{% endblock %}
-<div class="col-xl-12 col-md-12 mb-12">
-  <div class="card card-primary card-outline">
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Crear servicio</h6>
-    </div>
-    <div class="card-body">
-        <p>En este formulario usted podra editar el servicio que selecciono, puede poner las tareas, agregar otras
-            y cambiar el estado del servicio, recuerde cambiar la fecha.
-        </p>
+  {% load widget_tweaks %}
+  <!-- Content Row -->
+  <!-- Toastr -->
+  {% load static %}
+  {% block stylesheet %}   
+    <link rel="stylesheet" href="{% static 'webapp/plugins/select2/css/select2.min.css' %}">
+      <link rel="stylesheet" href="{% static 'webapp/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">    
+    <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
+  {% endblock %}
+  <div class="col-xl-12 col-md-12 mb-12">
+    <div class="card card-default">
+      <div class="card-header">
+        <h3 class="card-title">Nuevo servicio</h3>
+      </div>
       <form method="POST" class="ServicioForm">{% csrf_token %}
-        <div class="form-group">
-          <!-- Links de interes 
-            https://github.com/jazzband/django-widget-tweaks  
-            https://getbootstrap.com/docs/4.4/components/forms/
-           -->
-          <div class="form-group">
-            <label for="{{form.fecha.label}}">{{form.fecha.label}}</label>
-            {%if form.fecha.errors %}
-              {% render_field form.fecha class="form-control is-invalid" %}
-                {% for error in form.fecha.errors %}
-                <script>
-                  $('').ready(function() {
-                    toastr.error('{{ error }}','Fecha')
-                  });
-                </script>
-                {% endfor %}
-            {% else %}
-              {% render_field form.fecha class="form-control" %}
-            {% endif %}
-          </div>
+        <div class="card-body">
+            <div class="form-group">
+              <!-- Links de interes 
+                https://github.com/jazzband/django-widget-tweaks  
+                https://getbootstrap.com/docs/4.4/components/forms/
+              -->
+              <div class="form-group">
+                <label for="{{form.fecha.label}}">{{form.fecha.label}}</label>
+                {%if form.fecha.errors %}
+                  {% render_field form.fecha class="form-control is-invalid" %}
+                    {% for error in form.fecha.errors %}
+                    <script>
+                      $('').ready(function() {
+                        toastr.error('{{ error }}','Fecha')
+                      });
+                    </script>
+                    {% endfor %}
+                {% else %}
+                  {% render_field form.fecha class="form-control" %}
+                {% endif %}
+              </div>
 
-          <div class="form-group">
-            <label for="{{form.vehiculo.label}}">{{form.vehiculo.label}}</label>
-            {%if form.vehiculo.errors %}
-              {% render_field form.vehiculo class="form-control is-invalid" %}
-                {% for error in form.vehiculo.errors %}
-                <script>
-                  $('').ready(function() {
-                    toastr.error('{{ error }}','Vehiculo')
-                  });
-                </script>
-                {% endfor %}
-            {% else %}
-              {% render_field form.vehiculo class="form-control" %}
-            {% endif %}
-          </div>
+              <div class="form-group">
+                <label for="{{form.vehiculo.label}}">{{form.vehiculo.label}}</label>
+                {%if form.vehiculo.errors %}
+                  {% render_field form.vehiculo class="form-control is-invalid" %}
+                    {% for error in form.vehiculo.errors %}
+                    <script>
+                      $('').ready(function() {
+                        toastr.error('{{ error }}','Vehiculo')
+                      });
+                    </script>
+                    {% endfor %}
+                {% else %}
+                  {% render_field form.vehiculo class="form-control" %}
+                {% endif %}
+              </div>
+              
+              <div class="form-group">
+                <label for="{{form.tareas.label}}">{{form.tareas.label}}</label>
+                {%if form.tareas.errors %}
+                  {% render_field form.tareas class="form-control is-invalid" %}
+                    {% for error in form.tareas.errors %}
+                    <script>
+                      $('').ready(function() {
+                        toastr.error('{{ error }}','Tareas')
+                      });
+                    </script>
+                    {% endfor %}
+                {% else %}
+                  {% render_field form.tareas class="form-control select2" %}
+                {% endif %}
+              </div>
 
-          <!-- <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea> -->
+              <div class="form-group">
+                <label for="{{form.textoOtros.label}}">{{form.textoOtros.label}}</label>
+                {%if form.textoOtros.errors %}
+                  {% render_field form.textoOtros class="form-control is-invalid" %}
+                    {% for error in form.textoOtros.errors %}
+                    <script>
+                      $('').ready(function() {
+                        toastr.error('{{ error }}','Otros')
+                      });
+                    </script>
+                    {% endfor %}
+                {% else %}
+                  {% render_field form.textoOtros class="form-control" %}
+                {% endif %}
+              </div>                    
 
-          <div class="form-group">
-            <label for="{{form.textoOtros.label}}">{{form.textoOtros.label}}</label>
-            {%if form.textoOtros.errors %}
-              {% render_field form.textoOtros class="form-control is-invalid" %}
-                {% for error in form.textoOtros.errors %}
-                <script>
-                  $('').ready(function() {
-                    toastr.error('{{ error }}','Otros')
-                  });
-                </script>
-                {% endfor %}
-            {% else %}
-              {% render_field form.textoOtros class="form-control" %}
-            {% endif %}
-          </div>                    
+              <div class="form-group">
+                <label for="{{form.kilometros.label}}">{{form.kilometros.label}}</label>
+                {%if form.kilometros.errors %}
+                  {% render_field form.kilometros class="form-control is-invalid" %}
+                    {% for error in form.kilometros.errors %}
+                    <script>
+                      $('').ready(function() {
+                        toastr.error('{{ error }}','Kilometros')
+                      });
+                    </script>
+                    {% endfor %}
+                {% else %}
+                  {% render_field form.kilometros class="form-control" %}
+                {% endif %}
+              </div>
 
-          <div class="form-group">
-            <label for="{{form.kilometros.label}}">{{form.kilometros.label}}</label>
-            {%if form.kilometros.errors %}
-              {% render_field form.kilometros class="form-control is-invalid" %}
-                {% for error in form.kilometros.errors %}
-                <script>
-                  $('').ready(function() {
-                    toastr.error('{{ error }}','Kilometros')
-                  });
-                </script>
-                {% endfor %}
-            {% else %}
-              {% render_field form.kilometros class="form-control" %}
-            {% endif %}
-          </div>
+              <div class="form-group">
+                <label for="{{form.costo.label}}">{{form.costo.label}}</label>
+                {%if form.costo.errors %}
+                  {% render_field form.costo class="form-control is-invalid" %}
+                    {% for error in form.costo.errors %}
+                    <script>
+                      $('').ready(function() {
+                        toastr.error('{{ error }}','Costo')
+                      });
+                    </script>
+                    {% endfor %}
+                {% else %}
+                  {% render_field form.costo class="form-control" %}
+                {% endif %}
+              </div>
 
-          <div class="form-group">
-            <label for="{{form.costo.label}}">{{form.costo.label}}</label>
-            {%if form.costo.errors %}
-              {% render_field form.costo class="form-control is-invalid" %}
-                {% for error in form.costo.errors %}
-                <script>
-                  $('').ready(function() {
-                    toastr.error('{{ error }}','Costo')
-                  });
-                </script>
-                {% endfor %}
-            {% else %}
-              {% render_field form.costo class="form-control" %}
-            {% endif %}
-          </div>
-
-          <div class="form-group">
-            <label for="{{form.tareas.label}}">{{form.tareas.label}}</label>
-            {%if form.tareas.errors %}
-              {% render_field form.tareas class="form-control is-invalid" %}
-                {% for error in form.tareas.errors %}
-                <script>
-                  $('').ready(function() {
-                    toastr.error('{{ error }}','Tareas')
-                  });
-                </script>
-                {% endfor %}
-            {% else %}
-              {% render_field form.tareas class="form-control select2" %}
-            {% endif %}
-          </div>
-
-         <div class="form-group">
-            <label for="{{form.estados.label}}">{{form.estados.label}}</label>
-            {%if form.estados.errors %}
-              {% render_field form.estados class="form-control is-invalid" %}
-                {% for error in form.estados.errors %}
-                <script>
-                  $('').ready(function() {
-                    toastr.error('{{ error }}','Estados')
-                  });
-                </script>
-                {% endfor %}
-            {% else %}
-              {% render_field form.estados class="form-control" %}
-            {% endif %}
-          </div>
-          <button type='submit' class="btn btn-primary btn">Nuevo servicio</button>
+              
+            <div class="form-group">
+                <label for="{{form.estados.label}}">{{form.estados.label}}</label>
+                {%if form.estados.errors %}
+                  {% render_field form.estados class="form-control is-invalid" %}
+                    {% for error in form.estados.errors %}
+                    <script>
+                      $('').ready(function() {
+                        toastr.error('{{ error }}','Estados')
+                      });
+                    </script>
+                    {% endfor %}
+                {% else %}
+                  {% render_field form.estados class="form-control" %}
+                {% endif %}
+              </div>
+              
+            </div>
+        </div>
+        <div class="card-footer">
+          <button type='submit' class="btn btn-primary ">Guardar</button>
         </div>
       </form>
-          {% block javascripts %}       
-          <script>
-            $(document).ready(function() {
-              $('#id_tareas').select2({
-                  theme: 'bootstrap4'
-              });
-            });
-          </script>
-          <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
-          <script src="{% static 'webapp/plugins/select2/js/select2.full.min.js' %}"></script>
-          <script>
-            toastr.options = {
-              "closeButton": true,
-              "debug": false,
-              "newestOnTop": false,
-              "progressBar": true,
-              "positionClass": "toast-top-right",
-              "preventDuplicates": false,
-              "onclick": null,
-              "showDuration": "300",
-              "hideDuration": "1000",
-              "timeOut": "9000",
-              "extendedTimeOut": "1000",
-              "showEasing": "swing",
-              "hideEasing": "linear",
-              "showMethod": "fadeIn",
-              "hideMethod": "fadeOut"
-            }  
-            $(function () {
-            //Date range picker
-              $('#id_fecha').daterangepicker({
-                singleDatePicker: true,
-                timePicker: true,
-                locale: {
-                format: 'YYYY-MM-DD hh:mm'
-                }
-              })
-            })
-          </script>
-        {% endblock %}
     </div>
   </div>
-</div>
-<!-- End of Content Row -->
-<!-- InputMask -->
+  <!-- End of Content Row -->
+{% endblock %}
+
+{% block javascripts %}       
+  <script>
+    $(document).ready(function() {
+      $('#id_tareas').select2({
+          theme: 'bootstrap4'
+      });
+    });
+  </script>
+  <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
+  <script src="{% static 'webapp/plugins/select2/js/select2.full.min.js' %}"></script>
+  <script>
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "9000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }  
+    $(function () {
+    //Date range picker
+      $('#id_fecha').daterangepicker({
+        singleDatePicker: true,
+        timePicker: true,
+        locale: {
+        format: 'YYYY-MM-DD hh:mm'
+        }
+      })
+    })
+  </script>
 {% endblock %}

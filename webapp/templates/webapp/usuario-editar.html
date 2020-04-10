@@ -1,36 +1,33 @@
 {% extends "base.html" %}
 {% block content %} 
-{% load widget_tweaks %}
-<!-- Content Row -->
-<!-- Toastr -->
-{% load static %}
-{% block stylesheet %}
-      <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">    
-{% endblock %}
-<div class="col-xl-12 col-md-12 mb-12">
-  <div class="card card-primary card-outline p-2">
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Editar Usuario {{ usuario.id }}</h6>
-    </div>
-    <div class="card-body p-2">
-        <p>Formulario de edición de usuario</p>
-    </div>
+  <!-- Content Row -->
+  {% load widget_tweaks %}
+  <!-- Toastr -->
+  {% load static %}
+
+  <div class="col-xl-12 col-md-12 mb-12">
+    <div class="card card-default">
+      <div class="card-header">
+        <h3 class="card-title">Modificar usuario</h3>
+      </div>
       <form method="POST" class="editarUsuarioForm">{% csrf_token %}
-        <div class="form-group"> 
-            <label for="{{form.nombre.label}}">{{form.nombre.label}}</label>
-            {%if form.nombre.errors %}
-              {% render_field form.nombre class="form-control is-invalid" %}
-                {% for error in form.nombre.errors %}
-                <script>
-                  $('').ready(function() {
-                    toastr.error('{{ error }}','Nombre')
-                  });
-                </script>
-                {% endfor %}
-            {% else %}
-              {% render_field form.nombre class="form-control" %}
-            {% endif %}
+        <div class="card-body">
+          <div class="form-group"> 
+              <label for="{{form.nombre.label}}">{{form.nombre.label}}</label>
+              {%if form.nombre.errors %}
+                {% render_field form.nombre class="form-control is-invalid" %}
+                  {% for error in form.nombre.errors %}
+                  <script>
+                    $('').ready(function() {
+                      toastr.error('{{ error }}','Nombre')
+                    });
+                  </script>
+                  {% endfor %}
+              {% else %}
+                {% render_field form.nombre class="form-control" %}
+              {% endif %}
           </div>
+
           <div class="form-group">
             <label for="{{form.apellido.label}}">{{form.apellido.label}}</label>
             {%if form.apellido.errors %}
@@ -62,8 +59,6 @@
             {% endif %}
           </div>
 
-          <!-- <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea> -->
-
           <div class="form-group">
             <label for="{{form.telefono.label}}">{{form.telefono.label}}</label>
             {%if form.telefono.errors %}
@@ -74,39 +69,62 @@
                     toastr.error('{{ error }}','Telefono')
                   });
                 </script>
-                {% endfor %}
+              {% endfor %}
             {% else %}
               {% render_field form.telefono class="form-control" %}
             {% endif %}
-            </div>                    
-            <button type='submit' class="btn btn-primary btn">Guardar</button>
-            </div>
-            </form>
-          {% block javascripts %}       
-          </script>
-          <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
-          <script>
-            toastr.options = {
-              "closeButton": true,
-              "debug": false,
-              "newestOnTop": false,
-              "positionClass": "toast-top-right",
-              "preventDuplicates": false,
-              "onclick": null,
-              "showDuration": "300",
-              "hideDuration": "1000",
-              "timeOut": "9000",
-              "extendedTimeOut": "1000",
-              "showEasing": "swing",
-              "hideEasing": "linear",
-              "showMethod": "fadeIn",
-              "hideMethod": "fadeOut",  
-            }
-            </script>
-          {% endblock %} 
+          </div>     
+        </div>
+        <div class="card-footer">
+          <button type='submit' class="btn btn-primary ">Guardar</button>
+        </div>
+      </form>          
     </div>
   </div>
-</div>
-<!-- End Content Row -->
-<!-- InputMask -->
+<!-- End of Content Row -->
+{% endblock %}
+  
+{% block stylesheets %} 
+  <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">    
+{% endblock %}
+
+{% block javascripts %}       
+  <script>
+    $(document).ready(function() {
+      $('#id_tareas').select2({
+          theme: 'bootstrap4'
+      });
+    });
+  </script>
+  <script src="{% static 'webapp/plugins/toastr/toastr.min.js' %}"></script>
+  <script src="{% static 'webapp/plugins/select2/js/select2.full.min.js' %}"></script>
+  <script>
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "9000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }  
+    $(function () {
+    //Date range picker
+      $('#id_fecha').daterangepicker({
+        singleDatePicker: true,
+        timePicker: true,
+        locale: {
+        format: 'YYYY-MM-DD hh:mm'
+        }
+      })
+    })
+  </script>
 {% endblock %}
