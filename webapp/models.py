@@ -101,7 +101,7 @@ class EstadoServicio(models.Model):
         get_latest_by = "fecha"
 
 class Vehiculo(models.Model):
-    TiposCombustibles = models.TextChoices('Combustible', 'Nafta Gasoil Híbrido Eléctrico Hidrógeno GLP')
+    TiposCombustibles = models.TextChoices('Combustible', 'Ninguno Nafta Gasoil Híbrido Eléctrico Hidrógeno GLP')
     Colores = models.TextChoices('Color', 'Blanco Rojo Negro Azul Bordó Marrón Gris_Plata Gris_Ceniza Amarillo Verde Otro')
   
     modelo = models.ForeignKey('Modelo', on_delete=models.CASCADE) # Con el atributo modelo ya es suficiente, ya que a partir de él se puede inferir la Marca
@@ -109,7 +109,7 @@ class Vehiculo(models.Model):
     nroChasis = models.CharField('Número de chasis', max_length=50, default="")
     matricula = models.CharField('Matrícula', max_length=50, default="")
     anio = models.IntegerField('Año',default=2020)
-    tipoCombustible = models.CharField('Tipo de combustible', blank=True, choices=TiposCombustibles.choices, max_length=15)
+    tipoCombustible = models.CharField('Tipo de combustible', blank=False, default='Ninguno', choices=TiposCombustibles.choices, max_length=15)
     duenio = models.ForeignKey('Usuario', on_delete=models.CASCADE, verbose_name='Propietario')
    
     def __str__(self):
