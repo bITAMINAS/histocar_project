@@ -71,7 +71,7 @@ class registroUsuario(UserCreationForm):
 
     class Meta:
         model = Usuario
-        fields = ('documento', 'email', 'telefono', 'nombre', 'apellido', 'is_client', 'is_staff')
+        fields = ('documento', 'email', 'telefono', 'nombre','dirDepartamento','dirCiudad', 'dirCalle', 'dirNumero', 'apellido', 'is_client', 'is_staff')
         labels = {
             'documento': _('Cédula de identidad'),
         }
@@ -124,12 +124,16 @@ class Login(forms.Form): # Note: forms.Form NOT forms.ModelForm
 class editarUsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ('nombre', 'apellido', 'email', 'telefono')
+        fields = ('nombre', 'apellido', 'email', 'telefono','dirDepartamento','dirCiudad','dirCalle','dirNumero')
         labels = {
             'nombre': _('Nombre'),
             'apellido': _('Apellido'),
             'email': _('Email'),
-            'telefono': _('Telefono'), 
+            'telefono': _('Telefono'),
+            'dirDepartamento': _('Departamento'),
+            'dirCiudad': _('Ciudad'),
+            'dirCalle': _('Calle'),
+            'dirNumero': _('Numero'), 
         }
 
         
