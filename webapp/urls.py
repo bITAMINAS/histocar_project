@@ -31,6 +31,7 @@ urlpatterns = [
     path('crear-vehiculo', views.crearVehiculo, name='CrearVehiculo'),
     path('vehiculo-baja/<int:vehiculo_id>', views.borrarVehiculoCliente, name="BorrarVehiculoCliente"),
     path('crear-vehiculo-cliente', views.crearVehiculoCliente, name='crearVehiculoCliente'),
+    path('editar-vehiculo/<int:vehiculo_id>', views.editarVehiculo, name='editarVehiculo'),
     # Clientes
     path('clientes', views.clientesView, name='Clientes'),
     path('cliente/<int:usuario_id>', views.clienteView, name='Cliente'),

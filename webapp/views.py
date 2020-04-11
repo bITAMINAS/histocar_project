@@ -8,7 +8,7 @@ from django.contrib import messages
 
 #Cargamos los modelos
 from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Estado
-from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm, editarUsuarioForm, crearVehiculosCliente
+from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm, editarUsuarioForm, crearVehiculosCliente, editarVehiculoForm
 
 
 
@@ -40,8 +40,7 @@ def index(request):
 @login_required(login_url='login')
 def serviciosView(request):
     template_name='webapp/servicios-lista.html'
-    servicios = Servicio.objects.all() #.order_by('id')
-    
+    servicios = Servicio.objects.order_by('-id')
     seccion = 'Servicios'
     return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
 
@@ -253,6 +252,23 @@ def crearVehiculoCliente(request):
     else:
         form = crearVehiculosCliente()
     return render(request, template_name, {'form': form, 'seccion': seccion})
+
+def editarVehiculo(request, vehiculo_id):
+    seccion = 'Vehículos'
+    vehiculo = Vehiculo.objects.get(pk=vehiculo_id)
+    form = editarVehiculoForm(request.POST, instance = vehiculo)
+    if request.method == "POST":
+        if form.is_valid():
+            vehiculo=form.save()
+            vehiculo.save()
+            messages.success(request, 'Vehículo editado exitosamente.')
+            usuario_id = vehiculo.duenio.id
+            return redirect("Cliente", usuario_id = usuario_id)
+            
+    else:
+        form = editarVehiculoForm(instance=vehiculo)
+    
+    return render(request, 'webapp/vehiculo-editar.html', {'vehiculo': vehiculo, 'seccion': seccion, 'form': form})  
 
 
 

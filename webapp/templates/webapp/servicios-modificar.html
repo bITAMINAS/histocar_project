@@ -50,6 +50,22 @@
             </div>
 
             <div class="form-group">
+              <label for="{{form.tareas.label}}">{{form.tareas.label}}</label>
+              {%if form.tareas.errors %}
+                {% render_field form.tareas class="form-control is-invalid" %}
+                  {% for error in form.tareas.errors %}
+                  <script>
+                    $('').ready(function() {
+                      toastr.error('{{ error }}','Tareas')
+                    });
+                  </script>
+                  {% endfor %}
+              {% else %}
+                {% render_field form.tareas class="form-control select2" %}
+              {% endif %}
+            </div>
+
+            <div class="form-group">
               <label for="{{form.textoOtros.label}}">{{form.textoOtros.label}}</label>
               {%if form.textoOtros.errors %}
                 {% render_field form.textoOtros class="form-control is-invalid" %}
@@ -94,22 +110,6 @@
                   {% endfor %}
               {% else %}
                 {% render_field form.costo class="form-control" %}
-              {% endif %}
-            </div>
-
-            <div class="form-group">
-              <label for="{{form.tareas.label}}">{{form.tareas.label}}</label>
-              {%if form.tareas.errors %}
-                {% render_field form.tareas class="form-control is-invalid" %}
-                  {% for error in form.tareas.errors %}
-                  <script>
-                    $('').ready(function() {
-                      toastr.error('{{ error }}','Tareas')
-                    });
-                  </script>
-                  {% endfor %}
-              {% else %}
-                {% render_field form.tareas class="form-control select2" %}
               {% endif %}
             </div>
 
