@@ -189,9 +189,10 @@
           </div>
         </div>
         <div class="card-body">
-          <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+          <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 350px; max-width: 100%;"></canvas>
+          <p>Datos de los últimos 31 días</p>
         </div>
-        <p>Datos del último mes</p>
+        
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
@@ -225,8 +226,8 @@
         ],
         datasets: [
           {
-            data: [700,500,400,600,300,100],
-            backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+            data: [{{ contIngresados }},{{ contEnProgreso }},{{ contSuspendido }},{{ contFinalizado }},{{ contParaRetirar }},{{ contRetirado }}],
+            backgroundColor : ['#00a65a', '#f39c12', '#f56954', '#00c0ef', '#3c8dbc', '#d2d6de'],
           }
         ]
       }
