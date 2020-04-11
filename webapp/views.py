@@ -82,13 +82,13 @@ def editarServicio(request, servicio_id):
     if request.method == "POST":
         form = editarServicioForm(request.POST, instance=servicio)
         if form.is_valid():
-            FormEstado_id = request.POST["estados"]
+            FormEstado_id = request.POST["estado"]
 
             pending_servicio = form.save(commit=False)                    
             
             estadoActualServicio = int(FormEstado_id)
             pending_servicio.estadoAc = estadoActualServicio
-
+        
             #si el estado_id del form es distinto al al ultimo estado_id registrado
             if estadoAnteriorServicio != estadoActualServicio:               
                 e=Estado.objects.get(pk=estadoActualServicio)
@@ -101,9 +101,8 @@ def editarServicio(request, servicio_id):
             pending_servicio.save()
             form.save_m2m()
             return redirect("Servicios")
-
     else:
-        form = editarServicioForm(initial={'estados':estadoAnteriorServicio}, instance = servicio)
+        form = editarServicioForm(initial={'estado':estadoAnteriorServicio}, instance = servicio)
         
     return render(request, 'webapp/servicios-modificar.html', {'servicio': servicio,'form': form, 'seccion': seccion})
 

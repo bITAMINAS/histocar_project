@@ -4,11 +4,11 @@
 #################################################################
 #################################################################
 from django import forms
-from webapp.models import Servicio, Usuario, Vehiculo
+from webapp.models import Servicio, Usuario, Vehiculo, Estado
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
 from django.utils.translation import gettext_lazy as _
-from django.forms import ModelForm, Select, MultipleChoiceField
+from django.forms import ModelForm, Select, MultipleChoiceField, Textarea
 from django.utils.datastructures import MultiValueDict
 
 ################################################################################
@@ -24,14 +24,22 @@ class ServicioForm(forms.ModelForm):
     class Meta:
         model = Servicio
         fields = ('fecha', 'textoOtros', 'kilometros', 'costo', 'vehiculo',  'tareas',  'estados')
-        widgets = { 'estados': SelectSingleAsList,}
+        widgets = {
+            'estados': SelectSingleAsList,
+            'textoOtros': Textarea(attrs={'cols': 80, 'rows': 4}),
+        }
 
 class editarServicioForm(forms.ModelForm):
+    
+    estado = forms.ModelChoiceField(queryset=Estado.objects.all(), required=True, empty_label = None)
     class Meta:
         model = Servicio
-        fields = ('fecha', 'textoOtros', 'kilometros', 'costo', 'vehiculo',  'tareas',  'estados')
-        widgets = { 'estados': SelectSingleAsList,}
-        
+        fields = ('fecha', 'textoOtros', 'kilometros', 'costo', 'vehiculo', 'tareas','estado')
+        widgets = { 
+           # 'estados': SelectSingleAsList,
+            'textoOtros': Textarea(attrs={'cols': 80, 'rows': 4}),
+        }
+
 
 class crearVehiculos(forms.ModelForm):
     class Meta:
