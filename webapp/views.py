@@ -239,20 +239,12 @@ def crearVehiculo(request):
 
 def crearVehiculoCliente(request):
     template_name='webapp/cliente/vehiculo-crear-cliente.html'
-<<<<<<< HEAD
     seccion = 'Alta de nuevo vehiculo'
-=======
-    seccion = 'Vehículo'
->>>>>>> desarrollo
     usuario = request.user
     if request.method == 'POST':
         form = crearVehiculosCliente(request.POST)
         if form.is_valid():
-<<<<<<< HEAD
             vehiculo = form.save(commit=False)
-=======
-            vehiculo = Vehiculo(commit=False)
->>>>>>> desarrollo
             vehiculo.duenio = usuario
             form.save()
             messages.success(request, 'Vehiculo creado y asignado correctamente')
@@ -311,6 +303,13 @@ def logout(request):
 ####VISTAS CLIENTE###############
 
 ####Vista listar vehiculos#####
+
+def verVehiculos(request):
+    template_name = 'webapp/vehiculos-ver.html'
+    vehiculos = Vehiculo.objects.order_by('id')
+    seccion = 'Listado de vehiculos'
+    return render(request, template_name, {'vehiculos': vehiculos, 'seccion': seccion})
+
 @login_required(login_url='login')
 def verVehiculosCliente(request):
     template_name='webapp/cliente/vehiculo-listar.html'
@@ -331,4 +330,11 @@ def borrarVehiculoCliente(request, vehiculo_id):
     else:
         messages.warning(request, 'Ocurrio un problema, quizas no es tu vehiculo.')
 
+    return redirect('VerVehiculos')
+
+def borrarVehiculo(request, vehiculo_id):
+    instancia = Vehiculo.objects.get(id=vehiculo_id)
+    instancia.is_active=False
+    instancia.save()
+    messages.success(request, 'Vehiculo dado de baja exitosamente')
     return redirect('VerVehiculos')
