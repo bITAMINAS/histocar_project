@@ -34,7 +34,7 @@ class editarServicioForm(forms.ModelForm):
     estado = forms.ModelChoiceField(queryset=Estado.objects.all(), required=True, empty_label = None)
     class Meta:
         model = Servicio
-        fields = ('fecha', 'textoOtros', 'kilometros', 'costo', 'vehiculo', 'tareas','estado')
+        fields = ('fecha', 'textoOtros', 'kilometros', 'costo', 'vehiculo', 'tareas')
         widgets = { 
            # 'estados': SelectSingleAsList,
             'textoOtros': Textarea(attrs={'cols': 80, 'rows': 4}),
