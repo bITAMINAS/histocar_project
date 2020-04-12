@@ -32,9 +32,6 @@ def index(request):
     contFinalizado =  servicios.filter(estadoAc=14, fecha__range=[enddate, startdate]).count()
     contParaRetirar = servicios.filter(estadoAc=15, fecha__range=[enddate, startdate]).count()
     contRetirado =    servicios.filter(estadoAc=16, fecha__range=[enddate, startdate]).count()
-    print(startdate)
-    print(enddate)
-    print(contIngresados)
     ################
     clientes_count = Usuario.objects.filter(is_client=True, is_active=True).count()
     vehiculos_count = Vehiculo.objects.filter(duenio__is_active=True).count()
