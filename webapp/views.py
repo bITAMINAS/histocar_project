@@ -1,35 +1,49 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
-from datetime import datetime
+from datetime import datetime, timedelta, date
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 #Cargamos los modelos
 from .models import Servicio, Usuario, Vehiculo, EstadoServicio, Estado
-from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm, editarUsuarioForm, crearVehiculosCliente
+from .forms import ServicioForm, registroUsuario, Login, crearVehiculos, editarServicioForm, editarUsuarioForm, crearVehiculosCliente, editarVehiculoForm
 
 
 
 @login_required(login_url='login')
 def index(request):
     template_name='webapp/index.html'
+    startdate = timezone.now()
+    enddate = startdate - timedelta(days=31)
+    ################
     servicios = Servicio.objects.all().order_by('id')
-    ssIngresados = servicios.filter(estadoAc=11)
-    ssEnProgreso = servicios.filter(estadoAc=12)
-    ssSuspendido = servicios.filter(estadoAc=13)
-    ssFinalizado = servicios.filter(estadoAc=14)
+    ssIngresados =  servicios.filter(estadoAc=11)
+    ssEnProgreso =  servicios.filter(estadoAc=12)
+    ssSuspendido =  servicios.filter(estadoAc=13)
+    ssFinalizado =  servicios.filter(estadoAc=14)
     ssParaRetirar = servicios.filter(estadoAc=15)
-    ssRetirado = servicios.filter(estadoAc=16)
+    ssRetirado =    servicios.filter(estadoAc=16)
+    ################
+    contIngresados =  servicios.filter(estadoAc=11, fecha__range=[enddate, startdate]).count()
+    contEnProgreso =  servicios.filter(estadoAc=12, fecha__range=[enddate, startdate]).count()
+    contSuspendido =  servicios.filter(estadoAc=13, fecha__range=[enddate, startdate]).count()
+    contFinalizado =  servicios.filter(estadoAc=14, fecha__range=[enddate, startdate]).count()
+    contParaRetirar = servicios.filter(estadoAc=15, fecha__range=[enddate, startdate]).count()
+    contRetirado =    servicios.filter(estadoAc=16, fecha__range=[enddate, startdate]).count()
+    print(startdate)
+    print(enddate)
+    print(contIngresados)
+    ################
     clientes_count = Usuario.objects.filter(is_client=True, is_active=True).count()
     vehiculos_count = Vehiculo.objects.filter(duenio__is_active=True).count()
-    print(ssIngresados)
-    #print(ssIngresados)
     seccion = 'Inicio'
     context = {'servicios': servicios, 'seccion': seccion, 'ssIngresados': ssIngresados, 'ssEnProgreso': ssEnProgreso,
                 'ssSuspendido': ssSuspendido, 'ssFinalizado': ssFinalizado, 'ssParaRetirar': ssParaRetirar, 
-                'ssRetirado': ssRetirado, 'clientes_count':clientes_count, 'vehiculos_count':vehiculos_count}
+                'ssRetirado': ssRetirado, 'clientes_count':clientes_count, 'vehiculos_count':vehiculos_count, 
+                'contIngresados': contIngresados, 'contEnProgreso': contEnProgreso, 'contSuspendido': contSuspendido, 
+                'contFinalizado': contFinalizado, 'contParaRetirar': contParaRetirar, 'contRetirado': contRetirado,}
     return render(request, template_name, context)
 
 
@@ -40,8 +54,7 @@ def index(request):
 @login_required(login_url='login')
 def serviciosView(request):
     template_name='webapp/servicios-lista.html'
-    servicios = Servicio.objects.all() #.order_by('id')
-    
+    servicios = Servicio.objects.order_by('-id')
     seccion = 'Servicios'
     return render(request, template_name, {'servicios': servicios, 'seccion': seccion})
 
@@ -83,13 +96,13 @@ def editarServicio(request, servicio_id):
     if request.method == "POST":
         form = editarServicioForm(request.POST, instance=servicio)
         if form.is_valid():
-            FormEstado_id = request.POST["estados"]
+            FormEstado_id = request.POST["estado"]
 
             pending_servicio = form.save(commit=False)                    
             
             estadoActualServicio = int(FormEstado_id)
             pending_servicio.estadoAc = estadoActualServicio
-
+        
             #si el estado_id del form es distinto al al ultimo estado_id registrado
             if estadoAnteriorServicio != estadoActualServicio:               
                 e=Estado.objects.get(pk=estadoActualServicio)
@@ -102,9 +115,8 @@ def editarServicio(request, servicio_id):
             pending_servicio.save()
             form.save_m2m()
             return redirect("Servicios")
-
     else:
-        form = editarServicioForm(initial={'estados':estadoAnteriorServicio}, instance = servicio)
+        form = editarServicioForm(initial={'estado':estadoAnteriorServicio}, instance = servicio)
         
     return render(request, 'webapp/servicios-modificar.html', {'servicio': servicio,'form': form, 'seccion': seccion})
 
@@ -253,6 +265,23 @@ def crearVehiculoCliente(request):
     else:
         form = crearVehiculosCliente()
     return render(request, template_name, {'form': form, 'seccion': seccion})
+
+def editarVehiculo(request, vehiculo_id):
+    seccion = 'Vehículos'
+    vehiculo = Vehiculo.objects.get(pk=vehiculo_id)
+    form = editarVehiculoForm(request.POST, instance = vehiculo)
+    if request.method == "POST":
+        if form.is_valid():
+            vehiculo=form.save()
+            vehiculo.save()
+            messages.success(request, 'Vehículo editado exitosamente.')
+            usuario_id = vehiculo.duenio.id
+            return redirect("Cliente", usuario_id = usuario_id)
+            
+    else:
+        form = editarVehiculoForm(instance=vehiculo)
+    
+    return render(request, 'webapp/vehiculo-editar.html', {'vehiculo': vehiculo, 'seccion': seccion, 'form': form})  
 
 
 
