@@ -178,7 +178,33 @@
 
       </div>
       <div class="col-md-6">
-        <!-- DONUT CHART -->
+
+      <!-- BAR CHART -->
+      <div class="card card-success">
+        <div class="card-header">
+          <h3 class="card-title">Bar Chart</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+          </div>
+          <p>{% for servicio in new_datalist|dictsortreversed:"cantidad" %}
+
+            La tarea {{ servicio.tarea }} se pidio {{ servicio.cantidad }} veces.<br>
+                           
+           {% endfor %}</p>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+      <!-- DONUT CHART -->
       <div class="card card-info">
         <div class="card-header">
           <h3 class="card-title">Estado de servicios</h3>
@@ -191,15 +217,6 @@
         <div class="card-body">
           <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 350px; max-width: 100%;"></canvas>
           <p>Datos de los últimos 31 días</p>
-          {% for servicio in new_datalist %}
-
-          
-           La tarea {{ servicio.tareas }} se ejecuto {{ servicio.cantidad }} veces,<br>
-                            
-
-          {% endfor %}
-
-          
         </div>
         
         <!-- /.card-body -->
@@ -218,6 +235,37 @@
        * -------
        * Here we will create a few charts using ChartJS
        */
+
+      //-------------
+      //- BAR CHART -
+      //-------------
+      var barChartCanvas = $('#barChart').get(0).getContext('2d')
+
+      var barChartOptions = {
+        responsive              : true,
+        maintainAspectRatio     : false,
+        datasetFill             : false
+      }
+      var barChartData = {
+        labels: [
+        {% for servicio in new_datalist|dictsortreversed:"cantidad" %} 
+        '{{ servicio.tarea }}',{% endfor %}
+        ],
+        datasets: [
+          {
+            label               : 'Tareas más pedidas',
+            backgroundColor     : 'rgba(60,141,188,0.9)',
+            borderColor         : 'rgba(60,141,188,0.8)',
+            barPercentage       : 0.5,
+            data: [{% for servicio in new_datalist|dictsortreversed:"cantidad" %}{{ servicio.cantidad }},{% endfor %}]
+          }
+        ]
+      }
+      var barChart = new Chart(barChartCanvas, {
+        type: 'bar', 
+        data: barChartData,
+        options: barChartOptions
+      })
   
       //-------------
       //- DONUT CHART -
