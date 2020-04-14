@@ -191,6 +191,15 @@
         <div class="card-body">
           <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 350px; max-width: 100%;"></canvas>
           <p>Datos de los últimos 31 días</p>
+          {% for servicio in new_datalist %}
+
+          
+           La tarea {{ servicio.tareas }} se ejecuto {{ servicio.cantidad }} veces,<br>
+                            
+
+          {% endfor %}
+
+          
         </div>
         
         <!-- /.card-body -->
