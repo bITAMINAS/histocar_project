@@ -4,12 +4,13 @@
 #################################################################
 #################################################################
 from django import forms
-from webapp.models import Servicio, Usuario, Vehiculo, Estado
+from django.contrib.auth.forms import (ReadOnlyPasswordHashField,
+                                       UserCreationForm)
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
-from django.utils.translation import gettext_lazy as _
-from django.forms import ModelForm, Select, MultipleChoiceField, Textarea
+from django.forms import ModelForm, MultipleChoiceField, Select, Textarea
 from django.utils.datastructures import MultiValueDict
+from django.utils.translation import gettext_lazy as _
+from webapp.models import Estado, Marca, Servicio, Usuario, Vehiculo
 
 ################################################################################
 
@@ -51,8 +52,10 @@ class crearVehiculos(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(crearVehiculos, self).__init__(*args, **kwargs)
         self.fields['duenio'].queryset = Usuario.objects.filter(is_client=True)
+       
 
 class editarVehiculoForm(forms.ModelForm):
+
     class Meta:
         model = Vehiculo
         fields = ('__all__')
@@ -68,7 +71,7 @@ class editarVehiculoForm(forms.ModelForm):
 class crearVehiculosCliente(forms.ModelForm):
      class Meta:
         model = Vehiculo
-        fields = ('modelo', 'color', 'nroChasis', 'matricula', 'anio', 'tipoCombustible')
+        fields = ('modelo','color', 'nroChasis', 'matricula', 'anio', 'tipoCombustible')
         labels = {
             'nroChasis': _('Número de chasis'),
             'anio': _('Año'),
@@ -154,5 +157,3 @@ class editarUsuarioForm(forms.ModelForm):
             'dirCalle': _('Calle'),
             'dirNumero': _('Numero'), 
         }
-
-        

@@ -8,17 +8,21 @@
     <link rel="stylesheet" href="{% static 'webapp/plugins/select2/css/select2.min.css' %}">
       <link rel="stylesheet" href="{% static 'webapp/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">    
     <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Inicio</a></li>  
+        <li class="breadcrumb-item active" aria-current="page">Registro Vehicular</li>
+      </ol>
+    </nav>
   {% endblock %}
   <div class="col-xl-12 col-md-12 mb-12">
     <div class="card card-default">
       <div class="card-header">
         <h3 class="card-title">Nuevo vehículo</h3>
       </div>
-      <form method="POST" class="RegistroUsuario">{% csrf_token %}
-        <div class="card-body">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="{{form.duenio.label}}">{{form.duenio.label}}</label>
+      <form method="POST" class="RegistroUsuario">{% csrf_token %}>
+          <div class="form-group">
+            <label for="{{form.duenio.label}}">{{form.duenio.label}}</label>
               <!-- Si hay errores... -->
               {%if form.duenio.errors %}
                 <!-- Muestro el campo con indicación de error... -->
@@ -35,9 +39,9 @@
                 <!-- Si no hay errores, muestro el control normal -->
                 {% render_field form.duenio class="form-control" %}
               {% endif %}
-            </div>
-
-            <div class="form-group">
+          </div>
+  
+          <div class="form-group">
               <label for="{{form.modelo.label}}">{{form.modelo.label}}</label>
               <!-- Si hay errores... -->
               {%if form.modelo.errors %}
@@ -55,8 +59,9 @@
                 <!-- Si no hay errores, muestro el control normal -->
                 {% render_field form.modelo class="form-control" %}
               {% endif %}
+              </div>
             </div>
-
+         
             <div class="form-group">
               <label for="{{form.color.label}}">{{form.color.label}}</label>
               <!-- Si hay errores... -->

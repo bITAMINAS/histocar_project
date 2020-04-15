@@ -7,11 +7,21 @@
 {% endblock %}
 
 {% block content %} 
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Inicio</a></li>  
+    <li class="breadcrumb-item active" aria-current="page">Servicios</li>
+  </ol>
+</nav>
 <div class="row">
   <div class="col-12">
     <div class="card card-primary card-outline">
       <div class="card-header">
         <h3 class="card-title">Lista de servicios</h3>
+        <div align="right" class="btn_crear mb-3">
+          <a href="crear-servicio" type="button" class="btn btn-primary">Crear Servicio</a>
+        </div>
+         
       </div>
       <!-- /.card-header -->
       <div class="card-body">

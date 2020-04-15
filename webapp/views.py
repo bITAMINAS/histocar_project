@@ -259,6 +259,7 @@ def crearVehiculoCliente(request):
         if form.is_valid():
             vehiculo = Vehiculo(commit=False)
             vehiculo.duenio = usuario
+        
             form.save()
             messages.success(request, 'Vehiculo creado y asignado correctamente')
             return redirect('index')

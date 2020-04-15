@@ -36,7 +36,7 @@ urlpatterns = [
     path('clientes', views.clientesView, name='Clientes'),
     path('cliente/<int:usuario_id>', views.clienteView, name='Cliente'),
     path('cliente-crear', views.clienteCrearView, name='ClienteCrear'),
-
+    
     
     
    

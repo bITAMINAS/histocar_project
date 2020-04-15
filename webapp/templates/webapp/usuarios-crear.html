@@ -8,6 +8,12 @@
   <div class="col-xl-12 col-md-12 mb-12">
     <div class="card card-default">
       <div class="card-header">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Registro</li>
+          </ol>
+        </nav>
         <h3 class="card-title">Nuevo usuario</h3>
       </div>
       <form method="POST" class="RegistroUsuario" role="form">{% csrf_token %}

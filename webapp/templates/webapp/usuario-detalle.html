@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 {% block content %} 
-
-
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="#">Usuarios</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+  </ol>
+</nav>
 <div class="container-fluid">
   <div class="row">
     <!-- Col -->
 	  <div class="col-md-4">
-
+   
       <!-- Profile Image -->
       <div class="card card-primary card-outline">
         <div class="card-body box-profile">
@@ -18,6 +23,9 @@
           <ul class="list-group list-group-unbordered mb-3">
             <li class="list-group-item">
               <b>Dirección</b> <a class="float-right">{{ usuario.dirCalle}} {{ usuario.dirNumero }}</a>
+            </li>
+            <li class='list-group-item'>
+              <b>Localidad</b> <a class='float-right'>{{ usuario.dirCiudad}} {{ usuario.dirDepartamento }}</a>
             </li>
             <li class="list-group-item">
               <b>Teléfono</b> <a class="float-right">{{ usuario.telefono}}</a>

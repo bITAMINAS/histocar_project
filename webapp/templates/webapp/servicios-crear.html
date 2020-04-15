@@ -8,7 +8,14 @@
     <link rel="stylesheet" href="{% static 'webapp/plugins/select2/css/select2.min.css' %}">
       <link rel="stylesheet" href="{% static 'webapp/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">    
     <link rel="stylesheet" href="{% static 'webapp/plugins/toastr/toastr.min.css' %}">
-  {% endblock %}
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Inicio</a></li>  
+        <li class="breadcrumb-item"><a href="#">Servicios</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Crear</li>
+      </ol>
+    </nav>
+    {% endblock %}
   <div class="col-xl-12 col-md-12 mb-12">
     <div class="card card-default">
       <div class="card-header">
