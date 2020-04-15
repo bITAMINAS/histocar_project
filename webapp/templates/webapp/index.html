@@ -182,7 +182,7 @@
       <!-- BAR CHART -->
       <div class="card card-success">
         <div class="card-header">
-          <h3 class="card-title">Bar Chart</h3>
+          <h3 class="card-title">Ranking tareas más pedidas</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -194,11 +194,12 @@
           <div class="chart">
             <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
           </div>
+          <!--
           <p>{% for servicio in new_datalist|dictsortreversed:"cantidad" %}
 
             La tarea {{ servicio.tarea }} se pidio {{ servicio.cantidad }} veces.<br>
                            
-           {% endfor %}</p>
+           {% endfor %}</p>-->
         </div>
         <!-- /.card-body -->
       </div>
@@ -244,7 +245,16 @@
       var barChartOptions = {
         responsive              : true,
         maintainAspectRatio     : false,
-        datasetFill             : false
+        datasetFill             : false,
+        scales: {
+                  yAxes: [{
+                    ticks: { beginAtZero: true }
+                  }],
+                  xAxes: [{
+                    ticks: { autoSkip: false }
+                  }]
+                }
+
       }
       var barChartData = {
         labels: [
@@ -253,7 +263,7 @@
         ],
         datasets: [
           {
-            label               : 'Tareas más pedidas',
+            label               : '',
             backgroundColor     : 'rgba(60,141,188,0.9)',
             borderColor         : 'rgba(60,141,188,0.8)',
             barPercentage       : 0.5,
