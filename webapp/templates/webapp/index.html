@@ -107,6 +107,9 @@
                   <td>
                     {{ servicio.vehiculo.duenio }} 
                   </td>
+                  <td>
+                  <a class="btn btn-primary" href="{%url "ModificarServicio" servicio.id %}" role="button" >Editar</a>
+                  </td>
                 </tr>
 
                 <tr >
@@ -155,6 +158,9 @@
                   </td>
                   <td>
                     {{ servicio.vehiculo.duenio }} 
+                  </td>
+                  <td>
+                  <a class="btn btn-success" href="{%url "ModificarServicio" servicio.id %}" role="button" >Editar</a>
                   </td>
                 </tr>
 
