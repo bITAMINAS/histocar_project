@@ -114,18 +114,18 @@
             </div>
 
             <div class="form-group">
-              <label for="{{form.estados.label}}">{{form.estados.label}}</label>
-              {%if form.estados.errors %}
-                {% render_field form.estados class="form-control is-invalid" %}
-                  {% for error in form.estados.errors %}
+              <label for="{{form.estado.label}}">{{form.estado.label}}</label>
+              {%if form.estado.errors %}
+                {% render_field form.estado class="form-control is-invalid" %}
+                  {% for error in form.estado.errors %}
                   <script>
                     $('').ready(function() {
-                      toastr.error('{{ error }}','Estados')
+                      toastr.error('{{ error }}','Estado')
                     });
                   </script>
                   {% endfor %}
               {% else %}
-                {% render_field form.estados class="form-control" %}
+                {% render_field form.estado class="form-control" %}
               {% endif %}
             </div>
           </div>
