@@ -40,24 +40,24 @@ def index(request):
     # https://stackoverflow.com/questions/7811556/how-do-i-convert-a-django-queryset-into-list-of-dicts
     # https://es.stackoverflow.com/questions/187968/contar-las-palabras-repetidas-en-un-diccionario-en-python
 
-    tareasmasusadas = Servicio.objects.values('tareas__nombre')
-    enlista = list(tareasmasusadas)
-    new_datalist = []
+    nombreTarea = Servicio.objects.values('tareas__nombre')
+    listadoTareas = list(nombreTarea)
+    listaDeTareas = []
     items_found = []
-    for element in enlista :
+    for element in listadoTareas :
         if (not element in items_found):
             # items_found acumula los dic que ya se analizaron para no repetirlos
             items_found.append(element)
-            elem_count = enlista.count(element) # Se cuentan los elementos
+            elem_count = listadoTareas.count(element) # Se cuentan los elementos
             if elem_count > 1:
                 # Si hay mas de 1 repeticion, crear el diccionario nuevo
                 new_elem = {}
                 new_elem['tarea'] = element['tareas__nombre']
                 new_elem['cantidad'] = elem_count 
-                new_datalist.append(new_elem)
+                listaDeTareas.append(new_elem)
 
     seccion = 'Inicio'
-    context = {'new_datalist': new_datalist, 'servicios': servicios, 'seccion': seccion, 'ssIngresados': ssIngresados, 'ssEnProgreso': ssEnProgreso,
+    context = {'listaDeTareas': listaDeTareas, 'servicios': servicios, 'seccion': seccion, 'ssIngresados': ssIngresados, 'ssEnProgreso': ssEnProgreso,
                 'ssSuspendido': ssSuspendido, 'ssFinalizado': ssFinalizado, 'ssParaRetirar': ssParaRetirar, 
                 'ssRetirado': ssRetirado, 'clientes_count':clientes_count, 'vehiculos_count':vehiculos_count, 
                 'contIngresados': contIngresados, 'contEnProgreso': contEnProgreso, 'contSuspendido': contSuspendido, 

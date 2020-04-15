@@ -195,7 +195,7 @@
             <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
           </div>
           <!--
-          <p>{% for servicio in new_datalist|dictsortreversed:"cantidad" %}
+          <p>{% for servicio in listaDeTareas|dictsortreversed:"cantidad" %}
 
             La tarea {{ servicio.tarea }} se pidio {{ servicio.cantidad }} veces.<br>
                            
@@ -258,7 +258,7 @@
       }
       var barChartData = {
         labels: [
-        {% for servicio in new_datalist|dictsortreversed:"cantidad" %} 
+        {% for servicio in listaDeTareas|dictsortreversed:"cantidad" %} 
         '{{ servicio.tarea }}',{% endfor %}
         ],
         datasets: [
@@ -267,7 +267,7 @@
             backgroundColor     : 'rgba(60,141,188,0.9)',
             borderColor         : 'rgba(60,141,188,0.8)',
             barPercentage       : 0.5,
-            data: [{% for servicio in new_datalist|dictsortreversed:"cantidad" %}{{ servicio.cantidad }},{% endfor %}]
+            data: [{% for servicio in listaDeTareas|dictsortreversed:"cantidad" %}{{ servicio.cantidad }},{% endfor %}]
           }
         ]
       }
