@@ -62,24 +62,56 @@
       <div class="card">
         <div class="card-header p-2">
           <ul class="nav nav-pills">
-            <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Tareas relizadas</a></li>
-            <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Otros</a></li>
+            <li class="nav-item"><a class="nav-link active" href="#tasks" data-toggle="tab">Tareas relizadas</a></li>
+            <li class="nav-item"><a class="nav-link" href="#status" data-toggle="tab">Estados</a></li>
           </ul>
         </div><!-- /.card-header -->
         <div class="card-body">
           <div class="tab-content">
-            <div class="active tab-pane" id="activity">
+            <div class="active tab-pane" id="tasks">
               <!-- Post -->
               <div class="post">
-                <ul> 
+                <ul class="list-unstyled"> 
                   {% for tarea in servicio.tareas.all %}
-                  <li>{{tarea.nombre}}</li>
+                    <li class="p-1"><i class="fas fa-wrench pr-2"></i> {{tarea.nombre}}</li>
                   {% endfor %}
                 </ul>  
               </div>
               <!-- /.post -->
+              <div class="post pl-4">
+                <strong><i class="far fa-file-alt mr-1"></i> Otras tareas</strong>
+                <p class="text-muted ml-3"> {{ servicio.textoOtros }} </p>
+              </div>
             </div>
-            <div class="tab-pane" id="settings">
+            <div class="tab-pane" id="status">
+              <div class="timeline timeline-inverse">
+                <!-- timeline time label -->
+                <div class="time-label">
+                  <span class="bg-danger">
+                    {{ servicio.estadoservicio_set.last.fecha|date:'d N Y - G:i' }} 
+                  </span>
+                </div>
+                <!-- /.timeline-label -->
+                
+                {% for registro in servicio.estadoservicio_set.all reversed %}
+                <!-- timeline item -->
+                <div>
+                  <i class="fas fa-wrench bg-primary"></i>
+                      <div class="timeline-item">
+                    
+                        <span class="time"><i class="far fa-clock"></i> {{ registro.fecha }}</span>
+    
+                        <h3 class="timeline-header border-0"><a href="#">{{ registro.estado.nombre }}: </a> {{ registro.estado.descripcion }}
+                        </h3>
+                      </div>
+                </div>
+                <!-- END timeline item -->
+                {% endfor %}  
+                
+                <div>
+                  <i class="far fa-clock bg-gray"></i>
+                </div>
+              </div>
                 
             </div>
             <!-- /.tab-pane -->
