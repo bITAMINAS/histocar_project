@@ -294,7 +294,7 @@ def editarVehiculo(request, vehiculo_id):
             vehiculo.save()
             messages.success(request, 'Vehículo editado exitosamente.')
             usuario_id = vehiculo.duenio.id
-            return redirect("Cliente", usuario_id = usuario_id)
+            return redirect("VerVehiculos")
             
     else:
         form = editarVehiculoForm(instance=vehiculo)
