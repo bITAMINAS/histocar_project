@@ -190,7 +190,7 @@ def detallesUsuario(request, usuario_id):
 def editarUsuario(request, pk):
     seccion = 'Usuarios'
     usuario = Usuario.objects.get(pk=pk)
-    form = editarUsuarioForm(request.POST, instance = usuario)
+    form = editarUsuarioForm(request.POST, request.FILES, instance = usuario)
     if request.method == "POST":
         if form.is_valid():
             usuario=form.save()

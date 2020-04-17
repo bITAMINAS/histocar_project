@@ -10,9 +10,26 @@
       <div class="card-header">
         <h3 class="card-title">Modificar usuario</h3>
       </div>
-      <form method="POST" class="editarUsuarioForm">{% csrf_token %}
+      <form method="POST" class="editarUsuarioForm" enctype="multipart/form-data">{% csrf_token %}
         <div class="card-body">
           <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group"> 
+                <label for="{{form.avatar.label}}">{{form.avatar.label}}</label>
+              {%if form.avatar.errors %}
+              {% render_field form.avatar class="form-control is-invalid" %}
+              {% for error in form.avatar.errors %}
+              <script>
+                $('').ready(function() {
+                  toastr.error('{{ error }}','avatar')
+                });
+              </script>
+              {% endfor %}
+              {% else %}
+              {% render_field form.avatar class="form-control" %}
+              {% endif %}
+              </div>
+            </div>
             <div class="col-sm-4">
               <div class="form-group"> 
                 <label for="{{form.nombre.label}}">{{form.nombre.label}}</label>

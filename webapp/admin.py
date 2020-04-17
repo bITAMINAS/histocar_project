@@ -33,7 +33,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = Usuario
-        fields = ('documento', 'password', 'email', 'telefono', 'is_active', 'is_admin', 'dirDepartamento', 'dirCiudad', 'dirCalle', 'dirNumero')
+        fields = ('documento', 'password', 'email', 'telefono', 'is_active', 'is_admin', 'dirDepartamento', 'dirCiudad', 'dirCalle', 'dirNumero', 'avatar')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -60,7 +60,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = Usuario
-        fields = ('documento', 'password', 'email', 'telefono', 'is_active', 'is_admin', 'is_client', 'dirDepartamento', 'dirCiudad', 'dirCalle', 'dirNumero')
+        fields = ('documento', 'password', 'email', 'telefono', 'is_active', 'is_admin', 'is_client', 'dirDepartamento', 'dirCiudad', 'dirCalle', 'dirNumero', 'avatar')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -80,7 +80,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('documento', 'email', 'nombre', 'apellido', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('documento', 'password')}),
+        (None, {'fields': ('avatar', 'documento', 'password')}),
         ('Info personal', {'fields': ('email','nombre', 'apellido', 'telefono')}),
         ('Ubicacion', {'fields': ('dirDepartamento', 'dirCiudad', 'dirCalle', 'dirNumero')}),
         ('Permisos', {'fields': ('is_admin', 'is_staff', 'is_client', 'tipoUsuario')}),
@@ -90,7 +90,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('documento', 'email', 'password1', 'password2', 'nombre', 'apellido', 'telefono','dirDepartamento', 'dirCiudad', 'dirCalle', 'dirNumero'),
+            'fields': ('avatar', 'documento', 'email', 'password1', 'password2', 'nombre', 'apellido', 'telefono','dirDepartamento', 'dirCiudad', 'dirCalle', 'dirNumero'),
         }),
     )
     search_fields = ('email',)

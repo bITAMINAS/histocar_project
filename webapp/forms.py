@@ -8,7 +8,7 @@ from webapp.models import Servicio, Usuario, Vehiculo, Estado
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
 from django.utils.translation import gettext_lazy as _
-from django.forms import ModelForm, Select, MultipleChoiceField, Textarea
+from django.forms import ModelForm, Select, MultipleChoiceField, Textarea, FileInput
 from django.utils.datastructures import MultiValueDict
 
 ################################################################################
@@ -141,9 +141,13 @@ class Login(forms.Form): # Note: forms.Form NOT forms.ModelForm
 
 
 class editarUsuarioForm(forms.ModelForm):
+    #avatar = forms.ImageField(widget=forms.FileField)
     class Meta:
         model = Usuario
-        fields = ('nombre', 'apellido', 'email', 'telefono','dirDepartamento','dirCiudad','dirCalle','dirNumero')
+        fields = ('nombre', 'apellido', 'email', 'telefono','dirDepartamento','dirCiudad','dirCalle','dirNumero', 'avatar')
+        widgets = {
+            'avatar' : FileInput(),
+        }
         labels = {
             'nombre': _('Nombre'),
             'apellido': _('Apellido'),

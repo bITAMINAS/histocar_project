@@ -29,6 +29,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_client = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
+    avatar = models.ImageField(upload_to="media/avatar", blank=True, default="media/avatar/default.jpg")
 
     USERNAME_FIELD = 'documento'
     REQUIRED_FIELDS = ['email','telefono']
