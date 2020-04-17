@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 {% block content %} 
 <!-- Content Row -->
-  {% load widget_tweaks %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="http://127.0.0.1:8000/">Inicio</a></li>
+      <li class="breadcrumb-item"><a href="http://127.0.0.1:8000/servicios">Servicios</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Editar</li>
+    </ol>
+  </nav> 
+{% load widget_tweaks %}
   <!-- Toastr -->
   {% load static %}
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-      <li class="breadcrumb-item"><a href="servicio">Servicios</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Modificar</li>
-    </ol>
-  </nav>
+  
   <div class="col-xl-12 col-md-12 mb-12">
     <div class="card card-default">
       <div class="card-header">
@@ -187,7 +188,7 @@
         singleDatePicker: true,
         timePicker: true,
         locale: {
-        format: 'YYYY-MM-DD hh:mm'
+        format: 'DD/MM/YYYY hh:mm:ss'
         }
       })
     })

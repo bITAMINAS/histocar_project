@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+    'django_bootstrap_breadcrumbs',    
 ]
+
 AUTH_USER_MODEL = 'webapp.Usuario'
 
 MIDDLEWARE = [

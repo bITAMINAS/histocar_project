@@ -156,4 +156,7 @@ class editarUsuarioForm(forms.ModelForm):
             'dirCiudad': _('Ciudad'),
             'dirCalle': _('Calle'),
             'dirNumero': _('Numero'), 
+          
+
         }
+
