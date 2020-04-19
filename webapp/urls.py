@@ -29,7 +29,7 @@ urlpatterns = [
     # Vehículos
     path('ver-vehiculos', views.verVehiculosCliente, name='VerVehiculosCliente'),
     path('crear-vehiculo', views.crearVehiculo, name='CrearVehiculo'),
-    path('vehiculo-baja/<int:vehiculo_id>', views.borrarVehiculoCliente, name="BorrarVehiculoCliente"),
+    path('vehiculo-baja/<int:vehiculo_id>', views.borrarVehiculo, name="BorrarVehiculo"),
     path('crear-vehiculo-cliente', views.crearVehiculoCliente, name='crearVehiculoCliente'),
     path('editar-vehiculo/<int:vehiculo_id>', views.editarVehiculo, name='editarVehiculo'),
     path('lista-vehiculos', views.verVehiculos, name='VerVehiculos'),

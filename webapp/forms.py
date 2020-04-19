@@ -104,11 +104,9 @@ class registroUsuario(UserCreationForm):
             },
         }
 
-    
-    # class editarServicioForm(forms.ModelForm):
-    # class Meta:
-    #     model = Servicio
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password1'].widget.attrs.update({'autocomplete': 'new-password'})
 
     def clean_password2(self):
         # Check that the two password entries match
