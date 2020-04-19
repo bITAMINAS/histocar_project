@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block content %} 
+{% block content %}
   
   <script>
      $('.accordion-toggle').click(function(){
@@ -108,7 +108,14 @@
                     {{ servicio.vehiculo.duenio }} 
                   </td>
                   <td>
-                  <a class="btn btn-primary" href="{%url "ModificarServicio" servicio.id %}" role="button" >Editar</a>
+                  <!-- Button trigger modal -->
+                    <button class="btn btn-primary" onclick="abrir_modal_edicion('{% url 'EditarServicioDashboard' servicio.id %}')">
+                    Editar
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" role="dialog">
+                    </div>
                   </td>
                 </tr>
 
@@ -160,7 +167,15 @@
                     {{ servicio.vehiculo.duenio }} 
                   </td>
                   <td>
-                  <a class="btn btn-success" href="{%url "ModificarServicio" servicio.id %}" role="button" >Editar</a>
+                    <!-- Button trigger modal -->
+                    <button class="btn btn-primary" onclick="abrir_modal_edicion('{% url 'EditarServicioDashboard' servicio.id %}')">
+                    Editar
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" role="dialog">
+                    </div>
+
                   </td>
                 </tr>
 
@@ -225,7 +240,7 @@
           <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 350px; max-width: 100%;"></canvas>
           <p>Datos de los últimos 31 días</p>
         </div>
-        
+          
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
@@ -317,10 +332,21 @@
       })
   
       
-    })
+    })  
   </script>
-  
+ {% block javascripts %} 
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  function abrir_modal_edicion(url){
+      $('#myModal').load(url, function(){
+          $(this).modal('show');
+      });
+  }
+</script>
+{% endblock %}
+
 {%endblock%}
+
 
 {% block stylesheets %} 
   <style>
