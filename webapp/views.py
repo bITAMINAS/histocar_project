@@ -138,7 +138,37 @@ def editarServicio(request, servicio_id):
         
     return render(request, 'webapp/servicios-modificar.html', {'servicio': servicio,'form': form, 'seccion': seccion})
 
+def editarServicioDashboard(request, servicio_id):
+    seccion = 'Editar servicio'
+    servicio = Servicio.objects.get(pk=servicio_id)
+    estadoAnteriorServicio = servicio.estados.latest('estadoservicio__fecha').id
 
+    if request.method == "POST":
+        form = editarServicioForm(request.POST, instance=servicio)
+        if form.is_valid():
+            FormEstado_id = request.POST["estado"]
+
+            pending_servicio = form.save(commit=False)                    
+            
+            estadoActualServicio = int(FormEstado_id)
+            pending_servicio.estadoAc = estadoActualServicio
+        
+            #si el estado_id del form es distinto al al ultimo estado_id registrado
+            if estadoAnteriorServicio != estadoActualServicio:               
+                e=Estado.objects.get(pk=estadoActualServicio)
+                s=pending_servicio
+                
+                servicioEstado = EstadoServicio(estado=e, servicio=s, fecha=datetime.now())
+                
+                servicioEstado.save()
+
+            pending_servicio.save()
+            form.save_m2m()
+            return redirect("index")
+    else:
+        form = editarServicioForm(initial={'estado':estadoAnteriorServicio}, instance = servicio)
+        
+    return render(request, 'webapp/servicio-editar-dashboard.html', {'servicio': servicio,'form': form, 'seccion': seccion})
 
 def borrarServicio(request, servicio_id):
     instancia = Servicio.objects.get(id=servicio_id)
