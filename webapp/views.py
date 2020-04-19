@@ -395,7 +395,6 @@ def borrarVehiculoCliente(request, vehiculo_id):
 
 def borrarVehiculo(request, vehiculo_id):
     instancia = Vehiculo.objects.get(id=vehiculo_id)
-    instancia.is_active=False
-    instancia.save()
-    messages.success(request, 'Vehiculo dado de baja exitosamente')
+    instancia.delete()
+    messages.success(request, 'Vehículo dado de baja exitosamente')
     return redirect('VerVehiculos')

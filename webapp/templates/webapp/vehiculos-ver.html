@@ -30,27 +30,20 @@
           {% for vehiculo in vehiculos %} 
             <tr>
               <td>{{ vehiculo.id }}</td>
-              <td>
-              <strong>
-              {{ vehiculo.modelo }}
-              </strong>
+              <td>           
+                {{ vehiculo.modelo }}
               </td>
               <td>{{ vehiculo.matricula }}</td>
               <td>
-                  <strong>
                   {{ vehiculo.duenio.nombre }} {{ vehiculo.duenio.apellido }}
-                  </strong>
                </td>
                <td>{{ vehiculo.duenio.telefono }}</td>
               <td class="text-center">
                 <div class="btn-group">
-                  <a class="btn btn-default" href= "{%url "Cliente" vehiculo.duenio.id %}" role="button">
-                    <i class="fas fa-eye" ></i>
-                  </a>
                   <a class="btn btn-default" href= "{%url "editarVehiculo" vehiculo.id %}" role="button">
                     <i class="fas fa-edit"></i>
                   </a>
-                  <a class="btn btn-default" href= "{%url "BorrarVehiculoCliente" vehiculo.id %}" role="button" 
+                  <a class="btn btn-default" href= "{%url "BorrarVehiculo" vehiculo.id %}" role="button" 
                     onClick="return confirm('¿Seguro que quieres dar de baja a {{vehiculo.modelo}}?');">
                     <i class="far fa-trash-alt" style="color:rgba(211, 0, 0, 0.692);"></i>
                   </a>
