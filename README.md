@@ -1,5 +1,22 @@
-# histocar_project
-Proyecto de gestión de servicios vehiculares
+# HistoCar
+## Sistema para Gestión de servicios vehiculares
+Aplicación que funciona como una historia clínica de los vehículos, con el fin de mejorar la gestión de los servicios que les son realizados.
+
+
+Este proyecto fue desarrollado durtante el curso "ProgramaBIT" de la Cámara Uruguaya de Tecnologías de la Información e INEFOP
+
+Tecnlogías utilizadas:
+* Python
+* Django
+* HTML
+* CSS
+* Javascript
+* Visual Studio Code IDE
+* Git / Github
+* Trello (Para la gestión de las tareas, historias de usuario)
+
+
+
 
 Pasos para preparar el proyecto:
 
