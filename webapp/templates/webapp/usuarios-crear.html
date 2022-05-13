@@ -12,10 +12,9 @@
       </div>
       <form method="POST" class="RegistroUsuario" role="form">{% csrf_token %}
         <div class="card-body">     
-          <div class="col-sm-6">
             <!-- campoNombre y campoApellido -->
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <div class="form-group">
                   <label for="campoNombre">{{form.nombre.label}}</label>
                   {%if form.nombre.errors %}
@@ -32,7 +31,7 @@
                   {% endif %}
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-4">
               <div class="form-group">
                 <label for="campoApellido">{{form.apellido.label}}</label>
                 {%if form.apellido.errors %}
@@ -50,94 +49,175 @@
               </div>
               </div>
             </div>
-            <!-- campoDocumento -->
-            <div class="form-group">
-              <label for="campoDocumento">{{form.documento.label}}</label>
-              {%if form.documento.errors %}
-              {% render_field form.documento class="form-control is-invalid" %}
-              {% for error in form.documento.errors %}
-              <script>
-                $('').ready(function() {
-                  toastr.error('{{ error }}','{{form.documento.label}}')
-                });
-              </script>
-              {% endfor %}
-              {% else %}
-              {% render_field form.documento class="form-control" %}
-              {% endif %}
+            <!-- campoDocumento y campoTelefono -->
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label for="campoDocumento">{{form.documento.label}}</label>
+                {%if form.documento.errors %}
+                {% render_field form.documento class="form-control is-invalid" %}
+                {% for error in form.documento.errors %}
+                <script>
+                  $('').ready(function() {
+                    toastr.error('{{ error }}','{{form.documento.label}}')
+                  });
+                </script>
+                {% endfor %}
+                {% else %}
+                {% render_field form.documento class="form-control" %}
+                {% endif %}
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label for="campoTelefono">{{form.telefono.label}}</label>
+                {%if form.telefono.errors %}
+                {% render_field form.telefono class="form-control is-invalid" %}
+                {% for error in form.telefono.errors %}
+                <script>
+                  $('').ready(function() {
+                    toastr.error('{{ error }}','{{form.telefono.label}}')
+                  });
+                </script>
+                {% endfor %}
+                {% else %}
+                {% render_field form.telefono class="form-control" %}
+                {% endif %}
+                </div>
+              </div>
             </div>
             <!-- campoEmail -->
-            <div class="form-group">
-              <label for="campoEmail">{{form.email.label}}</label>
-              {%if form.email.errors %}
-              {% render_field form.email class="form-control is-invalid" %}
-              {% for error in form.email.errors %}
+            <div class="col-sm-8">
+              <div class="form-group">
+                <label for="campoEmail">{{form.email.label}}</label>
+                {%if form.email.errors %}
+                {% render_field form.email class="form-control is-invalid" %}
+                {% for error in form.email.errors %}
+                <script>
+                  $('').ready(function() {
+                    toastr.error('{{ error }}','{{form.email.label}}')
+                  });
+                </script>
+                {% endfor %}
+                {% else %}
+                {% render_field form.email class="form-control" %}
+                {% endif %}
+              </div>
+            </div>
+          <!-- campoDepartamento y campoCiudad -->
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="campoDepartamento">{{form.dirDepartamento.label}}</label>
+              {%if form.dirDepartamento.errors %}
+              {% render_field form.dirDepartamento class="form-control is-invalid" %}
+              {% for error in form.dirDepartamento.errors %}
               <script>
                 $('').ready(function() {
-                  toastr.error('{{ error }}','{{form.email.label}}')
+                  toastr.error('{{ error }}','{{form.dirDepartamento.label}}')
                 });
               </script>
               {% endfor %}
               {% else %}
-              {% render_field form.email class="form-control" %}
+              {% render_field form.dirDepartamento class="form-control" %}
               {% endif %}
+              </div>
             </div>
-            <!-- campoTelefono -->
-            <div class="form-group">
-              <label for="campoTelefono">{{form.telefono.label}}</label>
-              {%if form.telefono.errors %}
-              {% render_field form.telefono class="form-control is-invalid" %}
-              {% for error in form.telefono.errors %}
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="campoCiudad">{{form.dirCiudad.label}}</label>
+              {%if form.dirCiudad.errors %}
+              {% render_field form.dirCiudad class="form-control is-invalid" %}
+              {% for error in form.dirCiudad.errors %}
               <script>
                 $('').ready(function() {
-                  toastr.error('{{ error }}','{{form.telefono.label}}')
+                  toastr.error('{{ error }}','{{form.dirCiudad.label}}')
                 });
               </script>
               {% endfor %}
               {% else %}
-              {% render_field form.telefono class="form-control" %}
+              {% render_field form.dirCiudad class="form-control" %}
               {% endif %}
+              </div>
             </div>
-
-            <!-- campoContrasenia y campoRepetirContrasenia -->
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="campoContrasenia">{{form.password1.label}}</label>
-                  {%if form.password1.errors %}
-                  {% render_field form.password1 class="form-contrl is-invalid" %}
-                  {% for error in form.password1.errors %}
+          </div>
+          <!-- campoCalle y campoNumero -->
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="campoCalle">{{form.dirCalle.label}}</label>
+              {%if form.dirCalle.errors %}
+              {% render_field form.dirCalle class="form-control is-invalid" %}
+              {% for error in form.dirCalle.errors %}
+              <script>
+                $('').ready(function() {
+                  toastr.error('{{ error }}','{{form.dirCalle.label}}')
+                });
+              </script>
+              {% endfor %}
+              {% else %}
+              {% render_field form.dirCalle class="form-control" %}
+              {% endif %}
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="campoNumero">{{form.dirNumero.label}}</label>
+              {%if form.dirNumero.errors %}
+              {% render_field form.dirNumero class="form-control is-invalid" %}
+              {% for error in form.dirNumero.errors %}
+              <script>
+                $('').ready(function() {
+                  toastr.error('{{ error }}','{{form.dirNumero.label}}')
+                });
+              </script>
+              {% endfor %}
+              {% else %}
+              {% render_field form.dirNumero class="form-control" %}
+              {% endif %}
+              </div>
+            </div>
+          </div>  
+         <!-- campoContrasenia y campoRepetirContrasenia -->
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="campoContrasenia">{{form.password1.label}}</label>
+                {%if form.password1.errors %}
+                {% render_field form.password1 class="form-contrl is-invalid" %}
+                {% for error in form.password1.errors %}
+                <script>
+                  $('').ready(function() {
+                    toastr.error('{{ error }}','Contraseña')
+                  });
+                </script>
+                {% endfor %}
+                {% else %}
+                {% render_field form.password1 class="form-control" %}
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="campoRepetirContrasenia">{{form.password2.label}}</label>
+                {%if form.password2.errors %}
+                  {% render_field form.password2 class="form-control is-invalid" %}
+                  {% for error in form.password2.errors %}
                   <script>
                     $('').ready(function() {
-                      toastr.error('{{ error }}','Contraseña')
+                      toastr.error('{{ error }}','Confirmar contraseña')
                     });
                   </script>
                   {% endfor %}
                   {% else %}
-                  {% render_field form.password1 class="form-control" %}
+                  {% render_field form.password2 class="form-control" %}
                   {% endif %}
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="campoRepetirContrasenia">{{form.password2.label}}</label>
-                  {%if form.password2.errors %}
-                    {% render_field form.password2 class="form-control is-invalid" %}
-                    {% for error in form.password2.errors %}
-                      <script>
-                        $('').ready(function() {
-                          toastr.error('{{ error }}','Confirmar contraseña')
-                        });
-                      </script>
-                    {% endfor %}
-                  {% else %}
-                    {% render_field form.password2 class="form-control" %}
-                  {% endif %}
-                </div>
               </div>
             </div>
+          </div>
             <div class="form-group">
-              <p>Tipo de usuario</p>
+
+              <label>Tipo de usuario</label>
               <div class="custom-control custom-radio">
 
                 {% for radio in form.tipo_de_usuario %}

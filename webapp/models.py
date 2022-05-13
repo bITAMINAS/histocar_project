@@ -109,7 +109,7 @@ class Vehiculo(models.Model):
     nroChasis = models.CharField('Número de chasis', max_length=50, default="")
     matricula = models.CharField('Matrícula', max_length=50, default="")
     anio = models.IntegerField('Año',default=2020)
-    tipoCombustible = models.CharField('Tipo de combustible', blank=True, choices=TiposCombustibles.choices, max_length=15)
+    tipoCombustible = models.CharField('Tipo de combustible', blank=False, default='Ninguno', choices=TiposCombustibles.choices, max_length=15)
     duenio = models.ForeignKey('Usuario', on_delete=models.CASCADE, verbose_name='Propietario')
    
     def __str__(self):

@@ -20,6 +20,9 @@
               <b>Dirección</b> <a class="float-right">{{ usuario.dirCalle}} {{ usuario.dirNumero }}</a>
             </li>
             <li class="list-group-item">
+              <b>Localidad</b> <a class="float-right">{{ usuario.dirCiudad}} , {{ usuario.dirDepartamento }}</a>
+            </li>
+            <li class="list-group-item">
               <b>Teléfono</b> <a class="float-right">{{ usuario.telefono}}</a>
             </li>
             <li class="list-group-item">
@@ -61,7 +64,7 @@
                       </a>
                       </h4>
                     </div>
-                    <div id="collapse{{ servicio.id }}" class="panel-collapse in collapse" style="">
+                    <div id="collapse{{ servicio.id }}" class="panel-collapse in collapse">
                       <div class="card-body">
                       {% for tarea in servicio.tareas.all %}
                         <li>{{ tarea.nombre }}</li>

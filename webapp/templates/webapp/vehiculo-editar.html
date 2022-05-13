@@ -12,7 +12,7 @@
   <div class="col-xl-12 col-md-12 mb-12">
     <div class="card card-default">
       <div class="card-header">
-        <h3 class="card-title">Nuevo vehículo</h3>
+        <h3 class="card-title">Modificar vehículo</h3>
       </div>
       <form method="POST" class="RegistroUsuario">{% csrf_token %}
         <div class="card-body">
@@ -136,22 +136,18 @@
                 {% render_field form.anio class="form-control" %}
               {% endif %}
             </div>
-
-            <div class="form-group">
-              {{ form.tipoCombustible.label_tag }}
-              {% for pk, choice in form.tipoCombustible.field.widget.choices %}
+              <label>{{ form.tipoCombustible.label_tag }}</label>
               <div class="custom-control custom-radio">
-                  <input id="id_{{form.tipoCombustible.name}}_{{ forloop.counter0 }}" 
-                  name="{{form.tipoCombustible.name}}" 
-                  type="{{form.tipoCombustible.field.widget.input_type}}" value="{{pk}}" class="custom-control-input"
-                   {% ifequal form.tipoCombustible.data pk.0 %}
-                     checked="checked"
-                   {% endifequal %}/>
-                  <label for="id_{{form.tipoCombustible.name}}_{{ forloop.counter0 }}" class="custom-control-label">{{ choice }}</label>
+
+                {% for radio in form.tipoCombustible %}
+                  <div class="custom-control custom-radio">
+                      {{ radio }}
+                  </div>
+                {% endfor %}
+
               </div>
-              {% endfor %}
+              
             </div>
-    
             
           </div>
         </div>
